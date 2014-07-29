@@ -1,0 +1,69 @@
+@import basic
+@import vars
+
+html,body
+  margin: 0
+  padding: 0
+  width: 100%
+  height: 100%
+  font-family: "STHeiti", "Helvetica Neue", Arial, Helvetica, Geneva, "微軟正黑體", sans-serif
+  font-family: "Source Sans Pro","ヒラギノ角ゴ Pro","Hiragino Kaku Gothic Pro","文泉驛微米黑","WenQuanYi Micro Hei Light","微軟正黑體","Microsoft JhengHei","Helvetica Neue",Helvetica,Arial,sans-serif
+
+hr
+  border-bottom: 1px solid #bbb
+  width: 90%
+br.clear
+  clear: both
+
+body
+  background: url(/img/pat/rockywall.png) fixed
+
+#root
+  min-width: $min-width
+  width: 100%
+  height: 100%
+
+#content
+  width: 100%
+
+.static-content
+  margin: 200px auto
+  width: 70%
+  letter-spacing: 1px
+  font-size: 1.1em
+  h2
+    margin-bottom: 30px
+    border-bottom: 1px solid #999
+    padding-bottom: 5px
+  p
+    margin-bottom: 20px
+  h3
+    margin-top: 50px
+  ul
+    padding-left: 20px
+  @media (max-width: 480px)
+    margin-top: 80px
+    width: 90%
+
+.delay-bk
+  @include transition(all 0.8s)
+  opacity: 0
+.delay-bk.visible
+  opacity: 1
+
+.wing
+  width: 300px
+  height: 95px
+  display: block
+  margin: 10px auto
+
+@import nav
+@import banner
+@import feathers
+@import gallery
+@import detail
+@import feature
+@import footer
+@import dim
+@import form
+@import about

@@ -1,0 +1,40 @@
+
+#footer
+  height: 40px
+  background: rgba(0,0,0,0.5)
+  .ib
+    margin: 10px 10px 0
+  .right
+    float: right
+  .item.logo img
+    display: none
+  .item.logo:after
+    font-style: italic
+    font-weight: 900
+    content: "FERN"
+  .item
+    color: #fff
+    padding: 10px
+    display: inline-block
+    text-decoration: none
+    cursor: pointer
+
+@media (min-width: 800px)
+  #footer
+    height: 100px
+    background: rgba(0,0,0,0.5)
+    .ib
+      margin: 50px 100px 0
+    .right
+      float: right
+    .item
+      color: #fff
+      padding: 40px
+      display: inline-block
+    .item.logo
+      padding: 18px 0 0
+      &:after
+        display: none
+    .item.logo img
+      display: inline-block
+

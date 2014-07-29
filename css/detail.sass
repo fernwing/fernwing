@@ -1,0 +1,93 @@
+
+#detail
+  width: 90%
+  margin: 5px auto
+  .item
+    width: 400px
+    display: block
+    float: left
+    margin: 10px
+    position: relative
+    .img
+      width: 400px
+      height: 300px
+      position: relative
+      z-index: index($order, detail-img)
+      background-size: cover
+      border-radius: 5px
+    &:before
+      content: " "
+      display: block
+      position: absolute
+      z-index: index($order, detail-bk)
+      top: 0
+      left: 0
+      width: 400px
+      height: 300px
+      background: #ccc
+      border-radius: 5px
+      @include transition(border-radius 1s)
+    .title
+      position: relative
+      z-index: index($order, detail-title)
+      text-align: center
+      font-size: 1.5em
+      border-top: 5px solid #999
+      margin-top: 3px
+    .img.dashed
+      border: 2px dashed #999
+      font-size: 2em
+      text-align: center
+      position: relative
+      background: none
+      @include transition(border-radius 1s)
+      .ib
+        position: absolute
+        top: 50%
+        width: 100%
+        text-align: center
+        margin-top: -40px
+  .item:hover .img, .item:hover:before
+    border-radius: 25px
+
+@media (min-width: 480px) and (max-width: 840px)
+  #detail
+    width: 480px
+    margin: auto
+
+@media (min-width: 840px) and (max-width: 1260px)
+  #detail
+    width: 840px
+    margin: auto
+
+@media (min-width: 1260px) and (max-width: 1680px)
+  #detail
+    width: 1260px
+    margin: auto
+
+@media (min-width: 1680px)
+  #detail
+    width: 1680px
+    margin: auto
+
+@media (max-width: 480px)
+  #detail
+    width: 100%
+    .item
+      width: 100%
+      margin: 0
+      border-bottom: 5px solid #111
+      border-top: 5px solid #111
+      .img
+        width: 100%
+        border-radius: 0
+      .title
+        position: absolute
+        margin-top: -50px
+        width: 100%
+        background: rgba(0,0,0,0.3)
+        border: none
+        color: #fff
+        padding: 5px
+    .item:hover .img, .item:hover:before
+      border-radius: 0

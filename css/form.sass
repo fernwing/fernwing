@@ -1,0 +1,28 @@
+@import basic
+@import vars
+
+#order, #notify
+  max-width: 1024px
+  margin: 60px auto
+  h2
+    text-align: center
+  .ib
+    margin: 0 30px
+  opacity: 0
+  @include transition(opacity 1s)
+
+#order.shown, #notify.shown
+  opacity: 1
+
+#notify form
+  width: 80%
+  margin: auto
+
+.text-danger, .text-success
+  display: inline
+  margin-left: 10px
+
+#orderlist
+  td
+    padding: 2px 10px 2px 0
+

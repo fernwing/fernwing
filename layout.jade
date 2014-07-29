@@ -1,0 +1,99 @@
+doctype html
+//- basic libraries: jquery(1.10.2), d3js(3.3.11), angularjs(1.2.3), bootstrap(3.0)/semantic-ui(0.9.3/0.9.5)
+- var usecdn = false
+- var useog = true
+- var lib = { jquery: true, d3js: true, angular: true, bootstrap: true, semantic: false }
+- var assets = "assets"
+- var thumbnail = "http://fernwing.com/thumbnail.png"
+- var online = true
+mixin valid-label(form, name, label, value)
+  label
+    = label
+    span(ng-show="needFix && "+form+"."+name+".$invalid")
+      i.glyphicon.glyphicon-exclamation-sign.text-danger
+      .text-danger(ng-show=form+"."+name+".$error.required") 此欄位爲必填
+      .text-danger(ng-show="!"+form+"."+name+".$error.required")
+        | 這不是正確的
+        = value
+    .text-success(ng-show="!"+form+"."+name+".$invalid")
+      i.glyphicon.glyphicon-ok-sign
+
+html(lang="en")
+  head(prefix="og: http://ogp.me/ns#")
+    meta(charset="utf-8")
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel="icon",type="image/x-icon",href="/favicon.ico")
+    title FERN
+    // libraries
+    include library.jade
+    // custom files
+    link(rel="stylesheet",type="text/css",href="/css/index.css")
+    if online
+      script(type="text/javascript").
+        var online = true;
+      script(type="text/javascript",src='//cdn.firebase.com/v0/firebase.js')
+      script(type="text/javascript",src="//cdn.firebase.com/v0/firebase-simple-login.js")
+      script(type="text/javascript",src="//cdn.firebase.com/libs/angularfire/0.5.0/angularfire.min.js")
+      script(type="text/javascript",src="js/index.js")
+      script.
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-48765647-1', 'fernwing.com');
+        ga('send', 'pageview');
+
+  body(ng-app="main",ng-controller="main")
+    block pre-content
+    #root
+      #nav
+        .ib
+          .item.logo
+          .right
+            a.item(href="/#brief") 產品介紹
+            a.item(href="/#order") 購買
+            a.item(href="/#about") 關於我們
+      block bare-content
+      #content
+         block content
+      #content
+        .modal.fade#attribution(role="dialog",aria-labelledby="attribution",aria-hidden="true")
+          .modal-dialog
+            .modal-content
+              .modal-header
+                button.close(type="button",data-dismiss="modal" aria-hidden="true") &times;
+                h4.modal-title 此網站使用的素材
+              .modal-body
+                h4 
+                  | 圖示
+                  small
+                    |  / 來自 
+                    a(href="http://thenounproject.com/") noun projects
+                ul
+                  li
+                    | "
+                    a(href="http://thenounproject.com/term/bird/27693/") Bird
+                    | ", by Harvey Modhar
+                  li
+                    | "
+                    a(href="http://thenounproject.com/term/backpack/2551/") Backpack
+                    | ", by Rémy Médard
+                  li
+                    | "
+                    a(href="http://thenounproject.com/term/gears/9428/") Gears
+                    | ", by Max Hancock
+                  li
+                    | "
+                    a(href="http://thenounproject.com/term/camera/766/") Camera
+                    | ", by Dave Tappy
+              .modal-footer
+                button.btn.btn-default(type="button",data-dismiss="modal") 關閉
+        #footer
+          .ib
+            .item.logo: img(src="/img/logo/footer.png")
+            .right
+              .item("mailto:contact@fernwing.com") 聯絡我們
+              a.item(href="/privacy.html") 隱私權政策
+              a.item(href="/eula.html") 使用者條款
+              //-a.item(data-toggle="modal",data-target="#orderlist") 訂單
+              a.item(data-toggle="modal",data-target="#attribution") 誌謝

@@ -1,0 +1,335 @@
+html,body
+  margin: 0
+  padding: 0
+  width: 100%
+  height: 100%
+  font-family: "STHeiti", "Helvetica Neue", Arial, Helvetica, Geneva, "微軟正黑體", sans-serif
+
+hr
+  border-bottom: 1px solid #bbb
+  width: 90%
+
+#root
+  background: url(bk.png) fixed
+  min-width: 480px
+
+#nav
+  position: absolute
+  top: 0
+  left: 0
+  background: rgba(0,0,0,0.3)
+  z-index: 10
+  width: 100%
+  height: 95px
+  .ib
+    margin: 0 10px
+  .right
+    display: inline
+  .item.logo
+    font-family: Garamond
+    padding: 0px
+  .item
+    padding: 46px 25px
+    display: inline-block
+    font-size: 23px
+    color: #fff
+    font-weight: 200
+    letter-spacing: 1px
+    text-decoration: none
+    cursor: pointer
+    &:hover
+      text-shadow: 0 0 5px rgba(255,128,0,1)
+#head
+  height: 100%
+  z-index: 2
+  background: url(img/banner-bk.jpg) center center no-repeat #000
+  background-size: cover
+
+#banner
+  .logo
+    width: 80%
+    height: 250px
+    margin: 0 auto
+  .logo.word, .logo-wind
+    display: none
+
+  .subtitle
+    text-shadow: 0 3px 4px rgba(0,0,0,0.8)
+    //background: rgba(0,0,0,0.5)
+    width: 80%
+    padding: 0 10px
+    height: 50px
+    margin: 0 auto
+    color: #fff
+    font-size: 16px
+    text-align: center
+    line-height: 50px
+
+@media (max-width: 800px)
+  #head
+    background: url(banner-bk2-sm.jpg) 45% 0% no-repeat #000 fixed
+@media (min-width: 800px)
+  #head
+    //background: url(banner-bk2.jpg) 45% 0% no-repeat fixed
+    background: url(img/banner-bk-blur.jpg) center center no-repeat #000 fixed
+    background-size: cover
+    position: relative
+  #nav
+    height: 150px
+    .ib
+      padding-top: 10px
+      margin: 0 auto
+      max-width: 1024px
+    .right
+      float: right
+      display: block
+      height: 130px
+      padding-right: 145px
+  #banner
+    .logo
+      display: none
+      background: rgba(0,0,0,0.5)
+      background: url(banner-logo.png) center center no-repeat
+      width: 800px
+      height: 250px
+      margin: 30px auto
+    .logo-anim, .logo-word, .logo-wing
+      height: 250px
+      margin: 0 auto
+    .logo-anim
+      width: 80%
+      position: relative
+      .logo-word, .logo-wing
+        position: absolute
+        width: 100%
+      .logo-word
+        background: url(banner-logo-word.png) center center no-repeat
+      .logo-wing
+        background: url(banner-logo-wing.png) center center no-repeat
+    .subtitle
+      width: 800px
+      height: 100px
+      margin: 20px auto
+      color: #fff
+      font-size: 24px
+      line-height: 90px
+      text-align: center
+
+.bricks
+  display: inline-block
+  width: 309px
+  height: 412px
+.brick
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5)
+  width: 200px
+  height: 200px
+  display: inline-block
+  background: #ccc
+  margin: 6px 3px 0 3px
+  opacity: 0
+  -webkit-transition: opacity 1.5s
+  transition: opacity 1.5s
+.brick.visible, .brick.group
+  opacity: 1
+.brick.type-a
+  width: 496px
+  height: 410px
+.brick.type-b
+  width: 303px
+  height: 200px
+.brick.type-c
+  width: 273px
+  height: 410px
+
+#feature
+  margin: 30px 0 40px
+  h2
+    text-align: center
+    margin: 30px 0
+  .row
+    width: 90%
+    margin: 0 auto
+    text-align: center
+    p
+      width: 80%
+      text-align: left
+      margin: 0 auto 60px
+  img
+    -webkit-transition: -webkit-transform 1s
+    transition: transform 1s
+    transform: scale(0.5)
+    -webkit-transform: scale(0.5)
+  img.zoom
+    transform: scale(1.0)
+    -webkit-transform: scale(1.0)
+
+#order, #notify
+  max-width: 1024px
+  margin: 60px auto
+  h2
+    text-align: center
+  .ib
+    margin: 0 30px
+  opacity: 0
+  -webkit-transition: opacity 1s
+#order.shown, #notify.shown
+  opacity: 1
+
+#footer
+  height: 40px
+  background: rgba(0,0,0,0.5)
+  .ib
+    margin: 10px 10px 0
+  .right
+    float: right
+  .item.logo img
+    display: none
+  .item.logo:after
+    font-style: italic
+    font-weight: 900
+    content: "FERN"
+  .item
+    color: #fff
+    padding: 10px
+    display: inline-block
+    text-decoration: none
+    cursor: pointer
+
+@media (min-width: 800px)
+  #footer
+    height: 100px
+    background: rgba(0,0,0,0.5)
+    .ib
+      margin: 50px 100px 0
+    .right
+      float: right
+    .item
+      color: #fff
+      padding: 40px
+      display: inline-block
+    .item.logo
+      padding: 18px 0 0
+      &:after
+        display: none
+    .item.logo img
+      display: inline-block
+
+#dim
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  background: url(loading.gif) center center no-repeat rgba(0,0,0,0.5)
+  z-index: 1
+  .ib
+    position: fixed
+    top: 50%
+    left: 50%
+    margin: 50px 0 0 -50px
+    width: 100px
+    text-align: center
+    color: #fff
+
+.dimmer.ng-hide-add, .dimmer.ng-hide-remove
+  -webkit-transition: 0.5s linear all
+  transition: 0.5s linear all
+  display: block!important
+  opacity: 1
+.dimmer.ng-hide 
+  opacity: 0
+
+.text-danger, .text-success
+  display: inline
+  margin-left: 10px
+
+#orderlist
+  td
+    padding: 2px 10px 2px 0
+
+#album-subtitle
+  display: none
+@media (min-width: 800px)
+  #album-subtitle
+    position: absolute
+    display: block
+    background: rgba(0,0,0,0.3)
+    padding: 5px 20px
+    margin-top: -70px
+    color: #fff
+    left: 50%
+    width: 200px
+    margin-left: -100px
+    border-radius: 20px
+    text-align: center
+
+#album-icon
+  position: absolute
+  width: 32px
+  height: 32px
+  background: #fff
+  margin: -26px 0 0 -26px
+  left: 50%
+  background: url(album.png) no-repeat center center #fff
+  -webkit-transform: rotate(45deg)
+  box-shadow: -5px -5px 5px rgba(0,0,0,0.5)
+
+#gallery
+  text-align: center
+  margin: -10px 0 0
+  padding: 20px
+  background: #fff
+  box-shadow: 0 -5px 10px 2px rgba(0,0,0,0.8)
+  .brick
+    background: #eee
+    margin: 3px
+    background-position: center center
+  .brick.one, .brick.two
+    width: 243px
+    height: 340px
+  .brick.two
+    width: 496px
+  .brick.half
+    height: 165px
+  .brick.group
+    background: none
+    border: none
+    box-shadow: none
+    margin: 0
+    display: inline-block
+    width: 249px
+
+.w1047
+  display: none
+.w1310
+  display: none
+@media (max-width: 1047px)
+  .w1047
+    display: inline-block
+@media (min-width: 1310px)
+  .w1310
+    display: inline-block
+
+#feathers
+  position: absolute
+  width: 100%
+  height: 650px
+  overflow: hidden
+
+.feather
+  width: 32px
+  height: 32px
+  -webkit-transform: translate3d(0, 0, 0)
+  position: absolute
+  .bk
+    position: absolute
+    top: 10px
+    left: 0
+    width: 100%
+    height: 100%
+    background: url(shadow.png) center center no-repeat
+  .img
+    position: absolute
+    background: url(feather.png) center center no-repeat
+    width: 100%
+    height: 100%

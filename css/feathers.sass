@@ -1,0 +1,29 @@
+@import basic
+@import vars
+
+#feathers
+  position: absolute
+  z-index: index($order, feathers)
+  width: 100%
+  height: 100%
+  overflow: hidden
+  display: none
+
+.feather
+  width: 32px
+  height: 32px
+  -webkit-transform: translate3d(0, 0, 0)
+  position: absolute
+  z-index: index($order, feathers)
+  .bk
+    position: absolute
+    top: 10px
+    left: 0
+    width: 100%
+    height: 100%
+    background: url(/img/icon/shadow.png) center center no-repeat
+  .img
+    position: absolute
+    background: url(/img/icon/feather.png) center center no-repeat
+    width: 100%
+    height: 100%

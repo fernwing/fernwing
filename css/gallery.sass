@@ -1,0 +1,148 @@
+@import basic
+@import vars
+
+$margin: 2px
+
+#gallery
+  text-align: center
+  margin: 0 auto
+  padding-top: 10px
+  background: #fff
+  .brick, .brick-group
+    background: #eee
+    margin: $margin
+    background-position: center center
+    background-size: cover
+    display: block
+    float: left
+
+  .brick.one, .brick.two
+    width: 243px
+    height: 340px
+  .brick.two
+    width: 490px
+  .brick.half
+    height: 168px
+  .brick-group
+    background: none
+    height: 340px
+    .brick
+      margin: 0
+    .brick.one.half:first-of-type
+      margin-top: 0
+      margin-bottom: $margin
+      float: none
+    .brick.half:last-of-type
+      margin-top: $margin
+      margin-bottom: 0
+
+.brick
+  width: 200px
+  height: 200px
+  background: #ccc
+  opacity: 0
+  @include transition(all 1.5s)
+
+.brick.visible, .brick.group
+  opacity: 1
+.brick.type-a
+  width: 496px
+  height: 410px
+.brick.type-b
+  width: 303px
+  height: 200px
+.brick.type-c
+  width: 273px
+  height: 410px
+
+#gallery .brick-group.n990
+  display: none
+
+@media (max-width: 1245px)
+  #gallery .brick.w1245
+    display: none
+
+@media (max-width: 990px)
+  #gallery .brick-group.n990
+    display: block
+
+@media (max-width: 740px)
+  #gallery .brick.w740
+    display: none
+@media (max-width: 500px)
+  #gallery
+    display: none
+
+#gallery-xs
+  width: 100%
+  display: none
+
+@media (max-width: 500px)
+  #gallery-xs
+    display: block
+
+#gallery-xs
+  img
+    width: 100%
+    border-top: 5px solid rgba(0,0,0,1)
+    border-bottom: 5px solid rgba(0,0,0,1)
+.brick-xs
+  width: 100%
+  min-width: 320px
+  height: 210px
+  background-size: cover
+  &.portrait
+    height: 346px
+
+#gallery
+  .brick, .brick-group
+    &.vg1, &.vg2, &.vg3, &.vg4, &.vg5, &.vg6, &.vg7, &.vg8
+      display: none
+
+@media (max-width: 494px)
+  #gallery
+    width: 247px
+    .brick.vg1, .brick-group.vg1
+      display: block
+
+@media (min-width: 494px) and (max-width: 741px)
+  #gallery
+    width: 494px
+    .brick.vg2, .brick-group.vg2
+      display: block
+
+@media (min-width: 741px) and (max-width: 988px)
+  #gallery
+    width: 741px
+    .brick.vg3, .brick-group.vg3
+      display: block
+
+@media (min-width: 988px) and (max-width: 1235px)
+  #gallery
+    width: 988px
+    .brick.vg4, .brick-group.vg4
+      display: block
+
+@media (min-width: 1235px) and (max-width: 1482px)
+  #gallery
+    width: 1235px
+    .brick.vg5, .brick-group.vg5
+      display: block
+
+@media (min-width: 1482px) and (max-width: 1729px)
+  #gallery
+    width: 1482px
+    .brick.vg6, .brick-group.vg6
+      display: block
+
+@media (min-width: 1729px) and (max-width: 1976px)
+  #gallery
+    width: 1729px
+    .brick.vg7, .brick-group.vg7
+      display: block
+
+@media (min-width: 1976px)
+  #gallery
+    width: 1976px
+    .brick.vg8, .brick-group.vg8
+      display: block

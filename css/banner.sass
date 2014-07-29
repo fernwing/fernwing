@@ -1,0 +1,85 @@
+@import basic
+@import vars
+
+#banner
+  min-width: $min-width
+  width: 100%
+  height: 100%
+  @include background-gradient(#223D00, #0D1700)
+
+#banner-bk
+  min-width: $min-width
+  width: 100%
+  height: 100%
+  z-index: index($order, banner)
+  background-size: cover
+  background-position: center center
+
+#banner-logo, #banner-logo-sm, #banner-logo-xs
+  position: absolute
+  min-width: $min-width
+  width: 100%
+  height: 70%
+  top: 10%
+  background-repeat: no-repeat
+  background-position: center center
+  display: none
+
+@media (max-width: 480px)
+  #banner-logo-xs
+    display: block
+    min-height: 95px
+    min-width: 300px
+@media (max-width: 800px) and (min-width: 480px)
+  #banner-logo-sm
+    display: block
+    min-height: 142px
+    min-width: 450px
+@media (min-width: 800px)
+  #banner-logo
+    display: block
+    min-height: 230px
+    min-width: 730px
+
+#banner-subtitle
+  position: absolute
+  width: 80%
+  left: 10%
+  bottom: 20%
+  color: #fff
+  font-size: 2em
+  text-align: center
+  text-shadow: 0 3px 4px rgba(0,0,0,0.8)
+
+@media (max-width: 1024px)
+  #banner-subtitle
+    font-size: 1.5em
+@media (max-width: 800px)
+  #banner-subtitle
+    font-size: 1.2em
+@media (max-width: 640px)
+  #banner-subtitle
+    font-size: 2.0em
+@media (max-width: 480px)
+  #banner-subtitle
+    font-size: 1.2em
+    margin-bottom: 20px
+
+@include keyframes(blink)
+  0%
+    opacity: 1
+  100%
+    opacity: 0
+#banner-golook
+  position: absolute
+  bottom: 10px
+  left: 0
+  width: 100%
+  min-width: $min-width
+  text-align: center
+  z-index: order($order, banner)
+  color: #fff
+  i.glyphicon
+    @include animation(blink 1.0s ease-in infinite)
+    font-size: 2em
+    margin-top: 5px

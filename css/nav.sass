@@ -1,0 +1,65 @@
+@import vars
+
+#nav
+  position: absolute
+  top: 0
+  left: 0
+  background: rgba(0,0,0,0.3)
+  z-index: index($order, nav)
+  width: 100%
+  min-width: $min-width
+  height: 95px
+  .ib
+    margin: 0 10px
+  .right
+    display: inline
+    float: right
+  .item.logo
+    font-family: Garamond
+    padding: 0px
+  .item
+    padding: 46px 25px
+    display: inline-block
+    font-size: 23px
+    color: #fff
+    font-weight: 200
+    letter-spacing: 1px
+    text-decoration: none
+    cursor: pointer
+    &:hover
+      text-shadow: 0 0 5px rgba(255,128,0,1)
+  .item.logo
+    width: 140px
+    height: 130px
+    margin-left: 10px
+    float: left
+    background: url(/img/logo/white.png) center center no-repeat
+    background-size: cover
+
+@media (min-width: 800px)
+  #nav
+    height: 150px
+    .ib
+      padding-top: 10px
+      margin: 0 auto
+      max-width: 1024px
+    .right
+      display: block
+      height: 130px
+      padding-right: 145px
+@media (max-width: 640px)
+  #nav
+    .item
+      font-size: 18px
+      padding: 50px 10px
+    .right
+      padding-right: 15px
+@media (max-width: 480px)
+  #nav .right
+    padding-right: 0
+  #nav
+    height: 60px
+  #nav .item
+    padding: 20px 10px
+  #nav .item.logo
+    display: none

@@ -1,0 +1,230 @@
+extends layout
+block pre-content
+  #dim.dimmer(ng-show="state==1"): .ib 處理訂單中 .. 
+  #feathers
+block bare-content
+  #banner
+    #banner-bk.delay-bk(delay-bk="/img/banner/bk1400-blur.jpg")
+    #banner-logo.delay-bk(delay-bk="/img/logo/main.png")
+    #banner-logo-sm.delay-bk(delay-bk="/img/logo/main-sm.png")
+    #banner-logo-xs.delay-bk(delay-bk="/img/logo/white.png")
+    #banner-subtitle 為愛好休閒生活的您量身打造，輕巧、舒適、高機能性的隨身背包
+    #banner-golook
+      .desc 現在就來瞧瞧他的外觀
+      i.glyphicon.glyphicon-chevron-down
+  #content
+    #gallery
+      .brick.two.delay-bk(delay-bk="/img/gallery/01.jpg")
+      .brick-group.one
+        .brick.one.half.delay-bk(delay-bk="/img/gallery/10.jpg",style="margin-bottom:2px")
+        .brick.one.half.delay-bk(delay-bk="/img/gallery/06.jpg",style="margin-bottom:2px")
+      .brick.one.delay-bk(delay-bk="/img/gallery/04.jpg")
+      .brick.one.vg4.vg5.vg6.vg7.vg8.delay-bk(delay-bk="/img/gallery/05.jpg")
+      .brick.two.vg4.delay-bk(delay-bk="/img/gallery/12.jpg")
+      .brick.one.delay-bk(delay-bk="/img/gallery/09.jpg")
+      .brick.one.vg3.vg4.vg5.vg6.vg7.vg8.delay-bk(delay-bk="/img/gallery/08.jpg")
+      .brick-group.one.vg1
+        .brick.one.half.delay-bk(delay-bk="/img/gallery/10.jpg",style="margin-bottom:2px")
+        .brick.one.half.delay-bk(delay-bk="/img/gallery/06.jpg",style="margin-bottom:2px")
+      .brick.two.vg6.delay-bk(delay-bk="/img/gallery/12.jpg")
+      .brick.one.delay-bk(delay-bk="/img/gallery/07.jpg")
+      .brick.two.delay-bk(delay-bk="/img/gallery/03.jpg")
+      br.clear
+    #gallery-xs
+      img(src="/img/gallery/320/01.jpg")
+      img(src="/img/gallery/320/07.jpg")
+      img(src="/img/gallery/320/02.jpg")
+      img(src="/img/gallery/320/06.jpg")
+      img(src="/img/gallery/320/04.jpg")
+      img(src="/img/gallery/320/05.jpg")
+    br.clear
+    br.clear
+    br.clear
+  a(name="brief")
+  div
+    #content
+      #feature
+        .wing.delay-bk#wing-feature(delay-bk="/img/wing.png")
+        br
+        h2 滿足您對背包的期待與渴望
+        br
+        br
+        .row
+          .col-sm-4.bl-red
+            .feature
+              .feature-icon.delay-bk(delay-bk="/img/feature/a.png")
+              .feature-icon.delay-bk(delay-bk="/img/feature/a-2.png")
+            h3 極舒適
+            p 
+              | 一般輕量化背包為了減少重量會在背負系統妥協而影響舒適性，然而
+              b 蕨休閒背包
+              | 在輕量化的同時仍使用
+              b 透氣可調式肩帶
+              | ，良好的背負系統讓你即使在日常生活中使用它也不會有額外的負擔。
+          .col-sm-4.bl-green
+            .feature
+              .feature-icon.delay-bk(delay-bk="/img/feature/b.png")
+              .feature-icon.delay-bk(delay-bk="/img/feature/b-2.png")
+            h3 超輕量
+            p 
+              | 重量不到
+              b 300 克
+              | ，甚至比一盒
+              b 鋁箔包飲料
+              | 還輕。收納後大約
+              b 一個手掌大
+              | ，節省家中儲藏空間，也節省登山背包的珍貴容量，無論登山、旅遊、通勤、甚至上賣場，你沒有理由不隨身帶上一個。
+          .col-sm-4.bl-cyan
+            .feature
+              .feature-icon.delay-bk(delay-bk="/img/feature/c.png")
+              .feature-icon.delay-bk(delay-bk="/img/feature/c-2.png")
+            h3 高機能性
+            p
+              | 輕量化的同時仍保有
+              b 雙側袋
+              | 、
+              b 前袋
+              | 以及
+              b 拉鏈帶
+              | ，妥善的分隔讓你瞬間就能找到東西。水壺雨具在側邊、錢包零錢在前袋，甚至
+              b 不需卸下背包
+              | 就能取得，現在就把其他機能不良的背包丟了吧。
+      a(name="order")
+      #detail
+        .item
+          .img.delay-bk(delay-bk="/img/detail/02.jpg")
+          .title 方便的側袋與前袋隔間
+        .item
+          .img.delay-bk(delay-bk="/img/detail/04.jpg")
+          .title 透氣且排汗的背包背帶
+        .item
+          .img.delay-bk(delay-bk="/img/detail/06.jpg")
+          .title 背帶可以迅速調整長度
+        .item
+          .img.delay-bk(delay-bk="/img/detail/05.jpg")
+          .title 易拉的拉鏈並附有拉帶
+        .item
+          .img.delay-bk(delay-bk="/img/detail/03.jpg")
+          .title 增添設計感的背包花紋
+        .item
+          .img.delay-bk(delay-bk="/img/detail/11.jpg")
+          .title 彷彿背上翅膀般地輕巧
+        .item
+          .img.delay-bk(delay-bk="/img/detail/07.jpg")
+          .title 適合各式各樣場合使用
+        .item
+          .img.delay-bk(delay-bk="/img/detail/08.jpg")
+          .title 收納後輕便的體積重量
+        .item
+          .img.delay-bk(delay-bk="/img/detail/09.jpg")
+          .title 多種顏色款式可供選擇
+        .item
+          .img.delay-bk(delay-bk="/img/detail/10.jpg")
+          .title 同時兼具機能以及美感
+        .item
+          .img.dashed: .ib
+            | 想要嗎？
+            br
+            a(href="#order") 立刻訂購吧！
+      br.clear
+      #order
+      br
+      br
+      hr
+      br
+      br
+      #notify.shown(ng-controller="notify")
+        .ib
+          h1.text-center 訂購資訊
+          br
+          h2 還沒開賣，有興趣嗎？請留下 email 讓我們通知您
+          br
+          br
+        form.form-inline.text-center(name="notifyform",novalidate)
+          .form-group(ng-class="fix('email')")
+            +valid-label("notifyform","email", "電子郵件信箱", "電子郵件信箱")
+            input.form-control.input-lg(type="email",placeholder="例如：john@mail.tw",
+              ng-disabled="state!=0",name="email",ng-model="email",required)
+          .btn.btn-danger.btn-lg(ng-click="submit()",style="vertical-align:bottom",ng-disabled="state==2") 送出
+        br
+        h2(ng-show="state==2") 感謝您的回饋！
+      //-#order
+        .ib
+          h2 訂購資訊
+          br
+          form(name="orderform",novalidate)
+            .checkbox
+              label
+                input(type="checkbox",checked,ng-model="want",disabled)
+                h3(style="color:#e02") 我要一個 FERN 攻頂包！*
+                small (* : 由於數量有限且訂購踴躍，目前每人限購一只黑色 FERN 攻頂包 )
+            br
+            h4
+              i.glyphicon.glyphicon-shopping-cart
+              |  運送資訊
+            br
+            .form-group(ng-class="fix('name')")
+              +valid-label("orderform","name", "收件人", "姓名")
+              input.form-control(type="text",placeholder="例如： 王永仁",
+                ng-disabled="!want || state!=0",name="name",ng-model="name",required,ng-minlength="2")
+            .form-group(ng-class="fix('addr')")
+              +valid-label("orderform","addr", "寄送地址", "地址")
+              input.form-control(type="text",placeholder="例如：台北市士林區福港街 12 號",
+                ng-disabled="!want || state!=0",name="addr",ng-model="addr",required,ng-minlength="5")
+            .row
+              .col-sm-6: .form-group(ng-class="fix('email')")
+                +valid-label("orderform","email", "電子郵件信箱", "電子郵件信箱")
+                input.form-control(type="email",placeholder="例如：john@mail.tw ( 用於確認或修改訂單 )",
+                  ng-disabled="!want || state!=0",name="email",ng-model="email",required)
+              .col-sm-6: .form-group(ng-class="fix('phone')")
+                +valid-label("orderform","phone", "聯絡電話", "電話")
+                input.form-control(type="text",placeholder="例如： 0912312412 ( 於送貨時聯絡用 )",
+                  ng-disabled="!want || state!=0",name="phone",ng-model="phone",required,ng-minlength="7",ng-pattern="/[0-9-() ]/")
+            button.btn.btn-danger(type="submit",ng-disabled="!want || state!=0",ng-click="submit()",ng-hide="state==2") 送出訂單
+            .text-danger(ng-show="fix('name') || fix('addr') || fix('email') || fix('phone')") 您所填的資料有點問題，請修正後重新送出
+            button.btn.btn-default(type="submit",ng-disabled="true",ng-click="submit()",ng-show="state==2") 訂購完成!
+            button.btn.btn-success(type="submit",ng-click="clearForm()",ng-show="state==2") 我要追加
+            br
+            br
+            p * 商品訂購後將於 5 ~ 7 天內出貨
+
+    br.clear
+    br
+    hr
+    br
+    br
+    #about: .ib
+      h2 
+        img(src="/img/logo/icon-black.png")
+        |  關於我們
+      p 喜愛戶外運動的我們，常在陽光灑落的杉林中穿梭、嗅著山間青色的味道，輕盈的步伐跳躍在佈滿星蕨的泥土小徑上，露水沾濕了褲管，卻洗去了沈重的形象。我們常思考著，背包不應是旅行的負擔，而應該是生長在旅者背後的一對翅膀，帶著我們翩翩躍於旅人的行跡間。
+      br 
+      p 大多數的登山攻頂包為了輕量化而減去了機能，就像剪去羽毛的翅膀一般，而蕨之翼拒絕了這樣的妥協。隱喻著翅膀的蕨，拓印在每個蕨之翼的背包上，彷彿讓每位使用者都長出了翅膀，於各自的旅程間敖翔。
+      br 
+      p 此外，我們也注意到，時尚與機能之間，並不存在一條明顯的分界線；當回到文明社會之時，蕨之翼簡單清新的外觀，就像鳥兒收起了雙翼般，伴隨你徘徊在熱鬧繁華的街道之間。
+      br
+      p 你不再需要很多個背包了。你只需要一對翅膀。
+    br
+    br
+    br
+
+    .modal.fade#orderlist(role="dialog",aria-labelledby="orderlist",aria-hidden="true")
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type="button",data-dismiss="modal" aria-hidden="true") &times;
+            h4.modal-title 訂單列表
+          .modal-body
+            table
+              tr
+                th 姓名
+                th 地址
+                th 電子郵件
+                th 電話
+              tr(ng-repeat="(k,v) in orders.pending") 
+                td {{v[0]}}
+                td {{v[1]}}
+                td {{v[2]}}
+                td {{v[3]}}
+          .modal-footer
+            button.btn.btn-default(type="button",data-dismiss="modal") 關閉
