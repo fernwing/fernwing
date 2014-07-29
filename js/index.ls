@@ -22,7 +22,7 @@ angular.module \main
         setTimeout (-> e.toggle-class \visible), 100
 
   ..controller \notify, ($scope, $firebase, $timeout) ->
-    $scope.db-ref = new Firebase \https://fern.firebaseIO.com/notify
+    $scope.db-ref = new Firebase \https://fern.firebaseIO.com/notify/
     $scope.notify = $firebase $scope.db-ref
     $scope.need-fix = false
     $scope.state = 0
@@ -33,8 +33,8 @@ angular.module \main
       if not ($scope.email) => return $scope.need-fix = true
       $scope.need-fix = false
       $scope.state = 1
-      id = $scope.notify.[]pending.push [$scope.email]
-      $scope.notify.$save!
+      id = $scope.notify.$add $scope.email
+      #$scope.notify.$save!
       ga \send, \event, \notify, \submit
       $timeout ( -> $scope.post-submitted! ), 2000
 

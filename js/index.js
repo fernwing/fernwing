@@ -46,7 +46,7 @@ x$.directive('delayBk', function(){
   };
 });
 x$.controller('notify', function($scope, $firebase, $timeout){
-  $scope.dbRef = new Firebase('https://fern.firebaseIO.com/notify');
+  $scope.dbRef = new Firebase('https://fern.firebaseIO.com/notify/');
   $scope.notify = $firebase($scope.dbRef);
   $scope.needFix = false;
   $scope.state = 0;
@@ -61,14 +61,13 @@ x$.controller('notify', function($scope, $firebase, $timeout){
     }
   };
   return $scope.submit = function(){
-    var id, ref$;
+    var id;
     if (!$scope.email) {
       return $scope.needFix = true;
     }
     $scope.needFix = false;
     $scope.state = 1;
-    id = ((ref$ = $scope.notify).pending || (ref$.pending = [])).push([$scope.email]);
-    $scope.notify.$save();
+    id = $scope.notify.$add($scope.email);
     ga('send', 'event', 'notify', 'submit');
     return $timeout(function(){
       return $scope.postSubmitted();
