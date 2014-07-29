@@ -122,9 +122,9 @@ x$.controller('main', function($scope, $firebase, $timeout){
   zoomed = false;
   shown = false;
   $scope.st = {};
-  $scope.anchor = ['wing-feature', 'order', 'about', 'gallery'];
+  $scope.anchor = ['wing-feature', 'order', 'order-info', 'about', 'gallery'];
   $scope.anchor.map(function(it){
-    return $scope.st["#" + it] = $("#" + it).offset().top;
+    return $scope.st["#" + it] = ($("#" + it).offset() || {}).top;
   });
   $scope.reach = {};
   $(window).scroll(function(e){
@@ -136,7 +136,7 @@ x$.controller('main', function($scope, $firebase, $timeout){
       $('#feature img').addClass('zoom');
       $('#feature .feature').addClass('zoom');
     }
-    if (t > $scope.st['#order'] && !shown) {
+    if (t > $scope.st['#order-info'] - h / 2 && !shown) {
       shown = true;
       $('#order').addClass('shown');
       ga('send', 'event', 'form', 'reach');

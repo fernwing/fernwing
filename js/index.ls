@@ -68,8 +68,8 @@ angular.module \main
     zoomed = false
     shown = false
     $scope.st = {}
-    $scope.anchor = <[wing-feature order about gallery]>
-    $scope.anchor.map -> $scope.st["\##it"] = $("\##it").offset!top
+    $scope.anchor = <[wing-feature order order-info about gallery]>
+    $scope.anchor.map -> $scope.st["\##it"] = ($("\##it").offset! or {})top
     $scope.reach = {}
     $(window)scroll (e) ->
       h = $(window)height!
@@ -78,7 +78,7 @@ angular.module \main
         zoomed := true
         $('#feature img').add-class \zoom
         $('#feature .feature').add-class \zoom
-      if t > $scope.st['#order'] and !shown =>
+      if t > $scope.st['#order-info'] - (h/2) and !shown =>
         shown := true
         $('#order').add-class \shown
         ga \send, \event, \form, \reach

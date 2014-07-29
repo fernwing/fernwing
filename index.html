@@ -46,7 +46,7 @@
     <div id="root">
       <div id="nav">
         <div class="ib"><a href="/" class="item logo"></a>
-          <div class="right"><a href="/#brief" class="item">產品介紹</a><a href="/#order" class="item">購買</a><a href="/#about" class="item">關於我們</a></div>
+          <div class="right"><a href="/#brief" class="item">產品介紹</a><a href="/#order-info" class="item">購買</a><a href="/#about" class="item">關於我們</a></div>
         </div>
       </div>
       <div id="banner">
@@ -112,7 +112,7 @@
                 <p>輕量化的同時仍保有<b>雙側袋</b>、<b>前袋</b>以及<b>拉鏈帶</b>，妥善的分隔讓你瞬間就能找到東西。水壺雨具在側邊、錢包零錢在前袋，甚至<b>不需卸下背包</b>就能取得，現在就把其他機能不良的背包丟了吧。</p>
               </div>
             </div>
-          </div><a name="order"></a>
+          </div>
           <div id="detail">
             <div class="item">
               <div delay-bk="/img/detail/02.jpg" class="img delay-bk"></div>
@@ -150,7 +150,7 @@
             .img: .ib
               | 想要嗎？
               br
-              a(href="#order") 立刻訂購吧！
+              a(href="#order-info") 立刻訂購吧！
             -->
             <div id="spec" class="item">
               <div class="desc">
@@ -165,27 +165,132 @@
                 </div>
               </div>
             </div>
-          </div><br class="clear">
-          <div id="order"></div><br><br>
-          <hr><br><br>
-          <div id="notify" ng-controller="notify" class="shown">
+          </div><br class="clear"><br><br>
+          <div id="order-info"></div>
+          <hr>
+          <div id="order">
             <div class="ib">
-              <h1 class="text-center">訂購資訊</h1><br>
-              <h2>還沒開賣，有興趣嗎？請留下 email 讓我們通知您</h2><br><br>
+              <h2><i class="glyphicon glyphicon-phone-alt"></i> 現在就訂購！</h2><br>
+              <form name="orderform" novalidate>
+                <h4><i class="glyphicon glyphicon-list-alt"></i> 選擇數量</h4>
+                <div class="choices">
+                  <div class="choice">
+                    <div class="ib">
+                      <div class="color red"></div>
+                      <div class="form-group">
+                        <label>紅色</label>
+                        <select class="form-control">
+                          <option value="0">0</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="choice">
+                    <div class="ib">
+                      <div class="color green"></div>
+                      <div class="form-group">
+                        <label>綠色</label>
+                        <select class="form-control">
+                          <option value="0">0</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="choice">
+                    <div class="ib">
+                      <div class="color cyan"></div>
+                      <div class="form-group">
+                        <label>水藍色</label>
+                        <select class="form-control">
+                          <option value="0">0</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="choice invert">
+                    <div class="ib">
+                      <div class="color purple"></div>
+                      <div class="form-group">
+                        <label>紫色</label>
+                        <select class="form-control">
+                          <option value="0">0</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="choice invert">
+                    <div class="ib">
+                      <div class="color magenta"></div>
+                      <div class="form-group">
+                        <label>洋紅色</label>
+                        <select class="form-control">
+                          <option value="0">0</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="choice invert">
+                    <div class="ib">
+                      <div class="color black"></div>
+                      <div class="form-group">
+                        <label>黑色</label>
+                        <select class="form-control">
+                          <option value="0">0</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div><br class="clear"><br>
+                <h4><i class="glyphicon glyphicon-shopping-cart"></i> 運送資訊</h4><br>
+                <div ng-class="fix('name')" class="form-group">
+                  <label>收件人<span ng-show="needFix &amp;&amp; orderform.name.$invalid"><i class="glyphicon glyphicon-exclamation-sign text-danger"></i>
+                      <div ng-show="orderform.name.$error.required" class="text-danger">此欄位爲必填</div>
+                      <div ng-show="!orderform.name.$error.required" class="text-danger">這不是正確的姓名
+                      </div></span>
+                    <div ng-show="!orderform.name.$invalid" class="text-success"><i class="glyphicon glyphicon-ok-sign"></i></div>
+                  </label>
+                  <input type="text" placeholder="例如： 王永仁" ng-disabled="!want || state!=0" name="name" ng-model="name" required ng-minlength="2" class="form-control">
+                </div>
+                <div ng-class="fix('addr')" class="form-group">
+                  <label>寄送地址<span ng-show="needFix &amp;&amp; orderform.addr.$invalid"><i class="glyphicon glyphicon-exclamation-sign text-danger"></i>
+                      <div ng-show="orderform.addr.$error.required" class="text-danger">此欄位爲必填</div>
+                      <div ng-show="!orderform.addr.$error.required" class="text-danger">這不是正確的地址
+                      </div></span>
+                    <div ng-show="!orderform.addr.$invalid" class="text-success"><i class="glyphicon glyphicon-ok-sign"></i></div>
+                  </label>
+                  <input type="text" placeholder="例如：台北市士林區福港街 12 號" ng-disabled="!want || state!=0" name="addr" ng-model="addr" required ng-minlength="5" class="form-control">
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div ng-class="fix('email')" class="form-group">
+                      <label>電子郵件信箱<span ng-show="needFix &amp;&amp; orderform.email.$invalid"><i class="glyphicon glyphicon-exclamation-sign text-danger"></i>
+                          <div ng-show="orderform.email.$error.required" class="text-danger">此欄位爲必填</div>
+                          <div ng-show="!orderform.email.$error.required" class="text-danger">這不是正確的電子郵件信箱
+                          </div></span>
+                        <div ng-show="!orderform.email.$invalid" class="text-success"><i class="glyphicon glyphicon-ok-sign"></i></div>
+                      </label>
+                      <input type="email" placeholder="例如：john@mail.tw ( 用於確認或修改訂單 )" ng-disabled="!want || state!=0" name="email" ng-model="email" required class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div ng-class="fix('phone')" class="form-group">
+                      <label>聯絡電話<span ng-show="needFix &amp;&amp; orderform.phone.$invalid"><i class="glyphicon glyphicon-exclamation-sign text-danger"></i>
+                          <div ng-show="orderform.phone.$error.required" class="text-danger">此欄位爲必填</div>
+                          <div ng-show="!orderform.phone.$error.required" class="text-danger">這不是正確的電話
+                          </div></span>
+                        <div ng-show="!orderform.phone.$invalid" class="text-success"><i class="glyphicon glyphicon-ok-sign"></i></div>
+                      </label>
+                      <input type="text" placeholder="例如： 0912312412 ( 於送貨時聯絡用 )" ng-disabled="!want || state!=0" name="phone" ng-model="phone" required ng-minlength="7" ng-pattern="/[0-9-() ]/" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" ng-disabled="!want || state!=0" ng-click="submit()" ng-hide="state==2" class="btn btn-danger">送出訂單</button>
+                <div ng-show="fix('name') || fix('addr') || fix('email') || fix('phone')" class="text-danger">您所填的資料有點問題，請修正後重新送出</div>
+                <button type="submit" ng-disabled="true" ng-click="submit()" ng-show="state==2" class="btn btn-default">訂購完成!</button>
+                <button type="submit" ng-click="clearForm()" ng-show="state==2" class="btn btn-success">我要追加</button><br><br>
+                <p>* 商品訂購後將於 5 ~ 7 天內出貨</p>
+              </form>
             </div>
-            <form name="notifyform" novalidate class="form-inline text-center">
-              <div ng-class="fix('email')" class="form-group">
-                <label>電子郵件信箱<span ng-show="needFix &amp;&amp; notifyform.email.$invalid"><i class="glyphicon glyphicon-exclamation-sign text-danger"></i>
-                    <div ng-show="notifyform.email.$error.required" class="text-danger">此欄位爲必填</div>
-                    <div ng-show="!notifyform.email.$error.required" class="text-danger">這不是正確的電子郵件信箱
-                    </div></span>
-                  <div ng-show="!notifyform.email.$invalid" class="text-success"><i class="glyphicon glyphicon-ok-sign"></i></div>
-                </label>
-                <input type="email" placeholder="例如：john@mail.tw" ng-disabled="state!=0" name="email" ng-model="email" required class="form-control input-lg">
-              </div>
-              <div ng-click="submit()" style="vertical-align:bottom" ng-disabled="state==2" class="btn btn-danger btn-lg">送出</div>
-            </form><br>
-            <h2 ng-show="state==2">感謝您的回饋！</h2>
           </div>
         </div><br class="clear"><br>
         <hr><br><br>

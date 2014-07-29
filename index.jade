@@ -89,7 +89,6 @@ block bare-content
               | ，妥善的分隔讓你瞬間就能找到東西。水壺雨具在側邊、錢包零錢在前袋，甚至
               b 不需卸下背包
               | 就能取得，現在就把其他機能不良的背包丟了吧。
-      a(name="order")
       #detail
         .item
           .img.delay-bk(delay-bk="/img/detail/02.jpg")
@@ -125,7 +124,7 @@ block bare-content
           .img: .ib
             | 想要嗎？
             br
-            a(href="#order") 立刻訂購吧！
+            a(href="#order-info") 立刻訂購吧！
         .item#spec
           .desc: .ib
             h3
@@ -141,13 +140,11 @@ block bare-content
               li 收納尺寸: 長 19cm / 寬 17cm
 
       br.clear
-      #order
       br
       br
+      #order-info
       hr
-      br
-      br
-      #notify.shown(ng-controller="notify")
+      //-#notify.shown(ng-controller="notify")
         .ib
           h1.text-center 訂購資訊
           br
@@ -162,12 +159,63 @@ block bare-content
           .btn.btn-danger.btn-lg(ng-click="submit()",style="vertical-align:bottom",ng-disabled="state==2") 送出
         br
         h2(ng-show="state==2") 感謝您的回饋！
-      //-#order
+      #order
         .ib
-          h2 訂購資訊
+          h2 
+            i.glyphicon.glyphicon-phone-alt
+            |  現在就訂購！
           br
+
           form(name="orderform",novalidate)
-            .checkbox
+            h4
+              i.glyphicon.glyphicon-list-alt
+              |  選擇數量
+            .choices
+
+              .choice: .ib
+                .color.red
+                .form-group
+                  label 紅色
+                  select.form-control
+                    option(value="0") 0
+
+              .choice: .ib
+                .color.green
+                .form-group
+                  label 綠色
+                  select.form-control
+                    option(value="0") 0
+
+              .choice: .ib
+                .color.cyan
+                .form-group
+                  label 水藍色
+                  select.form-control
+                    option(value="0") 0
+
+              .choice.invert: .ib
+                .color.purple
+                .form-group
+                  label 紫色
+                  select.form-control
+                    option(value="0") 0
+
+              .choice.invert: .ib
+                .color.magenta
+                .form-group
+                  label 洋紅色
+                  select.form-control
+                    option(value="0") 0
+
+              .choice.invert: .ib
+                .color.black
+                .form-group
+                  label 黑色
+                  select.form-control
+                    option(value="0") 0
+
+            br.clear
+            //-.checkbox
               label
                 input(type="checkbox",checked,ng-model="want",disabled)
                 h3(style="color:#e02") 我要一個 FERN 攻頂包！*
