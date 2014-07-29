@@ -45,8 +45,7 @@
     <div id="feathers"></div>
     <div id="root">
       <div id="nav">
-        <div class="ib">
-          <div class="item logo"></div>
+        <div class="ib"><a href="/" class="item logo"></a>
           <div class="right"><a href="/#brief" class="item">產品介紹</a><a href="/#order" class="item">購買</a><a href="/#about" class="item">關於我們</a></div>
         </div>
       </div>
@@ -135,11 +134,7 @@
               <div delay-bk="/img/detail/03.jpg" class="img delay-bk"></div>
               <div class="title">增添設計感的背包花紋</div>
             </div>
-            <div class="item">
-              <div delay-bk="/img/detail/11.jpg" class="img delay-bk"></div>
-              <div class="title">彷彿背上翅膀般地輕巧</div>
-            </div>
-            <div class="item">
+            <div class="item w480">
               <div delay-bk="/img/detail/07.jpg" class="img delay-bk"></div>
               <div class="title">適合各式各樣場合使用</div>
             </div>
@@ -147,17 +142,27 @@
               <div delay-bk="/img/detail/08.jpg" class="img delay-bk"></div>
               <div class="title">收納後輕便的體積重量</div>
             </div>
-            <div class="item">
+            <div class="item w1260">
               <div delay-bk="/img/detail/09.jpg" class="img delay-bk"></div>
               <div class="title">多種顏色款式可供選擇</div>
             </div>
-            <div class="item">
-              <div delay-bk="/img/detail/10.jpg" class="img delay-bk"></div>
-              <div class="title">同時兼具機能以及美感</div>
-            </div>
-            <div class="item">
-              <div class="img dashed">
-                <div class="ib">想要嗎？<br><a href="#order">立刻訂購吧！</a></div>
+            <!--.item.dashed
+            .img: .ib
+              | 想要嗎？
+              br
+              a(href="#order") 立刻訂購吧！
+            -->
+            <div id="spec" class="item">
+              <div class="desc">
+                <div class="ib">
+                  <h3>產品規格<small>/ 蕨之翼隨身背包</small></h3>
+                  <ul>
+                    <li>容量: 25升</li>
+                    <li>重量: <b>199公克</b>，三顆蛋的重量</li>
+                    <li>正常尺寸: 高 36cm / 寬 24cm / 深 14cm</li>
+                    <li>收納尺寸: 長 19cm / 寬 17cm</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div><br class="clear">
@@ -251,8 +256,7 @@
         <div id="footer">
           <div class="ib">
             <div class="item logo"><img src="/img/logo/footer.png"></div>
-            <div class="right">
-              <div mailto:contact@fernwing.com class="item">聯絡我們</div><a href="/privacy.html" class="item">隱私權政策</a><a href="/eula.html" class="item">使用者條款</a><a data-toggle="modal" data-target="#attribution" class="item">誌謝</a>
+            <div class="right"><a href="mailto:contact@fernwing.com" class="item">聯絡我們</a><a href="/privacy.html" class="item">隱私權政策</a><a href="/eula.html" class="item">使用者條款</a><a data-toggle="modal" data-target="#attribution" class="item">誌謝</a>
             </div>
           </div>
         </div>

@@ -28,7 +28,10 @@ html(lang="en")
     include library.jade
     // custom files
     link(rel="stylesheet",type="text/css",href="/css/index.css")
-    if online
+    if !online
+      script(type="text/javascript").
+        var online = false;
+    else
       script(type="text/javascript").
         var online = true;
       script(type="text/javascript",src='//cdn.firebase.com/v0/firebase.js')
@@ -48,7 +51,7 @@ html(lang="en")
     #root
       #nav
         .ib
-          .item.logo
+          a.item.logo(href="/")
           .right
             a.item(href="/#brief") 產品介紹
             a.item(href="/#order") 購買
@@ -92,7 +95,7 @@ html(lang="en")
           .ib
             .item.logo: img(src="/img/logo/footer.png")
             .right
-              .item("mailto:contact@fernwing.com") 聯絡我們
+              a.item(href="mailto:contact@fernwing.com") 聯絡我們
               a.item(href="/privacy.html") 隱私權政策
               a.item(href="/eula.html") 使用者條款
               //-a.item(data-toggle="modal",data-target="#orderlist") 訂單

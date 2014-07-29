@@ -213,7 +213,7 @@ server = (req, res) ->
 log = (error, stdout, stderr) -> if "#{stdout}\n#{stderr}".trim! => console.log that
 update-file = ->
   [type,cmd] = [ftype(it), ""]
-  if it.indexOf \layout.jade >=0 => return
+  if it.indexOf(\layout.jade) >= 0 => return
   if type == \other => return
   if type == \ls => cmd = "#{ls} -cb #{it}"
   if type == \sass => cmd = "#{sass} css/index.sass css/index.css"# #{it} #{it.replace /\.sass$/, \.css}"

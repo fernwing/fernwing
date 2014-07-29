@@ -27,6 +27,20 @@
       background: #ccc
       border-radius: 5px
       @include transition(border-radius 1s)
+    .desc
+      .ib
+        margin: 10px 20px
+      position: relative
+      z-index: index($order, detail-title)
+      h3
+        margin-bottom: 30px
+      ul
+        padding-left: 20px
+        li
+          line-height: 1.3em
+          margin: 15px 0
+          font-size: 1.1em
+          letter-spacing: 1px
     .title
       position: relative
       z-index: index($order, detail-title)
@@ -34,7 +48,16 @@
       font-size: 1.5em
       border-top: 5px solid #999
       margin-top: 3px
-    .img.dashed
+  .item#spec
+    border: 1px solid #eee
+    box-shadow: 0 2px 7px rgba(0,0,0,0.15)
+    height: 300px
+    &:before
+      background: #fff
+  .item.dashed
+    &:before
+      background: none
+    .img
       border: 2px dashed #999
       font-size: 2em
       text-align: center
@@ -52,13 +75,17 @@
 
 @media (min-width: 480px) and (max-width: 840px)
   #detail
-    width: 480px
+    width: 400px
     margin: auto
+    .item.w1260
+      display: none
 
 @media (min-width: 840px) and (max-width: 1260px)
   #detail
     width: 840px
     margin: auto
+    .item.w1260
+      display: none
 
 @media (min-width: 1260px) and (max-width: 1680px)
   #detail
@@ -72,6 +99,10 @@
 
 @media (max-width: 480px)
   #detail
+    .item.w1260
+      display: none
+    .item.w480
+      display: none
     width: 100%
     .item
       width: 100%
@@ -89,5 +120,7 @@
         border: none
         color: #fff
         padding: 5px
+    .item#spec:before
+      width: 100%
     .item:hover .img, .item:hover:before
       border-radius: 0

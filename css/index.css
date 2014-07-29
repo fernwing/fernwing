@@ -435,6 +435,20 @@ body {
       -webkit-transition: border-radius 1s;
       -o-transition: border-radius 1s;
       transition: border-radius 1s; }
+    #detail .item .desc {
+      position: relative;
+      z-index: 3; }
+      #detail .item .desc .ib {
+        margin: 10px 20px; }
+      #detail .item .desc h3 {
+        margin-bottom: 30px; }
+      #detail .item .desc ul {
+        padding-left: 20px; }
+        #detail .item .desc ul li {
+          line-height: 1.3em;
+          margin: 15px 0;
+          font-size: 1.1em;
+          letter-spacing: 1px; }
     #detail .item .title {
       position: relative;
       z-index: 3;
@@ -442,34 +456,46 @@ body {
       font-size: 1.5em;
       border-top: 5px solid #999999;
       margin-top: 3px; }
-    #detail .item .img.dashed {
-      border: 2px dashed #999999;
-      font-size: 2em;
+  #detail .item#spec {
+    border: 1px solid #eeeeee;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.15);
+    height: 300px; }
+    #detail .item#spec:before {
+      background: white; }
+  #detail .item.dashed:before {
+    background: none; }
+  #detail .item.dashed .img {
+    border: 2px dashed #999999;
+    font-size: 2em;
+    text-align: center;
+    position: relative;
+    background: none;
+    -ms-transition: border-radius 1s;
+    -moz-transition: border-radius 1s;
+    -webkit-transition: border-radius 1s;
+    -o-transition: border-radius 1s;
+    transition: border-radius 1s; }
+    #detail .item.dashed .img .ib {
+      position: absolute;
+      top: 50%;
+      width: 100%;
       text-align: center;
-      position: relative;
-      background: none;
-      -ms-transition: border-radius 1s;
-      -moz-transition: border-radius 1s;
-      -webkit-transition: border-radius 1s;
-      -o-transition: border-radius 1s;
-      transition: border-radius 1s; }
-      #detail .item .img.dashed .ib {
-        position: absolute;
-        top: 50%;
-        width: 100%;
-        text-align: center;
-        margin-top: -40px; }
+      margin-top: -40px; }
   #detail .item:hover .img, #detail .item:hover:before {
     border-radius: 25px; }
 
 @media (min-width: 480px) and (max-width: 840px) {
   #detail {
-    width: 480px;
-    margin: auto; } }
+    width: 400px;
+    margin: auto; }
+    #detail .item.w1260 {
+      display: none; } }
 @media (min-width: 840px) and (max-width: 1260px) {
   #detail {
     width: 840px;
-    margin: auto; } }
+    margin: auto; }
+    #detail .item.w1260 {
+      display: none; } }
 @media (min-width: 1260px) and (max-width: 1680px) {
   #detail {
     width: 1260px;
@@ -481,6 +507,10 @@ body {
 @media (max-width: 480px) {
   #detail {
     width: 100%; }
+    #detail .item.w1260 {
+      display: none; }
+    #detail .item.w480 {
+      display: none; }
     #detail .item {
       width: 100%;
       margin: 0;
@@ -497,6 +527,8 @@ body {
         border: none;
         color: white;
         padding: 5px; }
+    #detail .item#spec:before {
+      width: 100%; }
     #detail .item:hover .img, #detail .item:hover:before {
       border-radius: 0; } }
 #feature {
