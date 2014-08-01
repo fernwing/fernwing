@@ -32,30 +32,85 @@
     width: 100%
     margin: auto
   .choice
-    border: 1px solid #ccc
-    border-radius: 3px
+    //-border: 1px solid #ccc
+    //-border-radius: 3px
     width: 280px
-    height: 225px
+    height: 295px
     margin: 5px
+    position: relative
     display: inline-block
+    .soldout
+      position: absolute
+      top: 0
+      left: 0
+      background: url(/img/form/soldout.png) center center no-repeat
+      z-index: index($order, order-choice-select)
+      width: 280px
+      height: 250px
+
     .ib
-      margin: 10px
+      margin: 0
     .color
       width: 100%
-      height: 135px
+      height: 250px
       margin-bottom: 10px
-    .red
-      background: #f00
-    .green
-      background: #9e0
-    .cyan
-      background: #09f
-    .purple
-      background: #90f
-    .magenta
-      background: #f09
-    .black
-      background: #000
+      &:before
+        content: " "
+        position: absolute
+        padding: 1px 3px
+        bottom: 7px
+        right: 25px
+        background: #000
+        color: #fff
+        font-weight: 999
+        display: block
+        width: 36px
+        height: 22px
+        border-radius: 5px
+        z-index: index($order, order-choice-select)
+
+    .color
+      &.red
+        &:before
+          content: "紅色"
+          background: #f00
+        background: url(/img/form/color.png) 0 0 no-repeat
+      &.green
+        &:before
+          content: "綠色"
+          background: #a2a32f
+        background: url(/img/form/color.png) 0 -1068px no-repeat
+      &.cyan
+        &:before
+          content: "水藍"
+          background: #49e
+        background: url(/img/form/color.png) 0 -1335px no-repeat
+      &.purple
+        &:before
+          content: "紫色"
+          background: #60b
+        background: url(/img/form/color.png) 0 -267px no-repeat
+      &.magenta
+        &:before
+          content: "紫紅"
+          background: #b0b
+        background: url(/img/form/color.png) 0 -801px no-repeat
+      &.black
+        &:before
+          content: "黑色"
+          background: #000
+        background: url(/img/form/color.png) 0 -534px no-repeat
+  .choice.soldout
+    .color
+      @include filter(saturate(0))
+      opacity: 0.5
+      &:after
+        content: "已售完"
+        display: block
+        position: absolute
+        z-index: index($order, order-choice-select)
+        bottom: 7px
+        right: 75px
 
 @media (max-width: 480px)
   #order
@@ -66,21 +121,24 @@
       .ib
         margin: 0
         height: 160px
-        position: relative
         .color
           height: 100%
-          position: absolute
+          background-size: cover
           z-index: index($order, order-choice-img)
           margin-bottom: 0
-        .form-group
-          label
-            text-shadow: 0 0 2px rgba(255,255,255,1)
-          position: absolute
-          z-index: index($order, order-choice-select)
-          width: 50%
-          top: 10px
-          left: 10px
-    .choice.invert
-      .form-group label
-        color: #fff
-        text-shadow: none
+          background-repeat: no-repeat
+          background-position: center center
+          &.red
+            background-image: url(/img/form/red.png)
+          &.green
+            background-image: url(/img/form/green.png)
+          &.cyan
+            background-image: url(/img/form/cyan.png)
+          &.purple
+            background-image: url(/img/form/purple.png)
+          &.magenta
+            background-image: url(/img/form/magenta.png)
+          &.black
+            background-image: url(/img/form/black.png)
+          &:before, &:after
+            bottom: -28px

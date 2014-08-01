@@ -1,4 +1,9 @@
 extends layout
+mixin order-choice(color)
+  .choice(ng-class="{'soldout':!avail."+color+"}"): .ib
+    .color(class=color)
+    select.form-control(class=color,ng-disabled="!avail."+color,name="count_"+color,ng-model="count."+color,ng-options="v for v in choicelist['"+color+"']")
+      option(value="0") 0
 block pre-content
   #dim.dimmer(ng-show="state==1"): .ib 處理訂單中 .. 
   #feathers
@@ -172,47 +177,12 @@ block bare-content
               |  選擇數量
             .choices
 
-              .choice: .ib
-                .color.red
-                .form-group
-                  label 紅色
-                  select.form-control
-                    option(value="0") 0
-
-              .choice: .ib
-                .color.green
-                .form-group
-                  label 綠色
-                  select.form-control
-                    option(value="0") 0
-
-              .choice: .ib
-                .color.cyan
-                .form-group
-                  label 水藍色
-                  select.form-control
-                    option(value="0") 0
-
-              .choice.invert: .ib
-                .color.purple
-                .form-group
-                  label 紫色
-                  select.form-control
-                    option(value="0") 0
-
-              .choice.invert: .ib
-                .color.magenta
-                .form-group
-                  label 洋紅色
-                  select.form-control
-                    option(value="0") 0
-
-              .choice.invert: .ib
-                .color.black
-                .form-group
-                  label 黑色
-                  select.form-control
-                    option(value="0") 0
+              +order-choice("red")
+              +order-choice("green")
+              +order-choice("cyan")
+              +order-choice("purple")
+              +order-choice("magenta")
+              +order-choice("black")
 
             br.clear
             //-.checkbox
@@ -234,16 +204,21 @@ block bare-content
               input.form-control(type="text",placeholder="例如：台北市士林區福港街 12 號",
                 ng-disabled="!want || state!=0",name="addr",ng-model="addr",required,ng-minlength="5")
             .row
-              .col-sm-6: .form-group(ng-class="fix('email')")
+              .col-sm-4: .form-group(ng-class="fix('email')")
                 +valid-label("orderform","email", "電子郵件信箱", "電子郵件信箱")
                 input.form-control(type="email",placeholder="例如：john@mail.tw ( 用於確認或修改訂單 )",
                   ng-disabled="!want || state!=0",name="email",ng-model="email",required)
-              .col-sm-6: .form-group(ng-class="fix('phone')")
+              .col-sm-4: .form-group(ng-class="fix('password')")
+                +valid-label("orderform","password","密碼", "密碼")
+                input.form-control(type="password",placeholder="用於確認或修改訂單",
+                  ng-disabled="!want || state!=0",name="password",ng-model="password",required)
+              .col-sm-4: .form-group(ng-class="fix('phone')")
                 +valid-label("orderform","phone", "聯絡電話", "電話")
                 input.form-control(type="text",placeholder="例如： 0912312412 ( 於送貨時聯絡用 )",
                   ng-disabled="!want || state!=0",name="phone",ng-model="phone",required,ng-minlength="7",ng-pattern="/[0-9-() ]/")
-            button.btn.btn-danger(type="submit",ng-disabled="!want || state!=0",ng-click="submit()",ng-hide="state==2") 送出訂單
-            .text-danger(ng-show="fix('name') || fix('addr') || fix('email') || fix('phone')") 您所填的資料有點問題，請修正後重新送出
+            button.btn.btn-danger.btn-block.btn-lg(type="submit",ng-disabled="!want || state!=0",ng-click="submit()",ng-hide="state==2") 送出訂單
+            .text-danger(ng-show="fix('name') || fix('addr') || fix('email') || fix('password') || fix('phone')")
+              | 您所填的資料有點問題，請修正後重新送出
             button.btn.btn-default(type="submit",ng-disabled="true",ng-click="submit()",ng-show="state==2") 訂購完成!
             button.btn.btn-success(type="submit",ng-click="clearForm()",ng-show="state==2") 我要追加
             br
@@ -267,6 +242,7 @@ block bare-content
       br
       p 你不再需要很多個背包了。你只需要一對翅膀。
     br
+    div(style="width:60%;margin:auto"): a.btn.btn-danger.btn-block.btn-lg(href="/#order-info") 現在就訂購
     br
     br
 

@@ -1,5 +1,9 @@
 angular.module \main, if online => <[firebase ngAnimate]> else <[ngAnimate]>
-if !online => angular.module.factory \$firebase, -> {}
+if !online => angular.module \main .factory \$firebase, -> ->
+if !online =>
+  Firebase = ->
+  FirebaseSimpleLogin = ->
+  ga = ->
 angular.module \main
   ..config ->
     $('a[href*=#]:not([href=#])').click ->
@@ -42,7 +46,16 @@ angular.module \main
   ..controller \main, ($scope, $firebase, $timeout) ->
     $scope.db-ref = new Firebase \https://fern.firebaseIO.com/order
     $scope.orders = $firebase $scope.db-ref
-    $scope.auth = new FirebaseSimpleLogin $scope.db-ref, (e,u) -> $scope.user = u
+    $scope.auth = new FirebaseSimpleLogin $scope.db-ref, (e,u) -> $scope.$apply ->
+      $scope.user = u
+      console.log ")))", $scope.user, e, u, $scope.state
+      if $scope.state == 1 => 
+        if !$scope.user => $scope.password = ""
+        $scope.submit!
+    $scope.count = {red: 0, green: 0, cyan: 0, purple: 0, magenta: 0, black: 0}
+    $scope.avail = {red: 5, green: 4, cyan: 0, purple: 2, magenta: 1, black: 0}
+    $scope.choicelist = {}
+    for k,v of $scope.avail => $scope.choicelist[k] = [i for i from 0 to v]
     $scope.want = true
     $scope.need-fix = false
     $scope.state = 0
@@ -51,18 +64,33 @@ angular.module \main
       if $scope.need-fix and !$scope[it] => "has-error" else ""
     
     $scope.clearForm = ->
-      $scope{name,addr,email,phone} = name: "", addr: "", email: "", phone: ""
+      $scope{name,addr,email,password,phone} = name: "", addr: "", email: "", password: "", phone: ""
       $scope.state = 0
 
     $scope.post-submitted = ->
       $scope.state = 2
     $scope.submit = ->
-      if not ($scope.name and $scope.addr and $scope.email and $scope.phone) => return $scope.need-fix = true
+      console.log "submitting"
+      if not ($scope.name and $scope.addr and $scope.email and $scope.password and $scope.phone) => 
+        return $scope <<< {need-fix: true, state: 0}
       $scope.need-fix = false
       $scope.state = 1
-      id = $scope.orders.[]pending.push [$scope.name, $scope.addr, $scope.email, $scope.phone]
-      $scope.orders.$save!
-      ga \send, \event, \form, \submit
+      console.log "[1]", $scope.auth.uid
+      if !$scope.user =>
+        console.log $scope.password
+        $scope.auth.createUser $scope.email, $scope.password, (e,u) ->
+          if e and e.code == \EMAIL_TAKEN => 
+            r = $scope.auth.login \password, email: $scope.email, password: $scope.password
+            console.log ">>>", r
+            console.log "[2]", $scope.auth.uid
+          else => 
+            console.log u
+            $scope.submit!
+      else 
+        console.log \ok
+      #id = $scope.orders.[]pending.push [$scope.name, $scope.addr, $scope.email, $scope.phone]
+      #$scope.orders.$save!
+      #ga \send, \event, \form, \submit
       $timeout ( -> $scope.post-submitted! ), 2000
 
     zoomed = false
@@ -108,6 +136,7 @@ angular.module \main
       jdx[i] = Math.random! * 0.5
       $(\#feathers)append n[i]
       m[i] = n[i].find \div
+
     /*set-interval ->
       for i from 0 til 50 =>
         x[i] += ( v[i] / 2 +  v[i] * Math.cos idx[i] )

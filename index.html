@@ -23,20 +23,8 @@
     <script type="text/javascript" src="assets/bootstrap/3.0.2/js/bootstrap.min.js"></script>
     <!-- custom files-->
     <link rel="stylesheet" type="text/css" href="/css/index.css">
-    <script type="text/javascript">var online = true;</script>
-    <script type="text/javascript" src="//cdn.firebase.com/v0/firebase.js"></script>
-    <script type="text/javascript" src="//cdn.firebase.com/v0/firebase-simple-login.js"></script>
-    <script type="text/javascript" src="//cdn.firebase.com/libs/angularfire/0.5.0/angularfire.min.js"></script>
+    <script type="text/javascript">var online = false;</script>
     <script type="text/javascript" src="js/index.js"></script>
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      ga('create', 'UA-48765647-1', 'fernwing.com');
-      ga('send', 'pageview');
-      
-    </script>
   </head>
   <body ng-app="main" ng-controller="main">
     <div id="dim" ng-show="state==1" class="dimmer">
@@ -174,70 +162,52 @@
               <form name="orderform" novalidate>
                 <h4><i class="glyphicon glyphicon-list-alt"></i> 選擇數量</h4>
                 <div class="choices">
-                  <div class="choice">
+                  <div ng-class="{'soldout':!avail.red}" class="choice">
                     <div class="ib">
                       <div class="color red"></div>
-                      <div class="form-group">
-                        <label>紅色</label>
-                        <select class="form-control">
-                          <option value="0">0</option>
-                        </select>
-                      </div>
+                      <select ng-disabled="!avail.red" name="count_red" ng-model="count.red" ng-options="v for v in choicelist['red']" class="form-control red">
+                        <option value="0">0</option>
+                      </select>
                     </div>
                   </div>
-                  <div class="choice">
+                  <div ng-class="{'soldout':!avail.green}" class="choice">
                     <div class="ib">
                       <div class="color green"></div>
-                      <div class="form-group">
-                        <label>綠色</label>
-                        <select class="form-control">
-                          <option value="0">0</option>
-                        </select>
-                      </div>
+                      <select ng-disabled="!avail.green" name="count_green" ng-model="count.green" ng-options="v for v in choicelist['green']" class="form-control green">
+                        <option value="0">0</option>
+                      </select>
                     </div>
                   </div>
-                  <div class="choice">
+                  <div ng-class="{'soldout':!avail.cyan}" class="choice">
                     <div class="ib">
                       <div class="color cyan"></div>
-                      <div class="form-group">
-                        <label>水藍色</label>
-                        <select class="form-control">
-                          <option value="0">0</option>
-                        </select>
-                      </div>
+                      <select ng-disabled="!avail.cyan" name="count_cyan" ng-model="count.cyan" ng-options="v for v in choicelist['cyan']" class="form-control cyan">
+                        <option value="0">0</option>
+                      </select>
                     </div>
                   </div>
-                  <div class="choice invert">
+                  <div ng-class="{'soldout':!avail.purple}" class="choice">
                     <div class="ib">
                       <div class="color purple"></div>
-                      <div class="form-group">
-                        <label>紫色</label>
-                        <select class="form-control">
-                          <option value="0">0</option>
-                        </select>
-                      </div>
+                      <select ng-disabled="!avail.purple" name="count_purple" ng-model="count.purple" ng-options="v for v in choicelist['purple']" class="form-control purple">
+                        <option value="0">0</option>
+                      </select>
                     </div>
                   </div>
-                  <div class="choice invert">
+                  <div ng-class="{'soldout':!avail.magenta}" class="choice">
                     <div class="ib">
                       <div class="color magenta"></div>
-                      <div class="form-group">
-                        <label>洋紅色</label>
-                        <select class="form-control">
-                          <option value="0">0</option>
-                        </select>
-                      </div>
+                      <select ng-disabled="!avail.magenta" name="count_magenta" ng-model="count.magenta" ng-options="v for v in choicelist['magenta']" class="form-control magenta">
+                        <option value="0">0</option>
+                      </select>
                     </div>
                   </div>
-                  <div class="choice invert">
+                  <div ng-class="{'soldout':!avail.black}" class="choice">
                     <div class="ib">
                       <div class="color black"></div>
-                      <div class="form-group">
-                        <label>黑色</label>
-                        <select class="form-control">
-                          <option value="0">0</option>
-                        </select>
-                      </div>
+                      <select ng-disabled="!avail.black" name="count_black" ng-model="count.black" ng-options="v for v in choicelist['black']" class="form-control black">
+                        <option value="0">0</option>
+                      </select>
                     </div>
                   </div>
                 </div><br class="clear"><br>
@@ -261,7 +231,7 @@
                   <input type="text" placeholder="例如：台北市士林區福港街 12 號" ng-disabled="!want || state!=0" name="addr" ng-model="addr" required ng-minlength="5" class="form-control">
                 </div>
                 <div class="row">
-                  <div class="col-sm-6">
+                  <div class="col-sm-4">
                     <div ng-class="fix('email')" class="form-group">
                       <label>電子郵件信箱<span ng-show="needFix &amp;&amp; orderform.email.$invalid"><i class="glyphicon glyphicon-exclamation-sign text-danger"></i>
                           <div ng-show="orderform.email.$error.required" class="text-danger">此欄位爲必填</div>
@@ -272,7 +242,18 @@
                       <input type="email" placeholder="例如：john@mail.tw ( 用於確認或修改訂單 )" ng-disabled="!want || state!=0" name="email" ng-model="email" required class="form-control">
                     </div>
                   </div>
-                  <div class="col-sm-6">
+                  <div class="col-sm-4">
+                    <div ng-class="fix('password')" class="form-group">
+                      <label>密碼<span ng-show="needFix &amp;&amp; orderform.password.$invalid"><i class="glyphicon glyphicon-exclamation-sign text-danger"></i>
+                          <div ng-show="orderform.password.$error.required" class="text-danger">此欄位爲必填</div>
+                          <div ng-show="!orderform.password.$error.required" class="text-danger">這不是正確的密碼
+                          </div></span>
+                        <div ng-show="!orderform.password.$invalid" class="text-success"><i class="glyphicon glyphicon-ok-sign"></i></div>
+                      </label>
+                      <input type="password" placeholder="用於確認或修改訂單" ng-disabled="!want || state!=0" name="password" ng-model="password" required class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
                     <div ng-class="fix('phone')" class="form-group">
                       <label>聯絡電話<span ng-show="needFix &amp;&amp; orderform.phone.$invalid"><i class="glyphicon glyphicon-exclamation-sign text-danger"></i>
                           <div ng-show="orderform.phone.$error.required" class="text-danger">此欄位爲必填</div>
@@ -284,8 +265,8 @@
                     </div>
                   </div>
                 </div>
-                <button type="submit" ng-disabled="!want || state!=0" ng-click="submit()" ng-hide="state==2" class="btn btn-danger">送出訂單</button>
-                <div ng-show="fix('name') || fix('addr') || fix('email') || fix('phone')" class="text-danger">您所填的資料有點問題，請修正後重新送出</div>
+                <button type="submit" ng-disabled="!want || state!=0" ng-click="submit()" ng-hide="state==2" class="btn btn-danger btn-block btn-lg">送出訂單</button>
+                <div ng-show="fix('name') || fix('addr') || fix('email') || fix('password') || fix('phone')" class="text-danger">您所填的資料有點問題，請修正後重新送出</div>
                 <button type="submit" ng-disabled="true" ng-click="submit()" ng-show="state==2" class="btn btn-default">訂購完成!</button>
                 <button type="submit" ng-click="clearForm()" ng-show="state==2" class="btn btn-success">我要追加</button><br><br>
                 <p>* 商品訂購後將於 5 ~ 7 天內出貨</p>
@@ -302,7 +283,8 @@
             <p>此外，我們也注意到，時尚與機能之間，並不存在一條明顯的分界線；當回到文明社會之時，蕨之翼簡單清新的外觀，就像鳥兒收起了雙翼般，伴隨你徘徊在熱鬧繁華的街道之間。</p><br>
             <p>你不再需要很多個背包了。你只需要一對翅膀。</p>
           </div>
-        </div><br><br><br>
+        </div><br>
+        <div style="width:60%;margin:auto"><a href="/#order-info" class="btn btn-danger btn-block btn-lg">現在就訂購</a></div><br><br>
         <div id="orderlist" role="dialog" aria-labelledby="orderlist" aria-hidden="true" class="modal fade">
           <div class="modal-dialog">
             <div class="modal-content">
