@@ -1,6 +1,9 @@
 extends layout
 mixin order-choice(color)
   .choice(ng-class="{'soldout':!avail."+color+"}"): .ib
+    .price
+      span 每個 {{price.#{color}}} 元
+      span(ng-show="count."+color)  x {{count.#{color}}} = {{price.#{color} * count.#{color}}} 元
     .color(class=color)
     select.form-control(class=color,ng-disabled="!avail."+color,name="count_"+color,ng-model="count."+color,ng-options="v for v in choicelist['"+color+"']")
       option(value="0") 0
@@ -204,19 +207,46 @@ block bare-content
               input.form-control(type="text",placeholder="例如：台北市士林區福港街 12 號",
                 ng-disabled="!want || state!=0",name="addr",ng-model="addr",required,ng-minlength="5")
             .row
-              .col-sm-4: .form-group(ng-class="fix('email')")
-                +valid-label("orderform","email", "電子郵件信箱", "電子郵件信箱")
-                input.form-control(type="email",placeholder="例如：john@mail.tw ( 用於確認或修改訂單 )",
-                  ng-disabled="!want || state!=0",name="email",ng-model="email",required)
-              .col-sm-4: .form-group(ng-class="fix('password')")
-                +valid-label("orderform","password","密碼", "密碼")
-                input.form-control(type="password",placeholder="用於確認或修改訂單",
-                  ng-disabled="!want || state!=0",name="password",ng-model="password",required)
               .col-sm-4: .form-group(ng-class="fix('phone')")
                 +valid-label("orderform","phone", "聯絡電話", "電話")
                 input.form-control(type="text",placeholder="例如： 0912312412 ( 於送貨時聯絡用 )",
                   ng-disabled="!want || state!=0",name="phone",ng-model="phone",required,ng-minlength="7",ng-pattern="/[0-9-() ]/")
-            button.btn.btn-danger.btn-block.btn-lg(type="submit",ng-disabled="!want || state!=0",ng-click="submit()",ng-hide="state==2") 送出訂單
+              .col-sm-4: .form-group(ng-class="fix('email')")
+                +valid-label("orderform","email", "電子郵件信箱", "電子郵件信箱")
+                input.form-control(type="email",placeholder="例如：john@mail.tw ( 用於確認或修改訂單 )",
+                  ng-disabled="user || !want || state!=0",name="email",ng-model="email",required)
+              .col-sm-4(ng-show="!user"): .form-group(ng-class="fix('password')")
+                +valid-label("orderform","password","密碼", "密碼")
+                input.form-control(type="password",placeholder="用於確認或修改訂單",
+                  ng-disabled="!want || state!=0",name="password",ng-model="password",required)
+              .col-sm-4(ng-show="user"): .form-group
+                label &nbsp;
+                .btn.btn-warning.form-control(ng-disabled="state!=0",ng-click="logout()") 我要用另外一組電子郵件
+            br
+
+            #order-detail.barblock.green
+              h4
+                i.glyphicon.glyphicon-th-list
+                span  訂單明細
+              .desc
+                span(ng-show="priceTotal()")  您所選購的商品為
+                span(ng-show="!priceTotal()")  您尚未選購任何背包
+                ul
+                  li(ng-show="count.red") 紅色背包 {{count.red}} 個
+                  li(ng-show="count.green") 綠色背包 {{count.green}} 個
+                  li(ng-show="count.cyan") 藍色背包 {{count.cyan}} 個
+                  li(ng-show="count.purple") 紫色背包 {{count.purple}} 個
+                  li(ng-show="count.magenta") 紫紅色背包 {{count.magenta}} 個
+                  li(ng-show="count.black") 黑色背包 {{count.black}} 個
+
+              .total(ng-show="priceTotal()")
+                i.glyphicon.glyphicon-tag
+                |  此筆訂單的總金額為：
+                span.red {{priceTotal()}} 
+                |  元
+
+            br
+            button.btn.btn-danger.btn-block.btn-lg(type="submit",ng-disabled="!priceTotal() || !want || state!=0",ng-click="submit()",ng-hide="state==2") 送出訂單
             .text-danger(ng-show="fix('name') || fix('addr') || fix('email') || fix('password') || fix('phone')")
               | 您所填的資料有點問題，請修正後重新送出
             button.btn.btn-default(type="submit",ng-disabled="true",ng-click="submit()",ng-show="state==2") 訂購完成!

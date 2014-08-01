@@ -44,16 +44,20 @@ angular.module \main
 
 
   ..controller \main, ($scope, $firebase, $timeout) ->
-    $scope.db-ref = new Firebase \https://fern.firebaseIO.com/order
-    $scope.orders = $firebase $scope.db-ref
-    $scope.auth = new FirebaseSimpleLogin $scope.db-ref, (e,u) -> $scope.$apply ->
+    $scope.orders-ref = new Firebase \https://fern.firebaseIO.com/order
+    $scope.orders = $firebase $scope.orders-ref
+    $scope.auth = new FirebaseSimpleLogin $scope.orders-ref, (e,u) -> $scope.$apply ->
+      if e => console.log "get user fail: ", e
       $scope.user = u
-      console.log ")))", $scope.user, e, u, $scope.state
+      if $scope.user => $scope.email = $scope.user.email
       if $scope.state == 1 => 
         if !$scope.user => $scope.password = ""
         $scope.submit!
+    $scope.price = {red: 583, green: 583, cyan: 583, purple: 583, magenta: 583, black: 583}
     $scope.count = {red: 0, green: 0, cyan: 0, purple: 0, magenta: 0, black: 0}
     $scope.avail = {red: 5, green: 4, cyan: 0, purple: 2, magenta: 1, black: 0}
+    $scope.priceTotal = ->
+      <[red green cyan purple magenta black]>map(-> $scope.price[it] * $scope.count[it])reduce ((a,b) -> a + b), 0
     $scope.choicelist = {}
     for k,v of $scope.avail => $scope.choicelist[k] = [i for i from 0 to v]
     $scope.want = true
@@ -63,31 +67,29 @@ angular.module \main
     $scope.fix = (it) ->
       if $scope.need-fix and !$scope[it] => "has-error" else ""
     
+    $scope.logout = -> if $scope.user =>
+      $scope.auth.logout!
+      $scope <<< {email: "", password: "", user: null}
     $scope.clearForm = ->
       $scope{name,addr,email,password,phone} = name: "", addr: "", email: "", password: "", phone: ""
+      if $scope.user => $scope.email = $scope.user.email
       $scope.state = 0
 
     $scope.post-submitted = ->
       $scope.state = 2
     $scope.submit = ->
-      console.log "submitting"
       if not ($scope.name and $scope.addr and $scope.email and $scope.password and $scope.phone) => 
         return $scope <<< {need-fix: true, state: 0}
       $scope.need-fix = false
       $scope.state = 1
-      console.log "[1]", $scope.auth.uid
       if !$scope.user =>
-        console.log $scope.password
         $scope.auth.createUser $scope.email, $scope.password, (e,u) ->
           if e and e.code == \EMAIL_TAKEN => 
-            r = $scope.auth.login \password, email: $scope.email, password: $scope.password
-            console.log ">>>", r
-            console.log "[2]", $scope.auth.uid
-          else => 
-            console.log u
+            $scope.auth.login \password, email: $scope.email, password: $scope.password
+          else if e => 
+            console.log "create user error: ", e
+          else
             $scope.submit!
-      else 
-        console.log \ok
       #id = $scope.orders.[]pending.push [$scope.name, $scope.addr, $scope.email, $scope.phone]
       #$scope.orders.$save!
       #ga \send, \event, \form, \submit

@@ -81,12 +81,17 @@ x$.controller('notify', function($scope, $firebase, $timeout){
 });
 x$.controller('main', function($scope, $firebase, $timeout){
   var k, ref$, v, i, zoomed, shown, count, x, y, r, s, m, idx, jdx, n, res$, i$, w, h, results$ = [];
-  $scope.dbRef = new Firebase('https://fern.firebaseIO.com/order');
-  $scope.orders = $firebase($scope.dbRef);
-  $scope.auth = new FirebaseSimpleLogin($scope.dbRef, function(e, u){
+  $scope.ordersRef = new Firebase('https://fern.firebaseIO.com/order');
+  $scope.orders = $firebase($scope.ordersRef);
+  $scope.auth = new FirebaseSimpleLogin($scope.ordersRef, function(e, u){
     return $scope.$apply(function(){
+      if (e) {
+        console.log("get user fail: ", e);
+      }
       $scope.user = u;
-      console.log(")))", $scope.user, e, u, $scope.state);
+      if ($scope.user) {
+        $scope.email = $scope.user.email;
+      }
       if ($scope.state === 1) {
         if (!$scope.user) {
           $scope.password = "";
@@ -95,6 +100,14 @@ x$.controller('main', function($scope, $firebase, $timeout){
       }
     });
   });
+  $scope.price = {
+    red: 583,
+    green: 583,
+    cyan: 583,
+    purple: 583,
+    magenta: 583,
+    black: 583
+  };
   $scope.count = {
     red: 0,
     green: 0,
@@ -110,6 +123,13 @@ x$.controller('main', function($scope, $firebase, $timeout){
     purple: 2,
     magenta: 1,
     black: 0
+  };
+  $scope.priceTotal = function(){
+    return ['red', 'green', 'cyan', 'purple', 'magenta', 'black'].map(function(it){
+      return $scope.price[it] * $scope.count[it];
+    }).reduce(function(a, b){
+      return a + b;
+    }, 0);
   };
   $scope.choicelist = {};
   for (k in ref$ = $scope.avail) {
@@ -127,6 +147,12 @@ x$.controller('main', function($scope, $firebase, $timeout){
       return "";
     }
   };
+  $scope.logout = function(){
+    if ($scope.user) {
+      $scope.auth.logout();
+      return $scope.email = "", $scope.password = "", $scope.user = null, $scope;
+    }
+  };
   $scope.clearForm = function(){
     var ref$;
     ref$ = {
@@ -136,37 +162,33 @@ x$.controller('main', function($scope, $firebase, $timeout){
       password: "",
       phone: ""
     }, $scope.name = ref$.name, $scope.addr = ref$.addr, $scope.email = ref$.email, $scope.password = ref$.password, $scope.phone = ref$.phone;
+    if ($scope.user) {
+      $scope.email = $scope.user.email;
+    }
     return $scope.state = 0;
   };
   $scope.postSubmitted = function(){
     return $scope.state = 2;
   };
   $scope.submit = function(){
-    console.log("submitting");
     if (!($scope.name && $scope.addr && $scope.email && $scope.password && $scope.phone)) {
       return $scope.needFix = true, $scope.state = 0, $scope;
     }
     $scope.needFix = false;
     $scope.state = 1;
-    console.log("[1]", $scope.auth.uid);
     if (!$scope.user) {
-      console.log($scope.password);
       $scope.auth.createUser($scope.email, $scope.password, function(e, u){
-        var r;
         if (e && e.code === 'EMAIL_TAKEN') {
-          r = $scope.auth.login('password', {
+          return $scope.auth.login('password', {
             email: $scope.email,
             password: $scope.password
           });
-          console.log(">>>", r);
-          return console.log("[2]", $scope.auth.uid);
+        } else if (e) {
+          return console.log("create user error: ", e);
         } else {
-          console.log(u);
           return $scope.submit();
         }
       });
-    } else {
-      console.log('ok');
     }
     return $timeout(function(){
       return $scope.postSubmitted();
