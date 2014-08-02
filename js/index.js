@@ -79,11 +79,13 @@ x$.controller('notify', function($scope, $firebase, $timeout){
     }, 2000);
   };
 });
-x$.controller('main', function($scope, $firebase, $timeout){
-  var k, ref$, v, i, zoomed, shown, count, x, y, r, s, m, idx, jdx, n, res$, i$, w, h, results$ = [];
-  $scope.ordersRef = new Firebase('https://fern.firebaseIO.com/order');
-  $scope.orders = $firebase($scope.ordersRef);
-  $scope.auth = new FirebaseSimpleLogin($scope.ordersRef, function(e, u){
+x$.controller('main', function($scope, $firebase, $timeout, dbref){
+  var zoomed, shown, count, x, y, v, r, s, m, idx, jdx, n, res$, i$, i, w, h;
+  $scope.db = {
+    order: null,
+    count: null
+  };
+  $scope.auth = dbref.auth('fern', function(e, u){
     return $scope.$apply(function(){
       if (e) {
         console.log("get user fail: ", e);
@@ -117,11 +119,11 @@ x$.controller('main', function($scope, $firebase, $timeout){
     black: 0
   };
   $scope.avail = {
-    red: 5,
-    green: 4,
+    red: 0,
+    green: 0,
     cyan: 0,
-    purple: 2,
-    magenta: 1,
+    purple: 0,
+    magenta: 0,
     black: 0
   };
   $scope.priceTotal = function(){
@@ -132,10 +134,6 @@ x$.controller('main', function($scope, $firebase, $timeout){
     }, 0);
   };
   $scope.choicelist = {};
-  for (k in ref$ = $scope.avail) {
-    v = ref$[k];
-    $scope.choicelist[k] = (fn$());
-  }
   $scope.want = true;
   $scope.needFix = false;
   $scope.state = 0;
@@ -147,6 +145,44 @@ x$.controller('main', function($scope, $firebase, $timeout){
       return "";
     }
   };
+  $scope.dbref = dbref;
+  $scope.loadcount = function(){
+    return dbref.get('fern', "admin/count/").$on('loaded', function(total){
+      return dbref.get('fern', "count/").$on('loaded', function(consumed){
+        return $scope.$apply(function(){
+          var c, uid, ref$, list, k, v, i, results$ = [];
+          for (c in $scope.avail) {
+            $scope.avail[c] = total[c];
+          }
+          for (uid in ref$ = consumed) {
+            list = ref$[uid];
+            if (/^\d+$/.exec(uid)) {
+              for (k in list) {
+                v = list[k];
+                for (c in $scope.avail) {
+                  $scope.avail[c] -= v.count[c];
+                }
+              }
+            }
+          }
+          for (k in ref$ = $scope.avail) {
+            v = ref$[k];
+            results$.push($scope.choicelist[k] = (fn$()));
+          }
+          return results$;
+          function fn$(){
+            var i$, to$, results$ = [];
+            for (i$ = 0, to$ = v; i$ <= to$; ++i$) {
+              i = i$;
+              results$.push(i);
+            }
+            return results$;
+          }
+        });
+      });
+    });
+  };
+  $scope.loadcount();
   $scope.logout = function(){
     if ($scope.user) {
       $scope.auth.logout();
@@ -171,7 +207,8 @@ x$.controller('main', function($scope, $firebase, $timeout){
     return $scope.state = 2;
   };
   $scope.submit = function(){
-    if (!($scope.name && $scope.addr && $scope.email && $scope.password && $scope.phone)) {
+    var payload, key;
+    if (!($scope.name && $scope.addr && $scope.email && ($scope.user || $scope.password) && $scope.phone && $scope.priceTotal())) {
       return $scope.needFix = true, $scope.state = 0, $scope;
     }
     $scope.needFix = false;
@@ -189,11 +226,33 @@ x$.controller('main', function($scope, $firebase, $timeout){
           return $scope.submit();
         }
       });
+      return;
     }
+    $scope.db.order = dbref.get('fern', "user/" + $scope.user.id + "/order/pending/");
+    $scope.db.count = dbref.get('fern', "count/" + $scope.user.id + "/");
+    payload = {
+      name: $scope.name,
+      email: $scope.email,
+      addr: $scope.addr,
+      phone: $scope.phone,
+      count: $scope.count
+    };
+    key = $scope.db.order.$add(payload).name();
+    $scope.db.count.$add({
+      count: $scope.count,
+      key: key
+    });
+    ga('send', 'event', 'form', 'submit');
     return $timeout(function(){
       return $scope.postSubmitted();
     }, 2000);
   };
+  if (typeof fastDebug !== "undefined" && fastDebug) {
+    $scope.name = "薄瓜瓜";
+    $scope.addr = "在大陸的薄瓜瓜的家";
+    $scope.phone = "0110101011";
+    $scope.count.purple = 2;
+  }
   zoomed = false;
   shown = false;
   $scope.st = {};
@@ -241,7 +300,6 @@ x$.controller('main', function($scope, $firebase, $timeout){
   n = res$;
   w = $(window).width();
   h = $(window).height();
-  console.log(w);
   for (i$ = 0; i$ < 30; ++i$) {
     i = i$;
     x[i] = Math.random() * -500;
@@ -252,15 +310,33 @@ x$.controller('main', function($scope, $firebase, $timeout){
     idx[i] = Math.random() * 6.28;
     jdx[i] = Math.random() * 0.5;
     $('#feathers').append(n[i]);
-    results$.push(m[i] = n[i].find('div'));
+    m[i] = n[i].find('div');
   }
-  return results$;
-  function fn$(){
-    var i$, to$, results$ = [];
-    for (i$ = 0, to$ = v; i$ <= to$; ++i$) {
-      i = i$;
-      results$.push(i);
-    }
-    return results$;
+  if (false) {
+    return setInterval(function(){
+      var i$, i, cy, results$ = [];
+      for (i$ = 0; i$ < 50; ++i$) {
+        i = i$;
+        x[i] += v[i] / 2 + v[i] * Math.cos(idx[i]);
+        cy = y[i] + (h / 6) * Math.sin(jdx[i]);
+        r[i] += parseInt(Math.random() * 3);
+        idx[i] += 0.011;
+        jdx[i] += 0.007;
+        n[i].css({
+          top: cy,
+          left: x[i],
+          opacity: s[i]
+        });
+        if (m[i]) {
+          m[i].css({
+            "-webkit-transform": "rotate(" + r[i] + "deg) scale(" + s[i] + ")"
+          });
+        }
+        if (x[i] >= w) {
+          results$.push(x[i] = Math.random() * -100);
+        }
+      }
+      return results$;
+    }, 50);
   }
 });

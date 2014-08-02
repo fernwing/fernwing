@@ -4,6 +4,7 @@ if !online =>
   Firebase = ->
   FirebaseSimpleLogin = ->
   ga = ->
+
 angular.module \main
   ..config ->
     $('a[href*=#]:not([href=#])').click ->
@@ -43,10 +44,13 @@ angular.module \main
       $timeout ( -> $scope.post-submitted! ), 2000
 
 
-  ..controller \main, ($scope, $firebase, $timeout) ->
-    $scope.orders-ref = new Firebase \https://fern.firebaseIO.com/order
-    $scope.orders = $firebase $scope.orders-ref
-    $scope.auth = new FirebaseSimpleLogin $scope.orders-ref, (e,u) -> $scope.$apply ->
+  ..controller \main, ($scope, $firebase, $timeout, dbref) ->
+    #$scope.orders-ref = new Firebase \https://fern.firebaseIO.com/order
+    #$scope.orders = $firebase $scope.orders-ref
+    #$scope.auth = new FirebaseSimpleLogin $scope.orders-ref, (e,u) -> $scope.$apply ->
+    $scope.db = order: null, count: null
+
+    $scope.auth = dbref.auth \fern, (e, u) -> $scope.$apply ->
       if e => console.log "get user fail: ", e
       $scope.user = u
       if $scope.user => $scope.email = $scope.user.email
@@ -55,11 +59,10 @@ angular.module \main
         $scope.submit!
     $scope.price = {red: 583, green: 583, cyan: 583, purple: 583, magenta: 583, black: 583}
     $scope.count = {red: 0, green: 0, cyan: 0, purple: 0, magenta: 0, black: 0}
-    $scope.avail = {red: 5, green: 4, cyan: 0, purple: 2, magenta: 1, black: 0}
+    $scope.avail = {red: 0, green: 0, cyan: 0, purple: 0, magenta: 0, black: 0}
     $scope.priceTotal = ->
       <[red green cyan purple magenta black]>map(-> $scope.price[it] * $scope.count[it])reduce ((a,b) -> a + b), 0
     $scope.choicelist = {}
-    for k,v of $scope.avail => $scope.choicelist[k] = [i for i from 0 to v]
     $scope.want = true
     $scope.need-fix = false
     $scope.state = 0
@@ -67,6 +70,19 @@ angular.module \main
     $scope.fix = (it) ->
       if $scope.need-fix and !$scope[it] => "has-error" else ""
     
+    $scope.dbref = dbref
+    $scope.loadcount = ->
+      (total) <- dbref.get \fern, "admin/count/" .$on \loaded
+      (consumed) <- dbref.get \fern, "count/" .$on \loaded
+      <- $scope.$apply
+      for c of $scope.avail => $scope.avail[c] = total[c]
+      for uid,list of consumed => if /^\d+$/.exec uid =>
+        for k,v of list =>
+          for c of $scope.avail =>
+            $scope.avail[c] -= v.count[c]
+      for k,v of $scope.avail => $scope.choicelist[k] = [i for i from 0 to v]
+
+    $scope.loadcount!
     $scope.logout = -> if $scope.user =>
       $scope.auth.logout!
       $scope <<< {email: "", password: "", user: null}
@@ -78,7 +94,7 @@ angular.module \main
     $scope.post-submitted = ->
       $scope.state = 2
     $scope.submit = ->
-      if not ($scope.name and $scope.addr and $scope.email and $scope.password and $scope.phone) => 
+      if not ($scope.name and $scope.addr and $scope.email and ($scope.user or $scope.password) and $scope.phone and $scope.priceTotal()) => 
         return $scope <<< {need-fix: true, state: 0}
       $scope.need-fix = false
       $scope.state = 1
@@ -90,10 +106,18 @@ angular.module \main
             console.log "create user error: ", e
           else
             $scope.submit!
-      #id = $scope.orders.[]pending.push [$scope.name, $scope.addr, $scope.email, $scope.phone]
-      #$scope.orders.$save!
-      #ga \send, \event, \form, \submit
+        return
+      $scope.db.order = dbref.get \fern, "user/#{$scope.user.id}/order/pending/"
+      $scope.db.count = dbref.get \fern, "count/#{$scope.user.id}/"
+      payload = $scope{name, email, addr, phone, count}
+      key = $scope.db.order.$add(payload).name!
+      $scope.db.count.$add {count: $scope.count, key: key}
+      ga \send, \event, \form, \submit
       $timeout ( -> $scope.post-submitted! ), 2000
+
+    if typeof(fast-debug)!="undefined" and fast-debug =>
+      $scope <<< {name: "薄瓜瓜", addr: "在大陸的薄瓜瓜的家", phone: "0110101011"}
+      $scope.count.purple = 2
 
     zoomed = false
     shown = false
@@ -127,7 +151,6 @@ angular.module \main
     n = for i from 0 til 100 => $("<div class='feather'><div class='bk'></div><div class='img'></div></div>")
     w = $(window)width!
     h = $(window)height!
-    console.log w
     for i from 0 til 30 =>
       x[i] = Math.random! * -500
       v[i] = Math.random! * 14
@@ -139,7 +162,8 @@ angular.module \main
       $(\#feathers)append n[i]
       m[i] = n[i].find \div
 
-    /*set-interval ->
+    if false => 
+      <- set-interval _, 50
       for i from 0 til 50 =>
         x[i] += ( v[i] / 2 +  v[i] * Math.cos idx[i] )
         cy = y[i] + (h/6) * Math.sin (jdx[i])
@@ -149,27 +173,4 @@ angular.module \main
         n[i].css top: cy, left: x[i],  opacity: s[i] #, "box-shadow": "0px 30px 50px rgba(0,0,0,0.5)"
         if m[i] => m[i].css "-webkit-transform": "rotate(#{r[i]}deg) scale(#{s[i]})"
         if x[i]>=w => x[i] = Math.random! * -100
-    , 50*/
     
-    /*
-    ani1 = {idx: 0, jdx: 0, kdx: 0, x: 0, y: 0}
-    ani2 = {idx: 0, jdx: 0, kdx: 0, x: 0, y: 0}
-    set-interval ->
-      ani1.idx = ( ani1.idx + 0.011 )
-      ani1.jdx = ( ani1.jdx + 0.005 )
-      ani1.kdx = 1
-      ani1.x = 5 + Math.sin(ani1.kdx) * 25 * Math.cos ani1.idx
-      ani1.y = 5 + Math.sin(ani1.kdx) * 20 * Math.sin ani1.jdx
-      n = $(\.logo-word)
-      n.css top: ani1.y, left: ani1.x
-      ani2.idx = ( ani2.idx + 0.007 )
-      ani2.jdx = ( ani2.jdx + 0.008 )
-      ani2.kdx = 1
-      ani2.x = 5 - Math.sin(ani2.kdx) * 23 * Math.cos ani2.idx
-      ani2.y = 5 + Math.sin(ani2.kdx) * 17 * Math.sin ani2.jdx
-      n = $(\.logo-wing)
-      n.css top: ani2.y, left: ani2.x
-    ,10
-    */
-
-
