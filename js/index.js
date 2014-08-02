@@ -196,8 +196,9 @@ x$.controller('main', function($scope, $firebase, $timeout, dbref){
       addr: "",
       email: "",
       password: "",
-      phone: ""
-    }, $scope.name = ref$.name, $scope.addr = ref$.addr, $scope.email = ref$.email, $scope.password = ref$.password, $scope.phone = ref$.phone;
+      phone: "",
+      payment: "1"
+    }, $scope.name = ref$.name, $scope.addr = ref$.addr, $scope.email = ref$.email, $scope.password = ref$.password, $scope.phone = ref$.phone, $scope.payment = ref$.payment;
     if ($scope.user) {
       $scope.email = $scope.user.email;
     }
@@ -253,6 +254,7 @@ x$.controller('main', function($scope, $firebase, $timeout, dbref){
     $scope.phone = "0110101011";
     $scope.count.purple = 2;
   }
+  $scope.payment = 1;
   zoomed = false;
   shown = false;
   $scope.st = {};

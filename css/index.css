@@ -851,6 +851,9 @@ span.red {
           background-image: url(/img/form/black.png); }
         #order .choice .ib .color:before, #order .choice .ib .color:after {
           bottom: -28px; } }
+.radio label {
+  vertical-align: middle; }
+
 #about {
   width: 80%;
   margin: auto; }

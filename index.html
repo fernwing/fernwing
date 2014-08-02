@@ -288,6 +288,24 @@
                       <div ng-disabled="state!=0" ng-click="logout()" class="btn btn-warning form-control">我要用另外一組電子郵件</div>
                     </div>
                   </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label>付款方式</label>
+                      <div class="radio">
+                        <input type="radio" name="payment" ng-model="payment" value="1">
+                        <label>貨到付款</label>
+                      </div>
+                      <div class="radio">
+                        <input type="radio" name="payment" ng-model="payment" value="2">
+                        <label>
+                          超商取貨
+                           ( <a>選擇門市 ...</a> )
+                        </label>
+                      </div>
+                    </div>
+                  </div>
                 </div><br>
                 <div id="order-detail" class="barblock green">
                   <h4><i class="glyphicon glyphicon-th-list"></i><span> 訂單明細</span></h4>

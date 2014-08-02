@@ -87,7 +87,7 @@ angular.module \main
       $scope.auth.logout!
       $scope <<< {email: "", password: "", user: null}
     $scope.clearForm = ->
-      $scope{name,addr,email,password,phone} = name: "", addr: "", email: "", password: "", phone: ""
+      $scope{name,addr,email,password,phone,payment} = name: "", addr: "", email: "", password: "", phone: "", payment: "1"
       if $scope.user => $scope.email = $scope.user.email
       $scope.state = 0
 
@@ -118,6 +118,7 @@ angular.module \main
     if typeof(fast-debug)!="undefined" and fast-debug =>
       $scope <<< {name: "薄瓜瓜", addr: "在大陸的薄瓜瓜的家", phone: "0110101011"}
       $scope.count.purple = 2
+    $scope.payment = 1
 
     zoomed = false
     shown = false

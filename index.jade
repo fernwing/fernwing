@@ -222,6 +222,21 @@ block bare-content
               .col-sm-4(ng-show="user"): .form-group
                 label &nbsp;
                 .btn.btn-warning.form-control(ng-disabled="state!=0",ng-click="logout()") 我要用另外一組電子郵件
+            .row
+              .col-sm-12
+                .form-group
+                  label 付款方式
+                  .radio
+                    input(type="radio",name="payment",ng-model="payment",value="1")
+                    label 貨到付款
+                  .radio
+                    input(type="radio",name="payment",ng-model="payment",value="2")
+                    label 
+                      | 超商取貨
+                      |  ( 
+                      a 選擇門市 ...
+                      |  )
+
             br
 
             #order-detail.barblock.green
