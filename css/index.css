@@ -247,6 +247,8 @@ span.red {
   width: 100%;
   min-width: 320px;
   text-align: center;
+  text-decoration: none;
+  cursor: pointer;
   z-index: order(detail-bk, detail-img, detail-title, banner, order-choice-img, order-choice-select, feathers, nav, banner);
   color: white; }
   #banner-golook i.glyphicon {
