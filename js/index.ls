@@ -136,7 +136,7 @@ angular.module \main
         ItemName: $scope.choiceName!
         ReturnURL: "http://staging.fernwing.com/api/paidnotify"
         #OrderResultURL: "http://staging.fernwing.com/api/order"
-        OrderResultURL: "http://staging.fernwing.com/"
+        OrderResultURL: "http://staging.fernwing.com/order"
         ChoosePayment: "ALL"
         CheckMacValue: ""
       data.CheckMacValue = allpay.encode data

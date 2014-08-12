@@ -265,7 +265,7 @@ x$.controller('main', function($scope, $firebase, $timeout, dbref, allpay){
       TradeDesc: "蕨之翼隨身背包",
       ItemName: $scope.choiceName(),
       ReturnURL: "http://staging.fernwing.com/api/paidnotify",
-      OrderResultURL: "http://staging.fernwing.com/",
+      OrderResultURL: "http://staging.fernwing.com/order",
       ChoosePayment: "ALL",
       CheckMacValue: ""
     });
