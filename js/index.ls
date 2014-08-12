@@ -63,7 +63,7 @@ angular.module \main
     $scope.count = {red: 0, green: 0, cyan: 0, purple: 0, magenta: 0, black: 0}
     $scope.avail = {red: 0, green: 0, cyan: 0, purple: 0, magenta: 0, black: 0}
     $scope.choiceName = ->
-      list = [<[red 紅]> <[green 綠]> <[cyan 藍]> <[purple 紫]> <[magenta 紫紅]> <[black 黑]>]
+      list = [<[red 紅色]> <[green 綠色]> <[cyan 藍色]> <[purple 紫色]> <[magenta 紫紅色]> <[black 黑色]>]
       list = list.filter -> $scope.count[it.0]
       list = list.map -> "#{it.1} #{$scope.count[it.0]} 個"
       list.join \#
@@ -128,14 +128,15 @@ angular.module \main
       data = {} <<< allpay.empty 
       data <<< do
         MerchantID: "2000132"
-        MerchantTradeNo: Math.random!
-        MerchantTradeDate: new Date!
+        MerchantTradeNo: "zbryikt#{parseInt(Math.random! * 100000)}"
+        MerchantTradeDate: allpay.now!
         PaymentType: "aio"
         TotalAmount: $scope.priceTotal!
         TradeDesc: "蕨之翼隨身背包"
         ItemName: $scope.choiceName!
         ReturnURL: "http://staging.fernwing.com/api/paidnotify"
-        OrderResultURL: "http://staging.fernwing.com/api/order"
+        #OrderResultURL: "http://staging.fernwing.com/api/order"
+        OrderResultURL: "http://staging.fernwing.com/"
         ChoosePayment: "ALL"
         CheckMacValue: ""
       data.CheckMacValue = allpay.encode data
@@ -143,6 +144,7 @@ angular.module \main
       $scope.allPayData = data
       $timeout ->
         $(\#allpayform).submit!
+      , 1000
 
     if typeof(fast-debug)!="undefined" and fast-debug =>
       $scope <<< {name: "薄瓜瓜", addr: "在大陸的薄瓜瓜的家", phone: "0110101011"}

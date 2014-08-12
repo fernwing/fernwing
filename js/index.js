@@ -129,7 +129,7 @@ x$.controller('main', function($scope, $firebase, $timeout, dbref, allpay){
   };
   $scope.choiceName = function(){
     var list;
-    list = [['red', '紅'], ['green', '綠'], ['cyan', '藍'], ['purple', '紫'], ['magenta', '紫紅'], ['black', '黑']];
+    list = [['red', '紅色'], ['green', '綠色'], ['cyan', '藍色'], ['purple', '紫色'], ['magenta', '紫紅色'], ['black', '黑色']];
     list = list.filter(function(it){
       return $scope.count[it[0]];
     });
@@ -258,19 +258,23 @@ x$.controller('main', function($scope, $firebase, $timeout, dbref, allpay){
     data = import$({}, allpay.empty);
     import$(data, {
       MerchantID: "2000132",
-      MerchantTradeNo: Math.random(),
-      MerchantTradeDate: new Date(),
+      MerchantTradeNo: "zbryikt" + parseInt(Math.random() * 100000),
+      MerchantTradeDate: allpay.now(),
       PaymentType: "aio",
       TotalAmount: $scope.priceTotal(),
       TradeDesc: "蕨之翼隨身背包",
       ItemName: $scope.choiceName(),
       ReturnURL: "http://staging.fernwing.com/api/paidnotify",
-      OrderResultURL: "http://staging.fernwing.com/api/order",
+      OrderResultURL: "http://staging.fernwing.com/",
       ChoosePayment: "ALL",
       CheckMacValue: ""
     });
     data.CheckMacValue = allpay.encode(data);
-    return console.log(data);
+    console.log(data);
+    $scope.allPayData = data;
+    return $timeout(function(){
+      return $('#allpayform').submit();
+    }, 1000);
   };
   if (typeof fastDebug !== "undefined" && fastDebug) {
     $scope.name = "薄瓜瓜";

@@ -319,6 +319,19 @@
                 <p>* 商品訂購後將於 5 ~ 7 天內出貨</p>
               </form>
             </div>
+            <form id="allpayform" action="http://payment-stage.allpay.com.tw/Cashier/AioCheckOut" method="POST">
+              <input type="hidden" name="MerchantID" ng-value="allPayData.MerchantID" class="form-control">
+              <input type="hidden" name="MerchantTradeNo" ng-value="allPayData.MerchantTradeNo" class="form-control">
+              <input type="hidden" name="MerchantTradeDate" ng-value="allPayData.MerchantTradeDate" class="form-control">
+              <input type="hidden" name="PaymentType" ng-value="allPayData.PaymentType" class="form-control">
+              <input type="hidden" name="TotalAmount" ng-value="allPayData.TotalAmount" class="form-control">
+              <input type="hidden" name="TradeDesc" ng-value="allPayData.TradeDesc" class="form-control">
+              <input type="hidden" name="ItemName" ng-value="allPayData.ItemName" class="form-control">
+              <input type="hidden" name="ReturnURL" ng-value="allPayData.ReturnURL" class="form-control">
+              <input type="hidden" name="OrderResultURL" ng-value="allPayData.OrderResultURL" class="form-control">
+              <input type="hidden" name="ChoosePayment" ng-value="allPayData.ChoosePayment" class="form-control">
+              <input type="hidden" name="CheckMacValue" ng-value="allPayData.CheckMacValue" class="form-control">
+            </form>
           </div>
         </div><br class="clear"><br>
         <hr><br><br>

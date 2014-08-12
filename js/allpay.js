@@ -16,6 +16,22 @@ x$.factory('allpay', function(){
       ChoosePayment: "ALL",
       CheckMacValue: ""
     },
+    now: function(){
+      var n, y, M, d, h, m, s;
+      n = new Date();
+      y = n.getYear() + 1900;
+      M = n.getMonth() + 1;
+      d = n.getDate();
+      h = n.getHours();
+      m = n.getMinutes();
+      s = n.getSeconds();
+      M = M < 10 ? "0" + M : M;
+      d = d < 10 ? "0" + d : d;
+      h = h < 10 ? "0" + h : h;
+      m = m < 10 ? "0" + m : m;
+      s = s < 10 ? "0" + s : s;
+      return y + "/" + M + "/" + d + " " + h + ":" + m + ":" + s;
+    },
     hash: {
       key: "5294y06JbISpM5x9",
       iv: "v77hoKGq4kWxNNIS"
@@ -57,38 +73,3 @@ x$.factory('allpay', function(){
     }
   };
 });
-/*main = ($scope) ->
-  $scope.data = do
-    MerchantID: "2000132"
-    MerchantTradeNo: "zbryikt123458"
-    MerchantTradeDate: "2014/08/12 10:00:00"
-    PaymentType: "aio"
-    TotalAmount: "100"
-    TradeDesc: "測試"
-    ItemName: "testitem1"
-    ReturnURL: "http://ec2-54-191-122-159.us-west-2.compute.amazonaws.com:9999/paidnotify"
-    OrderResultURL: "http://ec2-54-191-122-159.us-west-2.compute.amazonaws.com:9999/order"
-    ChoosePayment: "ALL"
-    CheckMacValue: ""
-  $scope.hash = do
-    key: "5294y06JbISpM5x9"
-    iv: "v77hoKGq4kWxNNIS"
-
-  $scope.checkcode = ->
-    list = []
-    for k,v of $scope.data =>
-      if k == 'CheckMacValue' => continue
-      list.push "#k=#v"
-    console.log list
-    list.sort (a,b) -> 
-      a = a.toUpperCase! 
-      b = b.toUpperCase!
-      if a > b => return 1
-      if a < b => return -1
-      return 0
-    chk = list.join("&")
-    chk = encodeURIComponent("HashKey=#{$scope.hash.key}&#chk&HashIV=#{$scope.hash.iv}")
-    chk = chk.replace /%20/g, "+"
-    chk = md5(chk.toLowerCase!).toUpperCase!
-    $scope.data.CheckMacValue = chk
-*/
