@@ -222,7 +222,7 @@ block bare-content
               .col-sm-4(ng-show="user"): .form-group
                 label &nbsp;
                 .btn.btn-warning.form-control(ng-disabled="state!=0",ng-click="logout()") 我要用另外一組電子郵件
-            .row
+            //-.row
               .col-sm-12
                 .form-group
                   label 付款方式
@@ -261,7 +261,7 @@ block bare-content
                 |  元
 
             br
-            button.btn.btn-danger.btn-block.btn-lg(type="submit",ng-disabled="!priceTotal() || !want || state!=0",ng-click="submit()",ng-hide="state==2") 送出訂單
+            button.btn.btn-danger.btn-block.btn-lg(type="submit",ng-disabled="!priceTotal() || !want || state!=0",ng-click="submit()",ng-hide="state==2") 選擇付款方式並送出訂單
             .text-danger(ng-show="fix('name') || fix('addr') || fix('email') || fix('password') || fix('phone')")
               | 您所填的資料有點問題，請修正後重新送出
             button.btn.btn-default(type="submit",ng-disabled="true",ng-click="submit()",ng-show="state==2") 訂購完成!

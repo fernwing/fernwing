@@ -218,28 +218,24 @@ span.red {
 
   100% {
     opacity: 0; } }
-
 @-moz-keyframes blink {
   0% {
     opacity: 1; }
 
   100% {
     opacity: 0; } }
-
 @-ms-keyframes blink {
   0% {
     opacity: 1; }
 
   100% {
     opacity: 0; } }
-
 @keyframes blink {
   0% {
     opacity: 1; }
 
   100% {
     opacity: 0; } }
-
 #banner-golook {
   position: absolute;
   bottom: 10px;

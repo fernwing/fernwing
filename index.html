@@ -35,7 +35,9 @@
       ga('create', 'UA-48765647-1', 'fernwing.com');
       ga('send', 'pageview');
     </script>
+    <script type="text/javascript" src="js/md5.min.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/allpay.js"></script>
     <script type="text/javascript" src="js/dbref.js"></script>
   </head>
   <body ng-app="main" ng-controller="main">
@@ -91,7 +93,10 @@
                   <div delay-bk="/img/feature/a-2.png" class="feature-icon delay-bk"></div>
                 </div>
                 <h3>極舒適</h3>
-                <p>一般輕量化背包為了減少重量會在背負系統妥協而影響舒適性，然而<b>蕨休閒背包</b>在輕量化的同時仍使用<b>透氣可調式肩帶</b>，良好的背負系統讓你即使在日常生活中使用它也不會有額外的負擔。</p>
+                <p>
+                   
+                  一般輕量化背包為了減少重量會在背負系統妥協而影響舒適性，然而<b>蕨休閒背包</b>在輕量化的同時仍使用<b>透氣可調式肩帶</b>，良好的背負系統讓你即使在日常生活中使用它也不會有額外的負擔。
+                </p>
               </div>
               <div class="col-sm-4 bl-green">
                 <div class="feature">
@@ -99,7 +104,10 @@
                   <div delay-bk="/img/feature/b-2.png" class="feature-icon delay-bk"></div>
                 </div>
                 <h3>超輕量</h3>
-                <p>重量不到<b>300 克</b>，甚至比一盒<b>鋁箔包飲料</b>還輕。收納後大約<b>一個手掌大</b>，節省家中儲藏空間，也節省登山背包的珍貴容量，無論登山、旅遊、通勤、甚至上賣場，你沒有理由不隨身帶上一個。</p>
+                <p>
+                   
+                  重量不到<b>300 克</b>，甚至比一盒<b>鋁箔包飲料</b>還輕。收納後大約<b>一個手掌大</b>，節省家中儲藏空間，也節省登山背包的珍貴容量，無論登山、旅遊、通勤、甚至上賣場，你沒有理由不隨身帶上一個。
+                </p>
               </div>
               <div class="col-sm-4 bl-cyan">
                 <div class="feature">
@@ -156,7 +164,10 @@
                   <h3>產品規格<small> / 蕨之翼隨身背包</small></h3>
                   <ul>
                     <li>容量: 25升</li>
-                    <li>重量: <b>199公克</b>，三顆蛋的重量</li>
+                    <li>
+                       
+                      重量: <b>199公克</b>，三顆蛋的重量
+                    </li>
                     <li>正常尺寸: 高 36cm / 寬 24cm / 深 14cm</li>
                     <li>收納尺寸: 長 19cm / 寬 17cm</li>
                   </ul>
@@ -168,7 +179,7 @@
           <hr>
           <div id="order">
             <div class="ib">
-              <h2><i class="glyphicon glyphicon-phone-alt"></i> 現在就訂購！</h2><br>
+              <h2> <i class="glyphicon glyphicon-phone-alt"></i> 現在就訂購！</h2><br>
               <form name="orderform" novalidate>
                 <h4><i class="glyphicon glyphicon-list-alt"></i> 選擇數量</h4>
                 <div class="choices">
@@ -286,24 +297,6 @@
                       <div ng-disabled="state!=0" ng-click="logout()" class="btn btn-warning form-control">我要用另外一組電子郵件</div>
                     </div>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-12">
-                    <div class="form-group">
-                      <label>付款方式</label>
-                      <div class="radio">
-                        <input type="radio" name="payment" ng-model="payment" value="1">
-                        <label>貨到付款</label>
-                      </div>
-                      <div class="radio">
-                        <input type="radio" name="payment" ng-model="payment" value="2">
-                        <label>
-                          超商取貨
-                           ( <a>選擇門市 ...</a> )
-                        </label>
-                      </div>
-                    </div>
-                  </div>
                 </div><br>
                 <div id="order-detail" class="barblock green">
                   <h4><i class="glyphicon glyphicon-th-list"></i><span> 訂單明細</span></h4>
@@ -319,7 +312,7 @@
                   </div>
                   <div ng-show="priceTotal()" class="total"><i class="glyphicon glyphicon-tag"></i> 此筆訂單的總金額為：<span class="red">{{priceTotal()}} </span> 元</div>
                 </div><br>
-                <button type="submit" ng-disabled="!priceTotal() || !want || state!=0" ng-click="submit()" ng-hide="state==2" class="btn btn-danger btn-block btn-lg">送出訂單</button>
+                <button type="submit" ng-disabled="!priceTotal() || !want || state!=0" ng-click="submit()" ng-hide="state==2" class="btn btn-danger btn-block btn-lg">選擇付款方式並送出訂單</button>
                 <div ng-show="fix('name') || fix('addr') || fix('email') || fix('password') || fix('phone')" class="text-danger">您所填的資料有點問題，請修正後重新送出</div>
                 <button type="submit" ng-disabled="true" ng-click="submit()" ng-show="state==2" class="btn btn-default">訂購完成!</button>
                 <button type="submit" ng-click="clearForm()" ng-show="state==2" class="btn btn-success">我要追加</button><br><br>
@@ -331,7 +324,7 @@
         <hr><br><br>
         <div id="about">
           <div class="ib">
-            <h2><img src="/img/logo/icon-black.png"> 關於我們</h2>
+            <h2> <img src="/img/logo/icon-black.png"> 關於我們</h2>
             <p>喜愛戶外運動的我們，常在陽光灑落的杉林中穿梭、嗅著山間青色的味道，輕盈的步伐跳躍在佈滿星蕨的泥土小徑上，露水沾濕了褲管，卻洗去了沈重的形象。我們常思考著，背包不應是旅行的負擔，而應該是生長在旅者背後的一對翅膀，帶著我們翩翩躍於旅人的行跡間。</p><br>
             <p>大多數的登山攻頂包為了輕量化而減去了機能，就像剪去羽毛的翅膀一般，而蕨之翼拒絕了這樣的妥協。隱喻著翅膀的蕨，拓印在每個蕨之翼的背包上，彷彿讓每位使用者都長出了翅膀，於各自的旅程間敖翔。</p><br>
             <p>此外，我們也注意到，時尚與機能之間，並不存在一條明顯的分界線；當回到文明社會之時，蕨之翼簡單清新的外觀，就像鳥兒收起了雙翼般，伴隨你徘徊在熱鬧繁華的街道之間。</p><br>
@@ -354,7 +347,7 @@
                     <th>電子郵件</th>
                     <th>電話</th>
                   </tr>
-                  <tr ng-repeat="(k,v) in orders.pending">
+                  <tr ng-repeat="(k,v) in orders.pending"> 
                     <td>{{v[0]}}</td>
                     <td>{{v[1]}}</td>
                     <td>{{v[2]}}</td>
@@ -380,7 +373,10 @@
                 <h4 class="modal-title">此網站使用的素材</h4>
               </div>
               <div class="modal-body">
-                <h4>圖示<small> / 來自 <a href="http://thenounproject.com/">noun projects</a></small></h4>
+                <h4>
+                   
+                  圖示<small> / 來自 <a href="http://thenounproject.com/">noun projects</a></small>
+                </h4>
                 <ul>
                   <li>"<a href="http://thenounproject.com/term/bird/27693/">Bird</a>", by Harvey Modhar</li>
                   <li>"<a href="http://thenounproject.com/term/backpack/2551/">Backpack</a>", by Rémy Médard</li>

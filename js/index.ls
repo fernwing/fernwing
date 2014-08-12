@@ -5,6 +5,8 @@ if !online =>
   FirebaseSimpleLogin = ->
   ga = ->
 
+fast-debug = true
+
 angular.module \main
   ..config ->
     $('a[href*=#]:not([href=#])').click ->
@@ -44,7 +46,7 @@ angular.module \main
       $timeout ( -> $scope.post-submitted! ), 2000
 
 
-  ..controller \main, ($scope, $firebase, $timeout, dbref) ->
+  ..controller \main, ($scope, $firebase, $timeout, dbref, allpay) ->
     #$scope.orders-ref = new Firebase \https://fern.firebaseIO.com/order
     #$scope.orders = $firebase $scope.orders-ref
     #$scope.auth = new FirebaseSimpleLogin $scope.orders-ref, (e,u) -> $scope.$apply ->
@@ -60,6 +62,12 @@ angular.module \main
     $scope.price = {red: 583, green: 583, cyan: 583, purple: 583, magenta: 583, black: 583}
     $scope.count = {red: 0, green: 0, cyan: 0, purple: 0, magenta: 0, black: 0}
     $scope.avail = {red: 0, green: 0, cyan: 0, purple: 0, magenta: 0, black: 0}
+    $scope.choiceName = ->
+      list = [<[red 紅]> <[green 綠]> <[cyan 藍]> <[purple 紫]> <[magenta 紫紅]> <[black 黑]>]
+      list = list.filter -> $scope.count[it.0]
+      list = list.map -> "#{it.1} #{$scope.count[it.0]} 個"
+      list.join \#
+        
     $scope.priceTotal = ->
       <[red green cyan purple magenta black]>map(-> $scope.price[it] * $scope.count[it])reduce ((a,b) -> a + b), 0
     $scope.choicelist = {}
@@ -107,13 +115,31 @@ angular.module \main
           else
             $scope.submit!
         return
-      $scope.db.order = dbref.get \fern, "user/#{$scope.user.id}/order/pending/"
-      $scope.db.count = dbref.get \fern, "count/#{$scope.user.id}/"
+      #$scope.db.order = dbref.get \fern, "user/#{$scope.user.id}/order/pending/"
+      #$scope.db.count = dbref.get \fern, "count/#{$scope.user.id}/"
       payload = $scope{name, email, addr, phone, count}
-      key = $scope.db.order.$add(payload).name!
-      $scope.db.count.$add {count: $scope.count, key: key}
-      ga \send, \event, \form, \submit
+      #key = $scope.db.order.$add(payload).name!
+      #$scope.db.count.$add {count: $scope.count, key: key}
+      #ga \send, \event, \form, \submit
+      $scope.allpay!
       $timeout ( -> $scope.post-submitted! ), 2000
+
+    $scope.allpay = ->
+      data = {} <<< allpay.empty 
+      data <<< do
+        MerchantID: "2000132"
+        MerchantTradeNo: Math.random!
+        MerchantTradeDate: new Date!
+        PaymentType: "aio"
+        TotalAmount: $scope.priceTotal!
+        TradeDesc: "蕨之翼隨身背包"
+        ItemName: $scope.choiceName!
+        ReturnURL: "http://staging.fernwing.com/api/paidnotify"
+        OrderResultURL: "http://staging.fernwing.com/api/order"
+        ChoosePayment: "ALL"
+        CheckMacValue: ""
+      data.CheckMacValue = allpay.encode data
+      console.log data
 
     if typeof(fast-debug)!="undefined" and fast-debug =>
       $scope <<< {name: "薄瓜瓜", addr: "在大陸的薄瓜瓜的家", phone: "0110101011"}
