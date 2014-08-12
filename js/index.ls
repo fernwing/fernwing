@@ -140,6 +140,9 @@ angular.module \main
         CheckMacValue: ""
       data.CheckMacValue = allpay.encode data
       console.log data
+      $scope.allPayData = data
+      $timeout ->
+        $(\#allpayform).submit!
 
     if typeof(fast-debug)!="undefined" and fast-debug =>
       $scope <<< {name: "薄瓜瓜", addr: "在大陸的薄瓜瓜的家", phone: "0110101011"}

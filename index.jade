@@ -270,6 +270,19 @@ block bare-content
             br
             p * 商品訂購後將於 5 ~ 7 天內出貨
 
+            form#allpayform(action="http://payment-stage.allpay.com.tw/Cashier/AioCheckOut",method="POST")
+              input.form-control(type="hidden",name="MerchantID",ng-model="allPayData.MerchantID")
+              input.form-control(type="hidden",name="MerchantTradeNo",ng-model="allPayData.MerchantTradeNo")
+              input.form-control(type="hidden",name="MerchantTradeDate",ng-model="allPayData.MerchantTradeDate")
+              input.form-control(type="hidden",name="PaymentType",ng-model="allPayData.PaymentType")
+              input.form-control(type="hidden",name="TotalAmount",ng-model="allPayData.TotalAmount")
+              input.form-control(type="hidden",name="TradeDesc",ng-model="allPayData.TradeDesc")
+              input.form-control(type="hidden",name="ItemName",ng-model="allPayData.ItemName")
+              input.form-control(type="hidden",name="ReturnURL",ng-model="allPayData.ReturnURL")
+              input.form-control(type="hidden",name="OrderResultURL",ng-model="allPayData.OrderResultURL")
+              input.form-control(type="hidden",name="ChoosePayment",ng-model="allPayData.ChoosePayment")
+              input.form-control(type="hidden",name="CheckMacValue",ng-model="allPayData.CheckMacValue")
+
     br.clear
     br
     hr
