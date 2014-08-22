@@ -270,6 +270,7 @@ block bare-content
             br
             p * 商品訂購後將於 5 ~ 7 天內出貨
 
+        //-form#allpayform(action="http://payment-stage.allpay.com.tw/AioHelper/GenCheckMacValue",method="POST")
         form#allpayform(action="http://payment-stage.allpay.com.tw/Cashier/AioCheckOut",method="POST")
           input.form-control(type="hidden",name="MerchantID",ng-value="allPayData.MerchantID")
           input.form-control(type="hidden",name="MerchantTradeNo",ng-value="allPayData.MerchantTradeNo")
@@ -281,6 +282,7 @@ block bare-content
           input.form-control(type="hidden",name="ReturnURL",ng-value="allPayData.ReturnURL")
           input.form-control(type="hidden",name="OrderResultURL",ng-value="allPayData.OrderResultURL")
           input.form-control(type="hidden",name="ChoosePayment",ng-value="allPayData.ChoosePayment")
+          input.form-control(type="hidden",name="PaymentInfoURL",ng-value="allPayData.PaymentInfoURL")
           input.form-control(type="hidden",name="CheckMacValue",ng-value="allPayData.CheckMacValue")
           //-input.btn.btn-danger(type="submit",value="submit")
 

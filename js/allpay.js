@@ -13,6 +13,7 @@ x$.factory('allpay', function(){
       ItemName: "testitem1",
       ReturnURL: "http://staging.fernwing.com/api/paidnotify",
       OrderResultURL: "http://staging.fernwing.com/api/order",
+      PaymentInfoURL: "123",
       ChoosePayment: "ALL",
       CheckMacValue: ""
     },
@@ -61,9 +62,11 @@ x$.factory('allpay', function(){
         return 0;
       });
       chk = list.join("&");
+      console.log(chk);
       if (this.hash.key) {
         chk = encodeURIComponent("HashKey=" + this.hash.key + "&" + chk + "&HashIV=" + this.hash.iv);
         chk = chk.replace(/%20/g, "+");
+        console.log(chk);
         chk = md5(chk.toLowerCase()).toUpperCase();
       } else {
         chk = this._encode(chk);

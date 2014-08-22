@@ -125,8 +125,8 @@ angular.module \main
       $timeout ( -> $scope.post-submitted! ), 2000
 
     $scope.allpay = ->
-      data = {} <<< allpay.empty 
-      data <<< do
+      #data = {} <<< allpay.empty 
+      data = {} <<< do
         MerchantID: "2000132"
         MerchantTradeNo: "zbryikt#{parseInt(Math.random! * 100000)}"
         MerchantTradeDate: allpay.now!
@@ -137,10 +137,11 @@ angular.module \main
         ReturnURL: "http://staging.fernwing.com/api/paidnotify"
         #OrderResultURL: "http://staging.fernwing.com/api/order"
         OrderResultURL: "http://staging.fernwing.com/order.html"
-        ChoosePayment: "ALL"
+        PaymentInfoURL: "http://staging.fernwing.com/api/order"
+        #ClientRedirectURL: "123"
+        ChoosePayment: "CVS"
         CheckMacValue: ""
       data.CheckMacValue = allpay.encode data
-      console.log data
       $scope.allPayData = data
       $timeout ->
         $(\#allpayform).submit!

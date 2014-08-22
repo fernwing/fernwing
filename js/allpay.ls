@@ -10,6 +10,7 @@ angular.module \main
       ItemName: "testitem1"
       ReturnURL: "http://staging.fernwing.com/api/paidnotify"
       OrderResultURL: "http://staging.fernwing.com/api/order"
+      PaymentInfoURL: ""
       ChoosePayment: "ALL"
       CheckMacValue: ""
     now: ->

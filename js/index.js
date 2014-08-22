@@ -256,22 +256,24 @@ x$.controller('main', function($scope, $firebase, $timeout, dbref, allpay){
   $scope.allpay = function(){
     var data;
     data = import$({}, allpay.empty);
-    import$(data, {
+    data = import$({}, {
       MerchantID: "2000132",
       MerchantTradeNo: "zbryikt" + parseInt(Math.random() * 100000),
       MerchantTradeDate: allpay.now(),
       PaymentType: "aio",
-      TotalAmount: $scope.priceTotal(),
+      TotalAmount: 1166,
       TradeDesc: "蕨之翼隨身背包",
       ItemName: $scope.choiceName(),
       ReturnURL: "http://staging.fernwing.com/api/paidnotify",
       OrderResultURL: "http://staging.fernwing.com/order.html",
-      ChoosePayment: "ALL",
+      PaymentInfoURL: "http://staging.fernwing.com/api/order",
+      ChoosePayment: "CVS",
       CheckMacValue: ""
     });
     data.CheckMacValue = allpay.encode(data);
     console.log(data);
     $scope.allPayData = data;
+    console.log(data.CheckMacValue);
     return $timeout(function(){
       return $('#allpayform').submit();
     }, 1000);
