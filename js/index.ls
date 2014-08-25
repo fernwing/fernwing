@@ -1,4 +1,4 @@
-angular.module \main, if online => <[firebase ngAnimate]> else <[ngAnimate]>
+angular.module \main, if online => <[firebase ngAnimate ld.common]> else <[ngAnimate ld.common]>
 if !online => angular.module \main .factory \$firebase, -> ->
 if !online =>
   Firebase = ->
@@ -46,19 +46,17 @@ angular.module \main
       $timeout ( -> $scope.post-submitted! ), 2000
 
 
-  ..controller \main, ($scope, $firebase, $timeout, dbref, allpay) ->
-    #$scope.orders-ref = new Firebase \https://fern.firebaseIO.com/order
-    #$scope.orders = $firebase $scope.orders-ref
-    #$scope.auth = new FirebaseSimpleLogin $scope.orders-ref, (e,u) -> $scope.$apply ->
+  ..controller \main, ($scope, $http, $firebase, $timeout, dbref, allpay) ->
     $scope.db = order: null, count: null
 
-    $scope.auth = dbref.auth \fern, (e, u) -> $scope.$apply ->
+    /*$scope.auth = dbref.auth \fern, (e, u) -> $scope.$apply ->
       if e => console.log "get user fail: ", e
       $scope.user = u
       if $scope.user => $scope.email = $scope.user.email
       if $scope.state == 1 => 
         if !$scope.user => $scope.password = ""
         $scope.submit!
+    */
     $scope.price = {red: 583, green: 583, cyan: 583, purple: 583, magenta: 583, black: 583}
     $scope.count = {red: 0, green: 0, cyan: 0, purple: 0, magenta: 0, black: 0}
     $scope.avail = {red: 0, green: 0, cyan: 0, purple: 0, magenta: 0, black: 0}
@@ -80,15 +78,12 @@ angular.module \main
     
     $scope.dbref = dbref
     $scope.loadcount = ->
-      (total) <- dbref.get \fern, "admin/count/" .$on \loaded
-      (consumed) <- dbref.get \fern, "count/" .$on \loaded
-      <- $scope.$apply
-      for c of $scope.avail => $scope.avail[c] = total[c]
-      for uid,list of consumed => if /^\d+$/.exec uid =>
-        for k,v of list =>
-          for c of $scope.avail =>
-            $scope.avail[c] -= v.count[c]
-      for k,v of $scope.avail => $scope.choicelist[k] = [i for i from 0 to v]
+      $http do
+        url: \/api/stock
+        method: \GET
+      .success (d) ->
+        $scope.avail = d.avail
+        for k,v of $scope.avail => $scope.choicelist[k] = [i for i from 0 to (v<?20)]
 
     $scope.loadcount!
     $scope.logout = -> if $scope.user =>
@@ -106,46 +101,24 @@ angular.module \main
         return $scope <<< {need-fix: true, state: 0}
       $scope.need-fix = false
       $scope.state = 1
-      if !$scope.user =>
-        $scope.auth.createUser $scope.email, $scope.password, (e,u) ->
-          if e and e.code == \EMAIL_TAKEN => 
-            $scope.auth.login \password, email: $scope.email, password: $scope.password
-          else if e => 
-            console.log "create user error: ", e
-          else
-            $scope.submit!
-        return
-      #$scope.db.order = dbref.get \fern, "user/#{$scope.user.id}/order/pending/"
-      #$scope.db.count = dbref.get \fern, "count/#{$scope.user.id}/"
+
       payload = $scope{name, email, addr, phone, count}
-      #key = $scope.db.order.$add(payload).name!
-      #$scope.db.count.$add {count: $scope.count, key: key}
       #ga \send, \event, \form, \submit
-      $scope.allpay!
+      $scope.allpay payload
       $timeout ( -> $scope.post-submitted! ), 2000
 
-    $scope.allpay = ->
-      #data = {} <<< allpay.empty 
-      data = {} <<< do
-        MerchantID: "2000132"
-        MerchantTradeNo: "zbryikt#{parseInt(Math.random! * 100000)}"
-        MerchantTradeDate: allpay.now!
-        PaymentType: "aio"
-        TotalAmount: $scope.priceTotal!
-        TradeDesc: "蕨之翼隨身背包"
-        ItemName: $scope.choiceName!
-        ReturnURL: "http://staging.fernwing.com/api/paidnotify"
-        #OrderResultURL: "http://staging.fernwing.com/api/order"
-        OrderResultURL: "http://staging.fernwing.com/order.html"
-        PaymentInfoURL: "http://staging.fernwing.com/api/order"
-        #ClientRedirectURL: "123"
-        ChoosePayment: "CVS"
-        CheckMacValue: ""
-      data.CheckMacValue = allpay.encode data
-      $scope.allPayData = data
-      $timeout ->
-        $(\#allpayform).submit!
-      , 1000
+    $scope.allpay = (payload) ->
+      $http do
+        url: \/api/order/init
+        method: \POST
+        headers: "Content-Type": "application/json"
+        data: payload
+      .success (d) ->
+        console.log "payload information (to allpay): #d"
+        $scope.allPayData = d
+        #$timeout (-> $(\#allpayform).submit!), 100
+      #TODO error handling 
+      .error (e) -> console.error e
 
     if typeof(fast-debug)!="undefined" and fast-debug =>
       $scope <<< {name: "薄瓜瓜", addr: "在大陸的薄瓜瓜的家", phone: "0110101011"}

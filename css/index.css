@@ -218,24 +218,28 @@ span.red {
 
   100% {
     opacity: 0; } }
+
 @-moz-keyframes blink {
   0% {
     opacity: 1; }
 
   100% {
     opacity: 0; } }
+
 @-ms-keyframes blink {
   0% {
     opacity: 1; }
 
   100% {
     opacity: 0; } }
+
 @keyframes blink {
   0% {
     opacity: 1; }
 
   100% {
     opacity: 0; } }
+
 #banner-golook {
   position: absolute;
   bottom: 10px;
@@ -862,3 +866,94 @@ span.red {
     margin: auto;
     font-size: 1.2em;
     letter-spacing: 1px; }
+
+.panel.thick {
+  border-left-style: solid;
+  border-left-width: 10px; }
+  .panel.thick .panel-heading {
+    border-top-left-radius: 0;
+    font-weight: 900;
+    font-size: 1.3em; }
+
+@-webkit-keyframes fadeout {
+  0% {
+    opacity: 1; }
+
+  50% {
+    opacity: 1; }
+
+  100% {
+    opacity: 0; } }
+
+@-moz-keyframes fadeout {
+  0% {
+    opacity: 1; }
+
+  50% {
+    opacity: 1; }
+
+  100% {
+    opacity: 0; } }
+
+@-ms-keyframes fadeout {
+  0% {
+    opacity: 1; }
+
+  50% {
+    opacity: 1; }
+
+  100% {
+    opacity: 0; } }
+
+@keyframes fadeout {
+  0% {
+    opacity: 1; }
+
+  50% {
+    opacity: 1; }
+
+  100% {
+    opacity: 0; } }
+
+.state-indicator {
+  display: inline;
+  font-size: 16px;
+  vertical-align: middle; }
+  .state-indicator img {
+    vertical-align: text-bottom; }
+  .state-indicator i.fa {
+    min-width: 100px; }
+  .state-indicator > * {
+    height: 24px;
+    line-height: 24px;
+    text-align: left; }
+    .state-indicator > *:after {
+      display: inline;
+      margin-left: 5px;
+      color: white;
+      vertical-align: text-bottom; }
+    .state-indicator > *.fadeout {
+      -ms-animation: fadeout 2s linear 1;
+      -moz-animation: fadeout 2s linear 1;
+      -webkit-animation: fadeout 2s linear 1;
+      -o-animation: fadeout 2s linear 1;
+      animation: fadeout 2s linear 1; }
+
+.ajax-done, .ajax-fail {
+  -ms-transition: all 1s linear 1s;
+  -moz-transition: all 1s linear 1s;
+  -webkit-transition: all 1s linear 1s;
+  -o-transition: all 1s linear 1s;
+  transition: all 1s linear 1s;
+  opacity: 0;
+  margin-left: 12px; }
+
+.ajax-done {
+  color: #44cc55; }
+  .ajax-done:after {
+    content: "完成"; }
+
+.ajax-fail {
+  color: #cc5544; }
+  .ajax-fail:after {
+    content: "錯誤"; }
