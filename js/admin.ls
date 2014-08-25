@@ -8,6 +8,9 @@ angular.module \main
   ..controller \order, <[$scope $http stateIndicator $timeout]> ++ ($scope, $http, stateIndicator, $timeout) ->
     $http.get \/api/order
     .success (d) -> $scope.order = d
+    $scope.show = (order) -> 
+      $scope.corder = order
+      setTimeout ( -> $ \#detail .modal show: true), 100
   ..controller \sales, <[$scope $http stateIndicator $timeout color]> ++ ($scope, $http, stateIndicator, $timeout, color) ->
     $http.get \/api/order
     .success (d) -> 

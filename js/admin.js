@@ -27,9 +27,17 @@ x$.filter('orderState', function(){
   };
 });
 x$.controller('order', ['$scope', '$http', 'stateIndicator', '$timeout'].concat(function($scope, $http, stateIndicator, $timeout){
-  return $http.get('/api/order').success(function(d){
+  $http.get('/api/order').success(function(d){
     return $scope.order = d;
   });
+  return $scope.show = function(order){
+    $scope.corder = order;
+    return setTimeout(function(){
+      return $('#detail').modal({
+        show: true
+      });
+    }, 100);
+  };
 }));
 x$.controller('sales', ['$scope', '$http', 'stateIndicator', '$timeout', 'color'].concat(function($scope, $http, stateIndicator, $timeout, color){
   return $http.get('/api/order').success(function(d){

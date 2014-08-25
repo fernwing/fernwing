@@ -95,12 +95,12 @@ x$.controller('main', function($scope, $http, $firebase, $timeout, dbref, allpay
       $scope.submit!
   */
   $scope.price = {
-    red: 583,
-    green: 583,
-    cyan: 583,
-    purple: 583,
-    magenta: 583,
-    black: 583
+    red: 0,
+    green: 0,
+    cyan: 0,
+    purple: 0,
+    magenta: 0,
+    black: 0
   };
   $scope.count = {
     red: 0,
@@ -154,16 +154,18 @@ x$.controller('main', function($scope, $http, $firebase, $timeout, dbref, allpay
       url: '/api/stock',
       method: 'GET'
     }).success(function(d){
-      var k, ref$, v, i, results$ = [];
+      var k, ref$, v, ref1$, i, results$ = [];
+      $scope.price = d.price;
       $scope.avail = d.avail;
       for (k in ref$ = $scope.avail) {
         v = ref$[k];
+        $scope.avail[k] = (ref1$ = $scope.avail[k]) > 0 ? ref1$ : 0;
         results$.push($scope.choicelist[k] = (fn$()));
       }
       return results$;
       function fn$(){
-        var i$, to$, results$ = [];
-        for (i$ = 0, to$ = v < 20 ? v : 20; i$ <= to$; ++i$) {
+        var i$, to$, ref$, results$ = [];
+        for (i$ = 0, to$ = (ref$ = v < 20 ? v : 20) > 0 ? ref$ : 0; i$ <= to$; ++i$) {
           i = i$;
           results$.push(i);
         }
@@ -237,7 +239,6 @@ x$.controller('main', function($scope, $http, $firebase, $timeout, dbref, allpay
     $scope.name = "薄瓜瓜";
     $scope.addr = "在大陸的薄瓜瓜的家";
     $scope.phone = "0110101011";
-    $scope.count.purple = 2;
   }
   $scope.payment = 1;
   zoomed = false;

@@ -60,7 +60,7 @@ block content
             th 狀態
             th 出貨
           tr(ng-repeat="o in order")
-            td {{o.init.MerchantTradeNo}}
+            td(ng-click="show(o)") {{o.init.MerchantTradeNo}}
             td {{o.info.name}}
             td {{o.info.addr}}
             td {{o.info.phone}}
@@ -72,5 +72,51 @@ block content
             td {{o.info.count.black}}
             td {{o.state|orderState}}
             td: i.glyphicon.glyphicon-tag
+      #detail.modal.fade
+        .modal-dialog.modal-lg
+          .modal-content
+            .modal-header
+              button.close(type="button",data-dismiss="modal"): span &times;
+              h4 訂單編號 {{corder.orderId}}
+            .modal-body
+              p(ng-show="corder.info")
+                h4 訂單基本資訊
+                ul
+                  li 姓名 / {{corder.info.name}}
+                  li 地址 / {{corder.info.addr}}
+                  li 電話 / {{corder.info.phone}}
+                  li 信箱 / {{corder.info.email}}
+                  li 數量 /
+                    span 紅 {{corder.info.count.red}}
+                    span  / 
+                    span 綠 {{corder.info.count.green}}
+                    span  / 
+                    span 藍 {{corder.info.count.blue}}
+                    span  / 
+                    span 紫 {{corder.info.count.purple}}
+                    span  / 
+                    span 紫紅 {{corder.info.count.magenta}}
+                    span  / 
+                    span 黑 {{corder.info.count.black}}
+                  li 狀態 / {{corder.state|orderState}} ( {{corder.state}} )
+                  li 建立時間 / {{corder.init.MerchantTradeDate}}
+                  li 金額 / {{corder.init.TotalAmount}}
+              p(ng-show="corder.confirm")
+                h4 訂單確認資訊 (付款方式確認產生)
+                ul
+                  li 回傳代碼 / {{corder.confirm.RtnCode}} / {{corder.confirm.RtnMsg}}
+                  li 歐付代碼 / {{corder.confirm.TradeNo}}
+                  li 交易金額 / {{corder.confirm.TradeAmt}}
+                  li 付款方式 / {{corder.confirm.PaymentType}}
+                  li 確認日期 / {{corder.confirm.TradeDate}}
+                  li 有效期限 / {{corder.confirm.ExpireDate}}
+                  li(ng-show="corder.confirm.PaymentType=='ATM'") 銀行代碼 / {{corder.confirm.BankCode}} / {{corder.confirm.vAccount}}
+                  li(ng-show="corder.confirm.PaymentType=='CVS' || corder.confirm.PaymentType=='BARCODE'")
+                    | 條碼 / {{corder.confirm.Barcode1}} / {{corder.confirm.Barcode2}} / {{corder.confirm.Barcode3}} 
+              p
+                h4 付款確認資訊
+              p {{corder}}
+            .modal-footer
+              .btn.btn-default(data-dismiss="modal") close
   script(type="text/javascript",src="js/admin.js")
 

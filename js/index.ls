@@ -57,7 +57,7 @@ angular.module \main
         if !$scope.user => $scope.password = ""
         $scope.submit!
     */
-    $scope.price = {red: 583, green: 583, cyan: 583, purple: 583, magenta: 583, black: 583}
+    $scope.price = {red: 0, green: 0, cyan: 0, purple: 0, magenta: 0, black: 0}
     $scope.count = {red: 0, green: 0, cyan: 0, purple: 0, magenta: 0, black: 0}
     $scope.avail = {red: 0, green: 0, cyan: 0, purple: 0, magenta: 0, black: 0}
     $scope.choiceName = ->
@@ -82,8 +82,11 @@ angular.module \main
         url: \/api/stock
         method: \GET
       .success (d) ->
+        $scope.price = d.price
         $scope.avail = d.avail
-        for k,v of $scope.avail => $scope.choicelist[k] = [i for i from 0 to (v<?20)]
+        for k,v of $scope.avail =>
+          $scope.avail[k] = $scope.avail[k]>?0
+          $scope.choicelist[k] = [i for i from 0 to (v<?20>?0)]
 
     $scope.loadcount!
     $scope.logout = -> if $scope.user =>
@@ -122,7 +125,6 @@ angular.module \main
 
     if typeof(fast-debug)!="undefined" and fast-debug =>
       $scope <<< {name: "薄瓜瓜", addr: "在大陸的薄瓜瓜的家", phone: "0110101011"}
-      $scope.count.purple = 2
     $scope.payment = 1
 
     zoomed = false
