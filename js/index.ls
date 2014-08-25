@@ -116,7 +116,7 @@ angular.module \main
       .success (d) ->
         console.log "payload information (to allpay): #d"
         $scope.allPayData = d
-        #$timeout (-> $(\#allpayform).submit!), 100
+        $timeout (-> $(\#allpayform).submit!), 100
       #TODO error handling 
       .error (e) -> console.error e
 

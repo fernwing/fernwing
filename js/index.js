@@ -225,7 +225,10 @@ x$.controller('main', function($scope, $http, $firebase, $timeout, dbref, allpay
       data: payload
     }).success(function(d){
       console.log("payload information (to allpay): " + d);
-      return $scope.allPayData = d;
+      $scope.allPayData = d;
+      return $timeout(function(){
+        return $('#allpayform').submit();
+      }, 100);
     }).error(function(e){
       return console.error(e);
     });
