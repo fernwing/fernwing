@@ -1,4 +1,14 @@
 extends layout
+mixin color-list2(r,name)
+  tr
+    td= name
+    td= "{{"+r+".red}}"
+    td= "{{"+r+".green}}"
+    td= "{{"+r+".cyan}}"
+    td= "{{"+r+".purple}}"
+    td= "{{"+r+".magenta}}"
+    td= "{{"+r+".black}}"
+    td= "{{"+r+".total}}"
 mixin color-list(r,disabled,total)
   .row
     .col-sm-10
@@ -34,14 +44,22 @@ block content
     .panel.panel-info.thick(ng-controller="sales")
       .panel-heading 銷售狀況
       .panel-body
-        h4 建立中 (付款方式待確認)
-        +color-list("init",true,true)
-        h4 付款方式已確認
-        +color-list("confirm",true,true)
-        h4 付款完成
-        +color-list("paid",true,true)
-        h4 貨品送出
-        +color-list("shipped",true,true)
+        table.salestable
+          tr
+            th 分類
+            th 紅色
+            th 綠色
+            th 藍色
+            th 紫色
+            th 紫紅色
+            th 黑色
+            th 總計
+          +color-list2("init","建立中")
+          +color-list2("confirm","待付款")
+          +color-list2("paid","已付款")
+          +color-list2("shipped","已出貨")
+          +color-list2("avail","剩餘存貨")
+
     .panel.panel-warning.thick(ng-controller="order")
       .panel-heading 訂單內容
       .panel-body
@@ -58,10 +76,11 @@ block content
             th 紫紅
             th 黑
             th 狀態
+            th 金額
             th 出貨
-          tr(ng-repeat="o in order")
+          tr.order(ng-repeat="o in order")
             td(ng-click="show(o)") {{o.init.MerchantTradeNo}}
-            td {{o.info.name}}
+            td: a(href="mailto:{{o.info.email}}") {{o.info.name}}
             td {{o.info.addr}}
             td {{o.info.phone}}
             td {{o.info.count.red}}
@@ -71,7 +90,8 @@ block content
             td {{o.info.count.magenta}}
             td {{o.info.count.black}}
             td {{o.state|orderState}}
-            td: i.glyphicon.glyphicon-tag
+            td {{o.init.TotalAmount}}
+            td: i.glyphicon.glyphicon-tag(ng-show="o.state!=3",ng-click="ship(o)")
       #detail.modal.fade
         .modal-dialog.modal-lg
           .modal-content

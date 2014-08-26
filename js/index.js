@@ -130,11 +130,15 @@ x$.controller('main', function($scope, $http, $firebase, $timeout, dbref, allpay
     return list.join('#');
   };
   $scope.priceTotal = function(){
-    return ['red', 'green', 'cyan', 'purple', 'magenta', 'black'].map(function(it){
+    var ret;
+    ret = ['red', 'green', 'cyan', 'purple', 'magenta', 'black'].map(function(it){
       return $scope.price[it] * $scope.count[it];
     }).reduce(function(a, b){
       return a + b;
     }, 0);
+    if (ret > 0) {
+      return ret += 50;
+    }
   };
   $scope.choicelist = {};
   $scope.want = true;
@@ -200,7 +204,7 @@ x$.controller('main', function($scope, $http, $firebase, $timeout, dbref, allpay
   };
   $scope.submit = function(){
     var payload;
-    if (!($scope.name && $scope.addr && $scope.email && ($scope.user || $scope.password) && $scope.phone && $scope.priceTotal())) {
+    if (!($scope.name && $scope.addr && $scope.email && $scope.phone && $scope.priceTotal())) {
       return $scope.needFix = true, $scope.state = 0, $scope;
     }
     $scope.needFix = false;

@@ -207,19 +207,19 @@ block bare-content
               input.form-control(type="text",placeholder="例如：台北市士林區福港街 12 號",
                 ng-disabled="!want || state!=0",name="addr",ng-model="addr",required,ng-minlength="5")
             .row
-              .col-sm-4: .form-group(ng-class="fix('phone')")
+              .col-sm-6: .form-group(ng-class="fix('phone')")
                 +valid-label("orderform","phone", "聯絡電話", "電話")
                 input.form-control(type="text",placeholder="例如： 0912312412 ( 於送貨時聯絡用 )",
                   ng-disabled="!want || state!=0",name="phone",ng-model="phone",required,ng-minlength="7",ng-pattern="/[0-9-() ]/")
-              .col-sm-4: .form-group(ng-class="fix('email')")
+              .col-sm-6: .form-group(ng-class="fix('email')")
                 +valid-label("orderform","email", "電子郵件信箱", "電子郵件信箱")
-                input.form-control(type="email",placeholder="例如：john@mail.tw ( 用於確認或修改訂單 )",
+                input.form-control(type="email",placeholder="例如：john@mail.tw ( 訂單會同時以信件寄給您 )",
                   ng-disabled="user || !want || state!=0",name="email",ng-model="email",required)
-              .col-sm-4(ng-show="!user"): .form-group(ng-class="fix('password')")
+              //-.col-sm-4(ng-show="!user"): .form-group(ng-class="fix('password')")
                 +valid-label("orderform","password","密碼", "密碼")
                 input.form-control(type="password",placeholder="用於確認或修改訂單",
                   ng-disabled="!want || state!=0",name="password",ng-model="password",required)
-              .col-sm-4(ng-show="user"): .form-group
+              //-.col-sm-4(ng-show="user"): .form-group
                 label &nbsp;
                 .btn.btn-warning.form-control(ng-disabled="state!=0",ng-click="logout()") 我要用另外一組電子郵件
             //-.row
@@ -246,13 +246,14 @@ block bare-content
               .desc
                 span(ng-show="priceTotal()")  您所選購的商品為
                 span(ng-show="!priceTotal()")  您尚未選購任何背包
-                ul
-                  li(ng-show="count.red") 紅色背包 {{count.red}} 個
-                  li(ng-show="count.green") 綠色背包 {{count.green}} 個
-                  li(ng-show="count.cyan") 藍色背包 {{count.cyan}} 個
-                  li(ng-show="count.purple") 紫色背包 {{count.purple}} 個
-                  li(ng-show="count.magenta") 紫紅色背包 {{count.magenta}} 個
-                  li(ng-show="count.black") 黑色背包 {{count.black}} 個
+                ul(ng-show="priceTotal()")
+                  li(ng-show="count.red") 紅色背包 {{count.red}} 個 x {{price.red}} 元
+                  li(ng-show="count.green") 綠色背包 {{count.green}} 個 x {{price.green}} 元
+                  li(ng-show="count.cyan") 藍色背包 {{count.cyan}} 個 x {{price.cyan}} 元
+                  li(ng-show="count.purple") 紫色背包 {{count.purple}} 個 x {{price.purple}} 元
+                  li(ng-show="count.magenta") 紫紅色背包 {{count.magenta}} 個 x {{price.magenta}} 元
+                  li(ng-show="count.black") 黑色背包 {{count.black}} 個 x {{price.black}} 元
+                  li 運費 50 元
 
               .total(ng-show="priceTotal()")
                 i.glyphicon.glyphicon-tag

@@ -875,6 +875,14 @@ span.red {
     font-weight: 900;
     font-size: 1.3em; }
 
+.salestable {
+  width: 100%; }
+  .salestable th, .salestable td {
+    text-align: center; }
+
+.order .glyphicon {
+  cursor: pointer; }
+
 @-webkit-keyframes fadeout {
   0% {
     opacity: 1; }

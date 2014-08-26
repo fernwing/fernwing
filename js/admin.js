@@ -27,10 +27,11 @@ x$.filter('orderState', function(){
   };
 });
 x$.controller('order', ['$scope', '$http', 'stateIndicator', '$timeout'].concat(function($scope, $http, stateIndicator, $timeout){
+  $scope.state = stateIndicator.init();
   $http.get('/api/order').success(function(d){
     return $scope.order = d;
   });
-  return $scope.show = function(order){
+  $scope.show = function(order){
     $scope.corder = order;
     return setTimeout(function(){
       return $('#detail').modal({
@@ -38,8 +39,39 @@ x$.controller('order', ['$scope', '$http', 'stateIndicator', '$timeout'].concat(
       });
     }, 100);
   };
+  return $scope.ship = function(order){
+    var payload;
+    $scope.state.loading();
+    console.log(order);
+    payload = {
+      MerchantTradeNo: order.init.MerchantTradeNo
+    };
+    return $http({
+      url: '/api/debug/genmac',
+      method: 'POST',
+      data: JSON.stringify(payload)
+    }).success(function(d){
+      payload.CheckMacValue = d;
+      console.log(payload);
+      return $http({
+        url: '/api/order/ship',
+        method: 'POST',
+        data: JSON.stringify(payload)
+      }).success(function(d){
+        return $scope.state.done();
+      }).error(function(e){
+        return $scope.state.fail();
+      });
+    }).error(function(e){
+      return $scope.state.fail();
+    });
+  };
 }));
 x$.controller('sales', ['$scope', '$http', 'stateIndicator', '$timeout', 'color'].concat(function($scope, $http, stateIndicator, $timeout, color){
+  $http.get('/api/stock').success(function(d){
+    $scope.avail = d.avail;
+    return color.total($scope.avail);
+  });
   return $http.get('/api/order').success(function(d){
     return [['init', 0], ['confirm', 1], ['paid', 2], ['shipped', 3]].map(function(v){
       var col, count, i$, len$, o, j$, ref$, len1$, k;

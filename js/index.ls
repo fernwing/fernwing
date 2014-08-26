@@ -67,7 +67,8 @@ angular.module \main
       list.join \#
         
     $scope.priceTotal = ->
-      <[red green cyan purple magenta black]>map(-> $scope.price[it] * $scope.count[it])reduce ((a,b) -> a + b), 0
+      ret = <[red green cyan purple magenta black]>map(-> $scope.price[it] * $scope.count[it])reduce ((a,b) -> a + b), 0
+      if ret > 0 => ret += 50
     $scope.choicelist = {}
     $scope.want = true
     $scope.need-fix = false
@@ -100,7 +101,7 @@ angular.module \main
     $scope.post-submitted = ->
       $scope.state = 2
     $scope.submit = ->
-      if not ($scope.name and $scope.addr and $scope.email and ($scope.user or $scope.password) and $scope.phone and $scope.priceTotal()) => 
+      if not ($scope.name and $scope.addr and $scope.email and $scope.phone and $scope.priceTotal()) => 
         return $scope <<< {need-fix: true, state: 0}
       $scope.need-fix = false
       $scope.state = 1

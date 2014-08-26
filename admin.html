@@ -121,146 +121,68 @@
           <div ng-controller="sales" class="panel panel-info thick">
             <div class="panel-heading">銷售狀況</div>
             <div class="panel-body">
-              <h4>建立中 (付款方式待確認)</h4>
-              <div class="row">
-                <div class="col-sm-10">
-                  <div class="row">
-                    <div class="col-sm-2 form-group">
-                      <label>紅色</label>
-                      <input type="text" name="red" value="0" ng-model="init.red" disabled="disabled" class="form-control"/>
-                    </div>
-                    <div class="col-sm-2 form-group">
-                      <label>綠色</label>
-                      <input type="text" name="green" value="0" ng-model="init.green" disabled="disabled" class="form-control"/>
-                    </div>
-                    <div class="col-sm-2 form-group">
-                      <label>水藍色</label>
-                      <input type="text" name="cyan" value="0" ng-model="init.cyan" disabled="disabled" class="form-control"/>
-                    </div>
-                    <div class="col-sm-2 form-group">
-                      <label>紫色</label>
-                      <input type="text" name="purple" value="0" ng-model="init.purple" disabled="disabled" class="form-control"/>
-                    </div>
-                    <div class="col-sm-2 form-group">
-                      <label>紫紅色</label>
-                      <input type="text" name="magenta" value="0" ng-model="init.magenta" disabled="disabled" class="form-control"/>
-                    </div>
-                    <div class="col-sm-2 form-group">
-                      <label>黑色</label>
-                      <input type="text" name="black" value="0" ng-model="init.black" disabled="disabled" class="form-control"/>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-2 form-group">
-                  <label>總計</label>
-                  <input type="text" name="total" value="0" ng-model="init.total" disabled="true" class="form-control"/>
-                </div>
-              </div>
-              <h4>付款方式已確認</h4>
-              <div class="row">
-                <div class="col-sm-10">
-                  <div class="row">
-                    <div class="col-sm-2 form-group">
-                      <label>紅色</label>
-                      <input type="text" name="red" value="0" ng-model="confirm.red" disabled="disabled" class="form-control"/>
-                    </div>
-                    <div class="col-sm-2 form-group">
-                      <label>綠色</label>
-                      <input type="text" name="green" value="0" ng-model="confirm.green" disabled="disabled" class="form-control"/>
-                    </div>
-                    <div class="col-sm-2 form-group">
-                      <label>水藍色</label>
-                      <input type="text" name="cyan" value="0" ng-model="confirm.cyan" disabled="disabled" class="form-control"/>
-                    </div>
-                    <div class="col-sm-2 form-group">
-                      <label>紫色</label>
-                      <input type="text" name="purple" value="0" ng-model="confirm.purple" disabled="disabled" class="form-control"/>
-                    </div>
-                    <div class="col-sm-2 form-group">
-                      <label>紫紅色</label>
-                      <input type="text" name="magenta" value="0" ng-model="confirm.magenta" disabled="disabled" class="form-control"/>
-                    </div>
-                    <div class="col-sm-2 form-group">
-                      <label>黑色</label>
-                      <input type="text" name="black" value="0" ng-model="confirm.black" disabled="disabled" class="form-control"/>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-2 form-group">
-                  <label>總計</label>
-                  <input type="text" name="total" value="0" ng-model="confirm.total" disabled="true" class="form-control"/>
-                </div>
-              </div>
-              <h4>付款完成</h4>
-              <div class="row">
-                <div class="col-sm-10">
-                  <div class="row">
-                    <div class="col-sm-2 form-group">
-                      <label>紅色</label>
-                      <input type="text" name="red" value="0" ng-model="paid.red" disabled="disabled" class="form-control"/>
-                    </div>
-                    <div class="col-sm-2 form-group">
-                      <label>綠色</label>
-                      <input type="text" name="green" value="0" ng-model="paid.green" disabled="disabled" class="form-control"/>
-                    </div>
-                    <div class="col-sm-2 form-group">
-                      <label>水藍色</label>
-                      <input type="text" name="cyan" value="0" ng-model="paid.cyan" disabled="disabled" class="form-control"/>
-                    </div>
-                    <div class="col-sm-2 form-group">
-                      <label>紫色</label>
-                      <input type="text" name="purple" value="0" ng-model="paid.purple" disabled="disabled" class="form-control"/>
-                    </div>
-                    <div class="col-sm-2 form-group">
-                      <label>紫紅色</label>
-                      <input type="text" name="magenta" value="0" ng-model="paid.magenta" disabled="disabled" class="form-control"/>
-                    </div>
-                    <div class="col-sm-2 form-group">
-                      <label>黑色</label>
-                      <input type="text" name="black" value="0" ng-model="paid.black" disabled="disabled" class="form-control"/>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-2 form-group">
-                  <label>總計</label>
-                  <input type="text" name="total" value="0" ng-model="paid.total" disabled="true" class="form-control"/>
-                </div>
-              </div>
-              <h4>貨品送出</h4>
-              <div class="row">
-                <div class="col-sm-10">
-                  <div class="row">
-                    <div class="col-sm-2 form-group">
-                      <label>紅色</label>
-                      <input type="text" name="red" value="0" ng-model="shipped.red" disabled="disabled" class="form-control"/>
-                    </div>
-                    <div class="col-sm-2 form-group">
-                      <label>綠色</label>
-                      <input type="text" name="green" value="0" ng-model="shipped.green" disabled="disabled" class="form-control"/>
-                    </div>
-                    <div class="col-sm-2 form-group">
-                      <label>水藍色</label>
-                      <input type="text" name="cyan" value="0" ng-model="shipped.cyan" disabled="disabled" class="form-control"/>
-                    </div>
-                    <div class="col-sm-2 form-group">
-                      <label>紫色</label>
-                      <input type="text" name="purple" value="0" ng-model="shipped.purple" disabled="disabled" class="form-control"/>
-                    </div>
-                    <div class="col-sm-2 form-group">
-                      <label>紫紅色</label>
-                      <input type="text" name="magenta" value="0" ng-model="shipped.magenta" disabled="disabled" class="form-control"/>
-                    </div>
-                    <div class="col-sm-2 form-group">
-                      <label>黑色</label>
-                      <input type="text" name="black" value="0" ng-model="shipped.black" disabled="disabled" class="form-control"/>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-2 form-group">
-                  <label>總計</label>
-                  <input type="text" name="total" value="0" ng-model="shipped.total" disabled="true" class="form-control"/>
-                </div>
-              </div>
+              <table class="salestable">
+                <tr>
+                  <th>分類</th>
+                  <th>紅色</th>
+                  <th>綠色</th>
+                  <th>藍色</th>
+                  <th>紫色</th>
+                  <th>紫紅色</th>
+                  <th>黑色</th>
+                  <th>總計</th>
+                </tr>
+                <tr>
+                  <td>建立中</td>
+                  <td>{{init.red}}</td>
+                  <td>{{init.green}}</td>
+                  <td>{{init.cyan}}</td>
+                  <td>{{init.purple}}</td>
+                  <td>{{init.magenta}}</td>
+                  <td>{{init.black}}</td>
+                  <td>{{init.total}}</td>
+                </tr>
+                <tr>
+                  <td>待付款</td>
+                  <td>{{confirm.red}}</td>
+                  <td>{{confirm.green}}</td>
+                  <td>{{confirm.cyan}}</td>
+                  <td>{{confirm.purple}}</td>
+                  <td>{{confirm.magenta}}</td>
+                  <td>{{confirm.black}}</td>
+                  <td>{{confirm.total}}</td>
+                </tr>
+                <tr>
+                  <td>已付款</td>
+                  <td>{{paid.red}}</td>
+                  <td>{{paid.green}}</td>
+                  <td>{{paid.cyan}}</td>
+                  <td>{{paid.purple}}</td>
+                  <td>{{paid.magenta}}</td>
+                  <td>{{paid.black}}</td>
+                  <td>{{paid.total}}</td>
+                </tr>
+                <tr>
+                  <td>已出貨</td>
+                  <td>{{shipped.red}}</td>
+                  <td>{{shipped.green}}</td>
+                  <td>{{shipped.cyan}}</td>
+                  <td>{{shipped.purple}}</td>
+                  <td>{{shipped.magenta}}</td>
+                  <td>{{shipped.black}}</td>
+                  <td>{{shipped.total}}</td>
+                </tr>
+                <tr>
+                  <td>剩餘存貨</td>
+                  <td>{{avail.red}}</td>
+                  <td>{{avail.green}}</td>
+                  <td>{{avail.cyan}}</td>
+                  <td>{{avail.purple}}</td>
+                  <td>{{avail.magenta}}</td>
+                  <td>{{avail.black}}</td>
+                  <td>{{avail.total}}</td>
+                </tr>
+              </table>
             </div>
           </div>
           <div ng-controller="order" class="panel panel-warning thick">
@@ -279,11 +201,12 @@
                   <th>紫紅</th>
                   <th>黑</th>
                   <th>狀態</th>
+                  <th>金額</th>
                   <th>出貨</th>
                 </tr>
-                <tr ng-repeat="o in order">
+                <tr ng-repeat="o in order" class="order">
                   <td ng-click="show(o)">{{o.init.MerchantTradeNo}}</td>
-                  <td>{{o.info.name}}</td>
+                  <td><a href="mailto:{{o.info.email}}">{{o.info.name}}</a></td>
                   <td>{{o.info.addr}}</td>
                   <td>{{o.info.phone}}</td>
                   <td>{{o.info.count.red}}</td>
@@ -293,7 +216,8 @@
                   <td>{{o.info.count.magenta}}</td>
                   <td>{{o.info.count.black}}</td>
                   <td>{{o.state|orderState}}</td>
-                  <td><i class="glyphicon glyphicon-tag"></i></td>
+                  <td>{{o.init.TotalAmount}}</td>
+                  <td><i ng-show="o.state!=3" ng-click="ship(o)" class="glyphicon glyphicon-tag"></i></td>
                 </tr>
               </table>
             </div>
