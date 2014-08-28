@@ -1,4 +1,4 @@
-angular.module \main, if online => <[firebase ngAnimate ld.common]> else <[ngAnimate ld.common]>
+angular.module \main, if online => <[firebase ngAnimate ld.common backend]> else <[ngAnimate ld.common backend]>
 if !online => angular.module \main .factory \$firebase, -> ->
 if !online =>
   Firebase = ->
@@ -46,17 +46,11 @@ angular.module \main
       $timeout ( -> $scope.post-submitted! ), 2000
 
 
-  ..controller \main, ($scope, $http, $firebase, $timeout, dbref, allpay) ->
+  ..controller \main, ($scope, $http, $firebase, $timeout, dbref, allpay, context) ->
     $scope.db = order: null, count: null
+    $scope.user = context.user
+    $scope.$watch 'user', -> if $scope.user => $scope.email = $scope.user.email
 
-    /*$scope.auth = dbref.auth \fern, (e, u) -> $scope.$apply ->
-      if e => console.log "get user fail: ", e
-      $scope.user = u
-      if $scope.user => $scope.email = $scope.user.email
-      if $scope.state == 1 => 
-        if !$scope.user => $scope.password = ""
-        $scope.submit!
-    */
     $scope.price = {red: 0, green: 0, cyan: 0, purple: 0, magenta: 0, black: 0}
     $scope.count = {red: 0, green: 0, cyan: 0, purple: 0, magenta: 0, black: 0}
     $scope.avail = {red: 0, green: 0, cyan: 0, purple: 0, magenta: 0, black: 0}
@@ -80,7 +74,7 @@ angular.module \main
     $scope.dbref = dbref
     $scope.loadcount = ->
       $http do
-        url: \/api/stock
+        url: \/d/stock
         method: \GET
       .success (d) ->
         $scope.price = d.price
@@ -90,9 +84,15 @@ angular.module \main
           $scope.choicelist[k] = [i for i from 0 to (v<?20>?0)]
 
     $scope.loadcount!
+
     $scope.logout = -> if $scope.user =>
-      $scope.auth.logout!
-      $scope <<< {email: "", password: "", user: null}
+      $http do
+        url: \/d/logout
+        method: \GET
+      .success (d) ->
+        $scope.user = null
+        $scope <<< {email: "", password: "", user: null}
+      .error (d) ->
     $scope.clearForm = ->
       $scope{name,addr,email,password,phone,payment} = name: "", addr: "", email: "", password: "", phone: "", payment: "1"
       if $scope.user => $scope.email = $scope.user.email
@@ -101,10 +101,17 @@ angular.module \main
     $scope.post-submitted = ->
       $scope.state = 2
     $scope.submit = ->
-      if not ($scope.name and $scope.addr and $scope.email and $scope.phone and $scope.priceTotal()) => 
+      if not ($scope.name and $scope.addr and $scope.email and ($scope.user or $scope.password) and  $scope.phone and $scope.priceTotal()) =>
         return $scope <<< {need-fix: true, state: 0}
       $scope.need-fix = false
       $scope.state = 1
+      if !$scope.user =>
+        $http do
+          url: \/d/login
+          method: \POST
+          data: JSON.stringify({username: $scope.email, password: $scope.password})
+        .success (d) -> $scope.user = d
+        .error (d) ->
 
       payload = $scope{name, email, addr, phone, count}
       #ga \send, \event, \form, \submit
@@ -113,7 +120,7 @@ angular.module \main
 
     $scope.allpay = (payload) ->
       $http do
-        url: \/api/order/init
+        url: \/d/order/init
         method: \POST
         headers: "Content-Type": "application/json"
         data: payload

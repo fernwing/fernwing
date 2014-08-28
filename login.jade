@@ -1,4 +1,23 @@
 extends layout
 block content
-  .static-content
-    a(href="/api/auth/facebook") 使用臉書登入
+  script(type="text/javascript",src="/d/user")
+  script(type="text/javascript",src="/js/login.js")
+  .static-content(ng-controller="login")
+    div(ng-show="user")
+      h2 您已登入
+      p 您已經用 {{user.email}} 登入了。
+    div(ng-show="!user")
+      h2 登入
+      form
+        .form-group
+          label Username
+          input.form-control(type="text",name="username",ng-model="info.username")
+        .form-group
+          label Password
+          input.form-control(type="password",name="password",ng-model="info.password")
+        .row
+          .col-sm-1
+            .btn.btn-primary(ng-click="login()") 登入
+          .col-sm-1
+            a.btn.btn-success(href="/api/auth/facebook") 或者使用臉書登入
+

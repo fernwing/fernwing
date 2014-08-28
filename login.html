@@ -15,30 +15,59 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="FernWing / 蕨之翼攻頂包">
     <meta property="og:description" content="為愛好休閒生活的您量身打造，輕巧、舒適、高機能性的隨身背包">
-    <script type="text/javascript" src="assets/jquery/1.10.2/jquery.min.js"></script>
-    <script type="text/javascript" src="assets/d3js/3.3.11/d3.v3.min.js"></script>
-    <script type="text/javascript" src="assets/angular/1.2.3/angular.min.js"></script>
-    <script type="text/javascript" src="assets/angular/1.2.3/angular-animate.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="assets/bootstrap/3.0.2/css/bootstrap.min.css">
-    <script type="text/javascript" src="assets/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/d3js/3.3.11/d3.v3.min.js"></script>
+    <script type="text/javascript" src="/assets/angular/1.2.3/angular.min.js"></script>
+    <script type="text/javascript" src="/assets/angular/1.2.3/angular-animate.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/bootstrap/3.0.2/css/bootstrap.min.css">
+    <script type="text/javascript" src="/assets/bootstrap/3.0.2/js/bootstrap.min.js"></script>
     <!-- custom files-->
     <link rel="stylesheet" type="text/css" href="/css/index.css">
     <script type="text/javascript">var online = false;</script>
-    <script type="text/javascript" src="js/md5.min.js"></script>
-    <script type="text/javascript" src="js/common.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript" src="js/allpay.js"></script>
-    <script type="text/javascript" src="js/dbref.js"></script>
+    <script type="text/javascript" src="/js/md5.min.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script type="text/javascript" src="/js/allpay.js"></script>
+    <script type="text/javascript" src="/js/dbref.js"></script>
+    <script type="text/javascript" src="/d/user"></script>
   </head>
   <body ng-app="main" ng-controller="main">
     <div id="root">
       <div id="nav">
         <div class="ib"><a href="/" class="item logo"></a>
-          <div class="right"><a href="/#brief" class="item">產品介紹</a><a href="/#order-info" class="item">購買</a><a href="/#about" class="item">關於我們</a></div>
+          <div class="right"><a href="/#brief" class="item">產品介紹</a><a href="/#order-info" class="item">購買</a><a href="/#about" class="item">關於我們</a><a href="/login.html" class="item">登入</a>
+            <endif></endif>
+          </div>
         </div>
       </div>
       <div id="content">
-        <div class="static-content"><a href="/api/auth/facebook">使用臉書登入</a></div>
+        <script type="text/javascript" src="/d/user"></script>
+        <script type="text/javascript" src="/js/login.js"></script>
+        <div ng-controller="login" class="static-content">
+          <div ng-show="user">
+            <h2>您已登入</h2>
+            <p>您已經用 {{user.email}} 登入了。</p>
+          </div>
+          <div ng-show="!user">
+            <h2>登入</h2>
+            <form>
+              <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="username" ng-model="info.username" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" ng-model="info.password" class="form-control">
+              </div>
+              <div class="row">
+                <div class="col-sm-1">
+                  <div ng-click="login()" class="btn btn-primary">登入</div>
+                </div>
+                <div class="col-sm-1"><a href="/api/auth/facebook" class="btn btn-success">或者使用臉書登入</a></div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
       <div id="content">
         <div id="attribution" role="dialog" aria-labelledby="attribution" aria-hidden="true" class="modal fade">
