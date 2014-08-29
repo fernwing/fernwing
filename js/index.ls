@@ -1,5 +1,5 @@
 angular.module \main, <[ngAnimate ld.common backend]>
-fast-debug = true
+fast-debug = false
 
 angular.module \main
   ..config ->
