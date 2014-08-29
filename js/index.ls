@@ -49,7 +49,7 @@ angular.module \main
   ..controller \main, ($scope, $http, $timeout, allpay, context) ->
     $scope.db = order: null, count: null
     $scope.user = context.user
-    $scope.$watch 'user', -> if $scope.user => $scope.email = $scope.user.email
+    #$scope.$watch 'user', -> if $scope.user => $scope.email = $scope.user.email
 
     $scope.price = {red: 0, green: 0, cyan: 0, purple: 0, magenta: 0, black: 0}
     $scope.count = {red: 0, green: 0, cyan: 0, purple: 0, magenta: 0, black: 0}

@@ -81,11 +81,6 @@ x$.controller('main', function($scope, $http, $timeout, allpay, context){
     count: null
   };
   $scope.user = context.user;
-  $scope.$watch('user', function(){
-    if ($scope.user) {
-      return $scope.email = $scope.user.email;
-    }
-  });
   $scope.price = {
     red: 0,
     green: 0,
