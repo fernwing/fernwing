@@ -25,6 +25,13 @@ body {
 #content {
   width: 100%; }
 
+.hr {
+  width: 100%;
+  height: 1px;
+  background: #cccccc;
+  box-shadow: 0 4px 2px rgba(0, 0, 0, 0.075);
+  margin: 20px 0; }
+
 .static-content {
   margin: 200px auto;
   width: 70%;
@@ -883,6 +890,19 @@ span.red {
 .order .glyphicon {
   cursor: pointer; }
 
+.admin-content {
+  margin: 20px 20px 120px 20px; }
+
+#admin-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: url(/img/logo/footer.png) left center no-repeat rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px 20px;
+  height: 50px;
+  line-height: 30px; }
+
 @-webkit-keyframes fadeout {
   0% {
     opacity: 1; }
@@ -927,8 +947,15 @@ span.red {
   display: inline;
   font-size: 16px;
   vertical-align: middle; }
-  .state-indicator img {
-    vertical-align: text-bottom; }
+  .state-indicator .spinner {
+    vertical-align: text-bottom;
+    background-image: url(/img/spin.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    display: inline-block;
+    width: 24px;
+    height: 24px; }
   .state-indicator i.fa {
     min-width: 100px; }
   .state-indicator > * {
@@ -954,7 +981,11 @@ span.red {
   -o-transition: all 1s linear 1s;
   transition: all 1s linear 1s;
   opacity: 0;
-  margin-left: 12px; }
+  margin-left: 12px;
+  min-width: 100px; }
+  .ajax-done:after, .ajax-fail:after {
+    width: 100%;
+    color: black; }
 
 .ajax-done {
   color: #44cc55; }
@@ -965,3 +996,21 @@ span.red {
   color: #cc5544; }
   .ajax-fail:after {
     content: "錯誤"; }
+
+.btn-primary .ajax-done:after, .btn-primary .ajax-fail:after, .btn-success .ajax-done:after, .btn-success .ajax-fail:after, .btn-danger .ajax-done:after, .btn-danger .ajax-fail:after, .btn-warning .ajax-done:after, .btn-warning .ajax-fail:after, .btn-info .ajax-done:after, .btn-info .ajax-fail:after {
+  color: white; }
+
+.btn-primary .state-indicator .spinner {
+  background-image: url(/img/spin-primary.gif); }
+
+.btn-success .state-indicator .spinner {
+  background-image: url(/img/spin-success.gif); }
+
+.btn-info .state-indicator .spinner {
+  background-image: url(/img/spin-info.gif); }
+
+.btn-warning .state-indicator .spinner {
+  background-image: url(/img/spin-warning.gif); }
+
+.btn-danger .state-indicator .spinner {
+  background-image: url(/img/spin-danger.gif); }

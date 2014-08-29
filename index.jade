@@ -152,7 +152,7 @@ block bare-content
       br
       #order-info
       hr
-      //-#notify.shown(ng-controller="notify")
+      #notify.shown(ng-show="status.status!=1"): div(ng-controller="notify")
         .ib
           h1.text-center 訂購資訊
           br
@@ -164,10 +164,12 @@ block bare-content
             +valid-label("notifyform","email", "電子郵件信箱", "電子郵件信箱")
             input.form-control.input-lg(type="email",placeholder="例如：john@mail.tw",
               ng-disabled="state!=0",name="email",ng-model="email",required)
-          .btn.btn-danger.btn-lg(ng-click="submit()",style="vertical-align:bottom",ng-disabled="state==2") 送出
+          .btn.btn-danger.btn-lg(ng-click="submit()",style="vertical-align:bottom",ng-disabled="state!=0") 送出
         br
+        h2(ng-show="state==1")
+          ldstate(ng-model="status.value")
         h2(ng-show="state==2") 感謝您的回饋！
-      #order
+      #order(ng-show="status.status==1")
         .ib
           h2 
             i.glyphicon.glyphicon-phone-alt
@@ -188,11 +190,6 @@ block bare-content
               +order-choice("black")
 
             br.clear
-            //-.checkbox
-              label
-                input(type="checkbox",checked,ng-model="want",disabled)
-                h3(style="color:#e02") 我要一個 FERN 攻頂包！*
-                small (* : 由於數量有限且訂購踴躍，目前每人限購一只黑色 FERN 攻頂包 )
             br
             h4
               i.glyphicon.glyphicon-shopping-cart

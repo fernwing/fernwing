@@ -1,2 +1,4 @@
 
-<div class="state-indicator"><img ng-show="state==1" src="/img/spin.gif"/><i ng-show="state==2" ng-class="{'fadeout':state==2}" class="glyphicon glyphicon-ok ajax-done"></i><i mg-show="state==3" ng-class="{'fadeout':state==3}" class="glyphicon glyphicon-remove-circle ajax-fail"></i></div>
+<div class="state-indicator">
+  <div ng-show="state==1" class="spinner"></div><i ng-show="state==2" ng-class="{'fadeout':state==2}" class="glyphicon glyphicon-ok ajax-done"></i><i ng-show="state==3" ng-class="{'fadeout':state==3}" class="glyphicon glyphicon-remove-circle ajax-fail"></i>
+</div>

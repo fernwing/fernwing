@@ -26,9 +26,34 @@ x$.filter('orderState', function(){
     return ['建立中', '待付款', '已付款', '已出貨'][input];
   };
 });
+x$.controller('status', ['$scope', '$http', 'stateIndicator'].concat(function($scope, $http, stateIndicator){
+  $scope.state = stateIndicator.init();
+  $scope.status = {
+    status: -1
+  };
+  $scope.setStatus = function(v){
+    $scope.state.loading();
+    $scope.status.status = v;
+    return $http({
+      url: '/d/status',
+      method: 'POST',
+      data: JSON.stringify($scope.status)
+    }).success(function(d){
+      return $scope.state.done();
+    }).error(function(d){
+      return $scope.state.fail();
+    });
+  };
+  return $http({
+    url: '/d/status',
+    method: 'GET'
+  }).success(function(d){
+    return $scope.status = d;
+  }).error(function(d){});
+}));
 x$.controller('order', ['$scope', '$http', 'stateIndicator', '$timeout'].concat(function($scope, $http, stateIndicator, $timeout){
   $scope.state = stateIndicator.init();
-  $http.get('/api/order').success(function(d){
+  $http.get('/d/order').success(function(d){
     return $scope.order = d;
   });
   $scope.show = function(order){
@@ -47,14 +72,14 @@ x$.controller('order', ['$scope', '$http', 'stateIndicator', '$timeout'].concat(
       MerchantTradeNo: order.init.MerchantTradeNo
     };
     return $http({
-      url: '/api/debug/genmac',
+      url: '/d/debug/genmac',
       method: 'POST',
       data: JSON.stringify(payload)
     }).success(function(d){
       payload.CheckMacValue = d;
       console.log(payload);
       return $http({
-        url: '/api/order/ship',
+        url: '/d/order/ship',
         method: 'POST',
         data: JSON.stringify(payload)
       }).success(function(d){
@@ -68,11 +93,11 @@ x$.controller('order', ['$scope', '$http', 'stateIndicator', '$timeout'].concat(
   };
 }));
 x$.controller('sales', ['$scope', '$http', 'stateIndicator', '$timeout', 'color'].concat(function($scope, $http, stateIndicator, $timeout, color){
-  $http.get('/api/stock').success(function(d){
+  $http.get('/d/stock').success(function(d){
     $scope.avail = d.avail;
     return color.total($scope.avail);
   });
-  return $http.get('/api/order').success(function(d){
+  return $http.get('/d/order').success(function(d){
     return [['init', 0], ['confirm', 1], ['paid', 2], ['shipped', 3]].map(function(v){
       var col, count, i$, len$, o, j$, ref$, len1$, k;
       col = d.filter(function(it){
@@ -99,7 +124,7 @@ x$.controller('stock', ['$scope', '$http', 'stateIndicator', '$timeout', 'color'
   x$ = $scope.state = stateIndicator.init();
   x$.loading();
   $http({
-    url: "/api/stock",
+    url: "/d/stock",
     method: "GET"
   }).success(function(d){
     $scope.state.reset();
@@ -111,7 +136,7 @@ x$.controller('stock', ['$scope', '$http', 'stateIndicator', '$timeout', 'color'
     $scope.state.loading();
     color.total($scope.stock.count);
     return $http({
-      url: "/api/stock",
+      url: "/d/stock",
       method: "POST",
       headers: {
         "Content-Type": "application/json"

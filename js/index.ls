@@ -1,10 +1,4 @@
-angular.module \main, if online => <[firebase ngAnimate ld.common backend]> else <[ngAnimate ld.common backend]>
-if !online => angular.module \main .factory \$firebase, -> ->
-if !online =>
-  Firebase = ->
-  FirebaseSimpleLogin = ->
-  ga = ->
-
+angular.module \main, <[ngAnimate ld.common backend]>
 fast-debug = true
 
 angular.module \main
@@ -28,25 +22,31 @@ angular.module \main
         e.css "background-image": "url(#url)"
         setTimeout (-> e.toggle-class \visible), 100
 
-  ..controller \notify, ($scope, $firebase, $timeout) ->
-    $scope.db-ref = new Firebase \https://fern.firebaseIO.com/notify/
-    $scope.notify = $firebase $scope.db-ref
+  ..controller \notify, <[$scope $timeout stateIndicator $http]> ++ ($scope, $timeout, stateIndicator, $http) ->
     $scope.need-fix = false
     $scope.state = 0
-    $scope.post-submitted = -> $scope.state = 2
+    $scope.status = stateIndicator.init!
+    $scope.post-submitted = -> 
+      $scope.status.done!
+      $scope.state = 2
     $scope.fix = (it) ->
       if $scope.need-fix and !$scope[it] => "has-error" else ""
     $scope.submit = ->
       if not ($scope.email) => return $scope.need-fix = true
       $scope.need-fix = false
       $scope.state = 1
-      id = $scope.notify.$add $scope.email
-      #$scope.notify.$save!
+      $scope.status.loading!
+      $http do
+        url: \/d/notify
+        method: \POST
+        data: {email: $scope.email}
+      .success -> 
+      .error ->
       ga \send, \event, \notify, \submit
       $timeout ( -> $scope.post-submitted! ), 2000
 
 
-  ..controller \main, ($scope, $http, $firebase, $timeout, dbref, allpay, context) ->
+  ..controller \main, ($scope, $http, $timeout, allpay, context) ->
     $scope.db = order: null, count: null
     $scope.user = context.user
     $scope.$watch 'user', -> if $scope.user => $scope.email = $scope.user.email
@@ -59,7 +59,11 @@ angular.module \main
       list = list.filter -> $scope.count[it.0]
       list = list.map -> "#{it.1} #{$scope.count[it.0]} 個"
       list.join \#
-        
+    $scope.status = {status: -1}
+    $http do
+      url: \/d/status
+      method: \GET
+    .success (d) -> $scope.status = d
     $scope.priceTotal = ->
       ret = <[red green cyan purple magenta black]>map(-> $scope.price[it] * $scope.count[it])reduce ((a,b) -> a + b), 0
       if ret > 0 => ret += 50
@@ -71,7 +75,6 @@ angular.module \main
     $scope.fix = (it) ->
       if $scope.need-fix and !$scope[it] => "has-error" else ""
     
-    $scope.dbref = dbref
     $scope.loadcount = ->
       $http do
         url: \/d/stock

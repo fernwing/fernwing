@@ -5,9 +5,26 @@ angular.module \main
     total: (v) -> v.total = @list.map(-> parseInt v[it]).reduce(((a,b) -> a + b), 0)
   ..filter \orderState, -> (input) -> <[建立中 待付款 已付款 已出貨]>[input]
 
+  ..controller \status, <[$scope $http stateIndicator]> ++ ($scope, $http, stateIndicator) ->
+    $scope.state = stateIndicator.init!
+    $scope.status = {status: -1}
+    $scope.setStatus = (v) ->
+      $scope.state.loading!
+      $scope.status.status = v
+      $http do
+        url: \/d/status
+        method: \POST
+        data: JSON.stringify($scope.status)
+      .success (d) -> $scope.state.done!
+      .error (d) -> $scope.state.fail!
+    $http do
+      url: \/d/status
+      method: \GET
+    .success (d) -> $scope.status = d
+    .error (d) ->
   ..controller \order, <[$scope $http stateIndicator $timeout]> ++ ($scope, $http, stateIndicator, $timeout) ->
     $scope.state = stateIndicator.init!
-    $http.get \/api/order
+    $http.get \/d/order
     .success (d) -> $scope.order = d
     $scope.show = (order) -> 
       $scope.corder = order
@@ -17,14 +34,14 @@ angular.module \main
       console.log order
       payload = {MerchantTradeNo: order.init.MerchantTradeNo}
       $http do
-        url: \/api/debug/genmac
+        url: \/d/debug/genmac
         method: \POST
         data: JSON.stringify(payload)
       .success (d) ->
         payload.CheckMacValue = d
         console.log payload
         $http do
-          url: \/api/order/ship
+          url: \/d/order/ship
           method: \POST
           data: JSON.stringify(payload)
         .success (d) -> $scope.state.done!
@@ -33,11 +50,11 @@ angular.module \main
 
 
   ..controller \sales, <[$scope $http stateIndicator $timeout color]> ++ ($scope, $http, stateIndicator, $timeout, color) ->
-    $http.get \/api/stock
+    $http.get \/d/stock
     .success (d) ->
       $scope.avail = d.avail
       color.total $scope.avail
-    $http.get \/api/order
+    $http.get \/d/order
     .success (d) -> 
       [[\init 0] [\confirm 1] [\paid 2] [\shipped 3]]map (v) ->
         col = d.filter(-> it.state == v.1)
@@ -55,7 +72,7 @@ angular.module \main
       ..loading!
     
     $http do
-      url: "/api/stock"
+      url: "/d/stock"
       method: "GET"
     .success (d) ->
       $scope.state.reset!
@@ -67,7 +84,7 @@ angular.module \main
       $scope.state.loading!
       color.total $scope.stock.count
       $http do
-        url: "/api/stock"
+        url: "/d/stock"
         method: "POST"
         headers: "Content-Type": "application/json"
         data: JSON.stringify($scope.stock)

@@ -1,4 +1,4 @@
 .state-indicator
-  img(ng-show="state==1",src="/img/spin.gif")
+  .spinner(ng-show="state==1")
   i.glyphicon.glyphicon-ok.ajax-done(ng-show="state==2",ng-class="{'fadeout':state==2}")
-  i.glyphicon.glyphicon-remove-circle.ajax-fail(mg-show="state==3",ng-class="{'fadeout':state==3}")
+  i.glyphicon.glyphicon-remove-circle.ajax-fail(ng-show="state==3",ng-class="{'fadeout':state==3}")
