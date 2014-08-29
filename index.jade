@@ -52,6 +52,8 @@ block bare-content
   div
     #content
       #feature
+        div.text-center
+          .btn.btn-danger.btn-lg 心動了嗎？點我訂購
         .wing.delay-bk#wing-feature(delay-bk="/img/wing.png")
         br
         h2 滿足您對背包的期待與渴望
@@ -291,7 +293,15 @@ block bare-content
     hr
     br
     br
-    #about: .ib
+    #about
+      h2
+        img(src="/img/logo/icon-black.png")
+        |  聯絡我們
+      p
+        | 有任何訂購或商品上的問題，歡迎您寫信與我們聯絡，來信請寄至客服信箱 contact@fernwing.com ，我們會在 48 小時之內回覆您。
+      br
+      br
+    //-#about: .ib
       h2 
         img(src="/img/logo/icon-black.png")
         |  關於我們
@@ -302,10 +312,10 @@ block bare-content
       p 此外，我們也注意到，時尚與機能之間，並不存在一條明顯的分界線；當回到文明社會之時，蕨之翼簡單清新的外觀，就像鳥兒收起了雙翼般，伴隨你徘徊在熱鬧繁華的街道之間。
       br
       p 你不再需要很多個背包了。你只需要一對翅膀。
-    br
-    div(style="width:60%;margin:auto"): a.btn.btn-danger.btn-block.btn-lg(href="/#order-info") 現在就訂購
-    br
-    br
+      br
+      div(style="width:60%;margin:auto"): a.btn.btn-danger.btn-block.btn-lg(href="/#order-info") 現在就訂購
+      br
+      br
 
     .modal.fade#orderlist(role="dialog",aria-labelledby="orderlist",aria-hidden="true")
       .modal-dialog
