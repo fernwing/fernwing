@@ -282,7 +282,7 @@
                   <input type="text" placeholder="例如：台北市士林區福港街 12 號" ng-disabled="!want || state!=0" name="addr" ng-model="addr" required ng-minlength="5" class="form-control">
                 </div>
                 <div class="row">
-                  <div class="col-sm-4">
+                  <div class="col-sm-6">
                     <div ng-class="fix('phone')" class="form-group">
                       <label>聯絡電話<span ng-show="needFix &amp;&amp; orderform.phone.$invalid"><i class="glyphicon glyphicon-exclamation-sign text-danger"></i>
                           <div ng-show="orderform.phone.$error.required" class="text-danger">此欄位爲必填</div>
@@ -293,7 +293,7 @@
                       <input type="text" placeholder="例如： 0912312412 ( 於送貨時聯絡用 )" ng-disabled="!want || state!=0" name="phone" ng-model="phone" required ng-minlength="7" ng-pattern="/[0-9-() ]/" class="form-control">
                     </div>
                   </div>
-                  <div class="col-sm-4">
+                  <div class="col-sm-6">
                     <div ng-class="fix('email')" class="form-group">
                       <label>電子郵件信箱<span ng-show="needFix &amp;&amp; orderform.email.$invalid"><i class="glyphicon glyphicon-exclamation-sign text-danger"></i>
                           <div ng-show="orderform.email.$error.required" class="text-danger">此欄位爲必填</div>
@@ -302,23 +302,6 @@
                         <div ng-show="!orderform.email.$invalid" class="text-success"><i class="glyphicon glyphicon-ok-sign"></i></div>
                       </label>
                       <input type="email" placeholder="例如：john@mail.tw ( 訂單會同時以信件寄給您 )" ng-disabled="user || !want || state!=0" name="email" ng-model="email" required class="form-control">
-                    </div>
-                  </div>
-                  <div ng-show="!user" class="col-sm-4">
-                    <div ng-class="fix('password')" class="form-group">
-                      <label>密碼<span ng-show="needFix &amp;&amp; orderform.password.$invalid"><i class="glyphicon glyphicon-exclamation-sign text-danger"></i>
-                          <div ng-show="orderform.password.$error.required" class="text-danger">此欄位爲必填</div>
-                          <div ng-show="!orderform.password.$error.required" class="text-danger">這不是正確的密碼
-                          </div></span>
-                        <div ng-show="!orderform.password.$invalid" class="text-success"><i class="glyphicon glyphicon-ok-sign"></i></div>
-                      </label>
-                      <input type="password" placeholder="用於確認或修改訂單" ng-disabled="!want || state!=0" name="password" ng-model="password" required class="form-control">
-                    </div>
-                  </div>
-                  <div ng-show="user" class="col-sm-4">
-                    <div class="form-group">
-                      <label>&nbsp;</label>
-                      <div ng-disabled="state!=0" ng-click="logout()" class="btn btn-warning form-control">我要用另外一組電子郵件</div>
                     </div>
                   </div>
                 </div><br>

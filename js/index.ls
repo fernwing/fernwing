@@ -104,17 +104,18 @@ angular.module \main
     $scope.post-submitted = ->
       $scope.state = 2
     $scope.submit = ->
-      if not ($scope.name and $scope.addr and $scope.email and ($scope.user or $scope.password) and  $scope.phone and $scope.priceTotal()) =>
+      #if not ($scope.name and $scope.addr and $scope.email and ($scope.user or $scope.password) and $scope.phone and $scope.priceTotal()) =>
+      if not ($scope.name and $scope.addr and $scope.email and $scope.phone and $scope.priceTotal()) =>
         return $scope <<< {need-fix: true, state: 0}
       $scope.need-fix = false
       $scope.state = 1
-      if !$scope.user =>
-        $http do
-          url: \/d/login
-          method: \POST
-          data: JSON.stringify({username: $scope.email, password: $scope.password})
-        .success (d) -> $scope.user = d
-        .error (d) ->
+      #if !$scope.user =>
+      #  $http do
+      #    url: \/d/login
+      #    method: \POST
+      #    data: JSON.stringify({username: $scope.email, password: $scope.password})
+      #  .success (d) -> $scope.user = d
+      #  .error (d) ->
 
       payload = $scope{name, email, addr, phone, count}
       #ga \send, \event, \form, \submit

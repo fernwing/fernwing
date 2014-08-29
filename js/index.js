@@ -209,23 +209,11 @@ x$.controller('main', function($scope, $http, $timeout, allpay, context){
   };
   $scope.submit = function(){
     var payload;
-    if (!($scope.name && $scope.addr && $scope.email && ($scope.user || $scope.password) && $scope.phone && $scope.priceTotal())) {
+    if (!($scope.name && $scope.addr && $scope.email && $scope.phone && $scope.priceTotal())) {
       return $scope.needFix = true, $scope.state = 0, $scope;
     }
     $scope.needFix = false;
     $scope.state = 1;
-    if (!$scope.user) {
-      $http({
-        url: '/d/login',
-        method: 'POST',
-        data: JSON.stringify({
-          username: $scope.email,
-          password: $scope.password
-        })
-      }).success(function(d){
-        return $scope.user = d;
-      }).error(function(d){});
-    }
     payload = {
       name: $scope.name,
       email: $scope.email,

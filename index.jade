@@ -204,19 +204,19 @@ block bare-content
               input.form-control(type="text",placeholder="例如：台北市士林區福港街 12 號",
                 ng-disabled="!want || state!=0",name="addr",ng-model="addr",required,ng-minlength="5")
             .row
-              .col-sm-4: .form-group(ng-class="fix('phone')")
+              .col-sm-6: .form-group(ng-class="fix('phone')")
                 +valid-label("orderform","phone", "聯絡電話", "電話")
                 input.form-control(type="text",placeholder="例如： 0912312412 ( 於送貨時聯絡用 )",
                   ng-disabled="!want || state!=0",name="phone",ng-model="phone",required,ng-minlength="7",ng-pattern="/[0-9-() ]/")
-              .col-sm-4: .form-group(ng-class="fix('email')")
+              .col-sm-6: .form-group(ng-class="fix('email')")
                 +valid-label("orderform","email", "電子郵件信箱", "電子郵件信箱")
                 input.form-control(type="email",placeholder="例如：john@mail.tw ( 訂單會同時以信件寄給您 )",
                   ng-disabled="user || !want || state!=0",name="email",ng-model="email",required)
-              .col-sm-4(ng-show="!user"): .form-group(ng-class="fix('password')")
+              //-.col-sm-4(ng-show="!user"): .form-group(ng-class="fix('password')")
                 +valid-label("orderform","password","密碼", "密碼")
                 input.form-control(type="password",placeholder="用於確認或修改訂單",
                   ng-disabled="!want || state!=0",name="password",ng-model="password",required)
-              .col-sm-4(ng-show="user"): .form-group
+              //-.col-sm-4(ng-show="user"): .form-group
                 label &nbsp;
                 .btn.btn-warning.form-control(ng-disabled="state!=0",ng-click="logout()") 我要用另外一組電子郵件
             //-.row
