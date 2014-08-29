@@ -28,7 +28,7 @@ angular.module \main
     .success (d) -> $scope.order = d
     $scope.show = (order) -> 
       $scope.corder = order
-      setTimeout ( -> $ \#detail .modal show: true), 100
+      setTimeout ( -> $ \#order-detail-modal .modal show: true), 100
     $scope.ship = (order) ->
       $scope.state.loading!
       console.log order

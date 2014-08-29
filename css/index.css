@@ -903,6 +903,9 @@ span.red {
   height: 50px;
   line-height: 30px; }
 
+#order-detail-modal .modal-dialog {
+  width: 80%; }
+
 @-webkit-keyframes fadeout {
   0% {
     opacity: 1; }

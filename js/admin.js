@@ -59,7 +59,7 @@ x$.controller('order', ['$scope', '$http', 'stateIndicator', '$timeout'].concat(
   $scope.show = function(order){
     $scope.corder = order;
     return setTimeout(function(){
-      return $('#detail').modal({
+      return $('#order-detail-modal').modal({
         show: true
       });
     }, 100);
