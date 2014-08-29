@@ -120,7 +120,7 @@ angular.module \main
       payload = $scope{name, email, addr, phone, count}
       #ga \send, \event, \form, \submit
       $scope.allpay payload
-      $timeout ( -> $scope.post-submitted! ), 2000
+      #$timeout ( -> $scope.post-submitted! ), 2000
 
     $scope.allpay = (payload) ->
       $http do

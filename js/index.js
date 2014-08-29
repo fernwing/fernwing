@@ -221,10 +221,7 @@ x$.controller('main', function($scope, $http, $timeout, allpay, context){
       phone: $scope.phone,
       count: $scope.count
     };
-    $scope.allpay(payload);
-    return $timeout(function(){
-      return $scope.postSubmitted();
-    }, 2000);
+    return $scope.allpay(payload);
   };
   $scope.allpay = function(payload){
     return $http({
