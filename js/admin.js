@@ -54,7 +54,16 @@ x$.controller('status', ['$scope', '$http', 'stateIndicator'].concat(function($s
 x$.controller('order', ['$scope', '$http', 'stateIndicator', '$timeout'].concat(function($scope, $http, stateIndicator, $timeout){
   $scope.state = stateIndicator.init();
   $http.get('/d/order').success(function(d){
-    return $scope.order = d;
+    $scope.order = d;
+    return $scope.order.sort(function(a, b){
+      if (a > b) {
+        return -1;
+      } else if (a === b) {
+        return 0;
+      } else {
+        return 1;
+      }
+    });
   });
   $scope.show = function(order){
     $scope.corder = order;
@@ -67,7 +76,6 @@ x$.controller('order', ['$scope', '$http', 'stateIndicator', '$timeout'].concat(
   return $scope.ship = function(order){
     var payload;
     $scope.state.loading();
-    console.log(order);
     payload = {
       MerchantTradeNo: order.init.MerchantTradeNo
     };
@@ -83,6 +91,7 @@ x$.controller('order', ['$scope', '$http', 'stateIndicator', '$timeout'].concat(
         method: 'POST',
         data: JSON.stringify(payload)
       }).success(function(d){
+        order.state = 3;
         return $scope.state.done();
       }).error(function(e){
         return $scope.state.fail();

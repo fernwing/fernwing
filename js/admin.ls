@@ -25,13 +25,14 @@ angular.module \main
   ..controller \order, <[$scope $http stateIndicator $timeout]> ++ ($scope, $http, stateIndicator, $timeout) ->
     $scope.state = stateIndicator.init!
     $http.get \/d/order
-    .success (d) -> $scope.order = d
+    .success (d) -> 
+      $scope.order = d
+      $scope.order.sort ((a,b) -> if a > b => -1 else if a==b => 0 else 1)
     $scope.show = (order) -> 
       $scope.corder = order
       setTimeout ( -> $ \#order-detail-modal .modal show: true), 100
     $scope.ship = (order) ->
       $scope.state.loading!
-      console.log order
       payload = {MerchantTradeNo: order.init.MerchantTradeNo}
       $http do
         url: \/d/debug/genmac
@@ -44,7 +45,9 @@ angular.module \main
           url: \/d/order/ship
           method: \POST
           data: JSON.stringify(payload)
-        .success (d) -> $scope.state.done!
+        .success (d) -> 
+          order.state = 3
+          $scope.state.done!
         .error (e) -> $scope.state.fail!
       .error (e) -> $scope.state.fail!
 
