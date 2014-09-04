@@ -11,8 +11,8 @@ x$.factory('allpay', function(){
       TotalAmount: "100",
       TradeDesc: "測試",
       ItemName: "testitem1",
-      ReturnURL: "http://staging.fernwing.com/api/paidnotify",
-      OrderResultURL: "http://staging.fernwing.com/api/order",
+      ReturnURL: "https://www.fernwing.com/api/paidnotify",
+      OrderResultURL: "https://www.fernwing.com/api/order",
       PaymentInfoURL: "",
       ChoosePayment: "ALL",
       CheckMacValue: ""
