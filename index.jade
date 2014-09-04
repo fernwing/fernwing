@@ -213,7 +213,7 @@ block bare-content
               .col-sm-6: .form-group(ng-class="fix('email')")
                 +valid-label("orderform","email", "電子郵件信箱", "電子郵件信箱")
                 input.form-control(type="email",placeholder="例如：john@mail.tw ( 訂單會同時以信件寄給您 )",
-                  ng-disabled="user || !want || state!=0",name="email",ng-model="email",required)
+                  ng-disabled="!want || state!=0",name="email",ng-model="email",required)
               //-.col-sm-4(ng-show="!user"): .form-group(ng-class="fix('password')")
                 +valid-label("orderform","password","密碼", "密碼")
                 input.form-control(type="password",placeholder="用於確認或修改訂單",
