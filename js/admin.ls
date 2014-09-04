@@ -5,6 +5,13 @@ angular.module \main
     total: (v) -> v.total = @list.map(-> parseInt v[it]).reduce(((a,b) -> a + b), 0)
   ..filter \orderState, -> (input) -> <[建立中 待付款 已付款 已出貨]>[input]
 
+  ..controller \notify, <[$scope $http]> ++ ($scope, $http) ->
+    $scope.notify = []
+    $http do
+      url: \/d/notify
+      method: \GET
+    .success (d) -> $scope.notify = d
+    .error (e) -> console.error e
   ..controller \status, <[$scope $http stateIndicator]> ++ ($scope, $http, stateIndicator) ->
     $scope.state = stateIndicator.init!
     $scope.status = {status: -1}
