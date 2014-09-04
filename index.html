@@ -304,7 +304,7 @@
                           </div></span>
                         <div ng-show="!orderform.email.$invalid" class="text-success"><i class="glyphicon glyphicon-ok-sign"></i></div>
                       </label>
-                      <input type="email" placeholder="例如：john@mail.tw ( 訂單會同時以信件寄給您 )" ng-disabled="user || !want || state!=0" name="email" ng-model="email" required class="form-control">
+                      <input type="email" placeholder="例如：john@mail.tw ( 訂單會同時以信件寄給您 )" ng-disabled="!want || state!=0" name="email" ng-model="email" required class="form-control">
                     </div>
                   </div>
                 </div><br>
