@@ -26,6 +26,17 @@ x$.filter('orderState', function(){
     return ['建立中', '待付款', '已付款', '已出貨'][input];
   };
 });
+x$.controller('notify', ['$scope', '$http'].concat(function($scope, $http){
+  $scope.notify = [];
+  return $http({
+    url: '/d/notify',
+    method: 'GET'
+  }).success(function(d){
+    return $scope.notify = d;
+  }).error(function(e){
+    return console.error(e);
+  });
+}));
 x$.controller('status', ['$scope', '$http', 'stateIndicator'].concat(function($scope, $http, stateIndicator){
   $scope.state = stateIndicator.init();
   $scope.status = {
