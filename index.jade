@@ -283,6 +283,7 @@ block bare-content
                 button.btn.btn-danger.btn-block.btn-lg(type="submit",ng-disabled="!priceTotal() || !want || state!=0",ng-click="submit(0)") ATM、超商付款或信用卡
                 | * 若選此項，將連至歐付寶繼續下一步
             br
+            #order-complete-anchor
             #ssl
               img(src="img/SSL.png",style="width:64px")
               div(style="display:inline-block;vertical-align:middle")
@@ -294,8 +295,8 @@ block bare-content
             #order-complete(ng-show="state==2")
               h3
                 i.glyphicon.glyphicon-ok
-                |  訂購完成，感謝您的訂購！
-              p 我們同時寄送了一封訂購明細至您所提供的信箱，以便您確認訂購內容。
+                |  訂購完成！
+              p 感謝您的訂購！我們同時寄送了一封訂購明細至您所提供的信箱，以便您確認訂購內容。
               //-button.btn.btn-default(type="submit",ng-disabled="true",ng-click="submit()",ng-show="state==2") 訂購完成!
               button.btn.btn-success(type="submit",ng-click="clearForm()") 想要再多買幾個嗎？按我追加
             br

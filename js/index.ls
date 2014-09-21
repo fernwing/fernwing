@@ -98,11 +98,24 @@ angular.module \main
       .error (d) ->
     $scope.clearForm = ->
       $scope{name,addr,email,password,phone,payment} = name: "", addr: "", email: "", password: "", phone: "", payment: "1"
+      $scope.count = {red: 0, green: 0, cyan: 0, purple: 0, magenta: 0, black: 0}
       if $scope.user => $scope.email = $scope.user.email
       $scope.state = 0
+      target = $(\#order)
+      setTimeout ->
+        if target.length => $("html,body").animate(do
+          scrollTop: target.offset!top
+        , 500)
+      , 100
 
     $scope.post-submitted = ->
       $scope.state = 2
+      target = $(\#order-complete-anchor)
+      setTimeout ->
+        if target.length => $("html,body").animate(do
+          scrollTop: target.offset!top
+        , 500)
+      , 100
     $scope.submit = (paytype) ->
       #if not ($scope.name and $scope.addr and $scope.email and ($scope.user or $scope.password) and $scope.phone and $scope.priceTotal()) =>
       if not ($scope.name and $scope.addr and $scope.email and $scope.phone and $scope.priceTotal()) =>

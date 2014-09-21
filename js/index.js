@@ -185,7 +185,7 @@ x$.controller('main', function($scope, $http, $timeout, allpay, context){
     }
   };
   $scope.clearForm = function(){
-    var ref$;
+    var ref$, target;
     ref$ = {
       name: "",
       addr: "",
@@ -194,13 +194,38 @@ x$.controller('main', function($scope, $http, $timeout, allpay, context){
       phone: "",
       payment: "1"
     }, $scope.name = ref$.name, $scope.addr = ref$.addr, $scope.email = ref$.email, $scope.password = ref$.password, $scope.phone = ref$.phone, $scope.payment = ref$.payment;
+    $scope.count = {
+      red: 0,
+      green: 0,
+      cyan: 0,
+      purple: 0,
+      magenta: 0,
+      black: 0
+    };
     if ($scope.user) {
       $scope.email = $scope.user.email;
     }
-    return $scope.state = 0;
+    $scope.state = 0;
+    target = $('#order');
+    return setTimeout(function(){
+      if (target.length) {
+        return $("html,body").animate({
+          scrollTop: target.offset().top
+        }, 500);
+      }
+    }, 100);
   };
   $scope.postSubmitted = function(){
-    return $scope.state = 2;
+    var target;
+    $scope.state = 2;
+    target = $('#order-complete-anchor');
+    return setTimeout(function(){
+      if (target.length) {
+        return $("html,body").animate({
+          scrollTop: target.offset().top
+        }, 500);
+      }
+    }, 100);
   };
   $scope.submit = function(paytype){
     var payload;
