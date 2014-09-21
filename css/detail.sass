@@ -14,10 +14,12 @@
       position: relative
       z-index: index($order, detail-img)
       background-size: cover
+      background-position: center center
       border-radius: 5px
     &:before
       content: " "
-      display: block
+      //-display: block
+      display: none
       position: absolute
       z-index: index($order, detail-bk)
       top: 0
@@ -112,6 +114,7 @@
       .img
         width: 100%
         border-radius: 0
+        height: 200px
       .title
         position: absolute
         margin-top: -50px
@@ -122,5 +125,8 @@
         padding: 5px
     .item#spec:before
       width: 100%
+    .item#spec
+      height: 240px
+      box-shadow: none
     .item:hover .img, .item:hover:before
       border-radius: 0

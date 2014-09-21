@@ -2,7 +2,8 @@ extends layout
 mixin order-choice(color)
   .choice(ng-class="{'soldout':!avail."+color+"}"): .ib
     .price
-      span 每個 {{price.#{color}}} 元
+      span(ng-show="!count."+color) 每個 
+      span {{price.#{color}}} 元
       span(ng-show="count."+color)  x {{count.#{color}}} = {{price.#{color} * count.#{color}}} 元
     .color(class=color)
     select.form-control(class=color,ng-disabled="!avail."+color,name="count_"+color,ng-model="count."+color,ng-options="v for v in choicelist['"+color+"']")
@@ -41,9 +42,9 @@ block bare-content
     #gallery-xs
       img(src="/img/gallery/320/01.jpg")
       img(src="/img/gallery/320/07.jpg")
-      img(src="/img/gallery/320/02.jpg")
+      //-img(src="/img/gallery/320/02.jpg")
       img(src="/img/gallery/320/06.jpg")
-      img(src="/img/gallery/320/04.jpg")
+      //-img(src="/img/gallery/320/04.jpg")
       img(src="/img/gallery/320/05.jpg")
     br.clear
     br.clear
@@ -65,7 +66,13 @@ block bare-content
               .feature-icon.delay-bk(delay-bk="/img/feature/a.png")
               .feature-icon.delay-bk(delay-bk="/img/feature/a-2.png")
             h3 極舒適
-            p 
+            p.visible-xs
+              | 一般輕量背包常在背負系統妥協而影響舒適性，但是
+              b 蕨之翼
+              | 在輕量化時仍使用
+              b 透氣可調式肩帶
+              | ，讓你即使日常使用也不會有額外負擔。
+            p.hidden-xs 
               | 一般輕量化背包為了減少重量會在背負系統妥協而影響舒適性，然而
               b 蕨休閒背包
               | 在輕量化的同時仍使用
@@ -76,7 +83,13 @@ block bare-content
               .feature-icon.delay-bk(delay-bk="/img/feature/b.png")
               .feature-icon.delay-bk(delay-bk="/img/feature/b-2.png")
             h3 超輕量
-            p 
+            p.visible-xs
+              | 僅
+              b  300 公克
+              | - 比一盒
+              b  鋁箔包
+              |  還輕，收納後就如手掌大，節省家中空間與行李箱容量，無論旅遊、通勤、甚至上賣場，沒有理由不將他帶上。
+            p.hidden-xs 
               | 重量不到
               b 300 克
               | ，甚至比一盒
@@ -89,7 +102,15 @@ block bare-content
               .feature-icon.delay-bk(delay-bk="/img/feature/c.png")
               .feature-icon.delay-bk(delay-bk="/img/feature/c-2.png")
             h3 高機能性
-            p
+            p.visible-xs
+              | 在輕量化的同時仍保有
+              b 雙側袋
+              | 、
+              b 前袋
+              | 以及
+              b 拉鏈帶
+              | ，讓您輕易就找到東西放在哪，現在就把其他機能不良的背包丟了吧。
+            p.hidden-xs
               | 輕量化的同時仍保有
               b 雙側袋
               | 、
@@ -101,40 +122,30 @@ block bare-content
               | 就能取得，現在就把其他機能不良的背包丟了吧。
       #detail
         .item
-          .img.delay-bk(delay-bk="/img/detail/02.jpg")
-          .title 方便的側袋與前袋隔間
+          .img.delay-bk(delay-bk="/img/detail/08.jpg")
+          .title 收納後輕便的體積重量
         .item
           .img.delay-bk(delay-bk="/img/detail/04.jpg")
           .title 透氣且排汗的背包背帶
         .item
+          .img.delay-bk(delay-bk="/img/detail/02.jpg")
+          .title 方便的側袋與前袋隔間
+        .item
           .img.delay-bk(delay-bk="/img/detail/06.jpg")
           .title 背帶可以迅速調整長度
-        .item
+        .item.hidden-xs
           .img.delay-bk(delay-bk="/img/detail/05.jpg")
           .title 易拉的拉鏈並附有拉帶
         .item
           .img.delay-bk(delay-bk="/img/detail/03.jpg")
           .title 增添設計感的背包花紋
-        //-.item.w480
-          .img.delay-bk(delay-bk="/img/detail/11.jpg")
-          .title 彷彿背上翅膀般地輕巧
         .item.w480
           .img.delay-bk(delay-bk="/img/detail/07.jpg")
           .title 適合各式各樣場合使用
-        .item
-          .img.delay-bk(delay-bk="/img/detail/08.jpg")
-          .title 收納後輕便的體積重量
         .item.w1260
           .img.delay-bk(delay-bk="/img/detail/09.jpg")
           .title 多種顏色款式可供選擇
-        //-.item
-          .img.delay-bk(delay-bk="/img/detail/10.jpg")
-          .title 同時兼具機能以及美感
-        //.item.dashed
-          .img: .ib
-            | 想要嗎？
-            br
-            a(href="#order-info") 立刻訂購吧！
+
         .item#spec
           .desc: .ib
             h3
@@ -146,14 +157,14 @@ block bare-content
                 | 重量: 
                 b 199公克
                 | ，三顆蛋的重量
-              li 正常尺寸: 高 36cm / 寬 24cm / 深 14cm
-              li 收納尺寸: 長 19cm / 寬 17cm
+            ul
+              li 尺寸: 高 36cm / 寬 24cm / 深 14cm
+              li 收納後: 長 19cm / 寬 17cm
 
       br.clear
       br
-      br
       #order-info
-      hr
+      hr.hidden-xs
       #notify.shown(ng-show="status.status!=1"): div(ng-controller="notify")
         .ib
           h1.text-center 訂購資訊
@@ -171,7 +182,7 @@ block bare-content
         h2(ng-show="state==1")
           ldstate(ng-model="status.value")
         h2(ng-show="state==2") 感謝您的回饋！
-      #order(ng-show="status.status==1")
+      #order.shown(ng-show="status.status==1")
         .ib
           h2 
             i.glyphicon.glyphicon-phone-alt
@@ -180,8 +191,8 @@ block bare-content
 
           form(name="orderform",novalidate)
             h4
-              i.glyphicon.glyphicon-list-alt
-              |  選擇數量
+              i.glyphicon.glyphicon-shopping-cart
+              |  第一步、選擇數量
             .choices
 
               +order-choice("red")
@@ -194,8 +205,8 @@ block bare-content
             br.clear
             br
             h4
-              i.glyphicon.glyphicon-shopping-cart
-              |  運送資訊
+              i.glyphicon.glyphicon-list-alt
+              |  第二步、運送資訊
             br
             .form-group(ng-class="fix('name')")
               +valid-label("orderform","name", "收件人", "姓名")
@@ -261,7 +272,22 @@ block bare-content
                 |  元
 
             br
-            button.btn.btn-danger.btn-block.btn-lg(type="submit",ng-disabled="!priceTotal() || !want || state!=0",ng-click="submit()",ng-hide="state==2") 選擇付款方式並送出訂單
+            h4
+              i.glyphicon.glyphicon-credit-card
+              |  最後，選擇付款方式完成訂購
+            .row
+              .col-sm-6
+                button.btn.btn-danger.btn-block.btn-lg(type="submit",ng-disabled="!priceTotal() || !want || state!=0",ng-click="submit(1)",ng-hide="state==2") 貨到付款
+                br
+              .col-sm-6
+                button.btn.btn-danger.btn-block.btn-lg(type="submit",ng-disabled="!priceTotal() || !want || state!=0",ng-click="submit(2)",ng-hide="state==2") ATM、超商付款或信用卡
+                | * 若選此項，將連至歐付寶繼續下一步
+            br
+            img(src="img/SSL.png",style="width:64px")
+            div(style="display:inline-block;vertical-align:middle")
+              | 我們使用 SSL 連線，
+              br
+              | 保障您的資料安全
             .text-danger(ng-show="fix('name') || fix('addr') || fix('email') || fix('password') || fix('phone')")
               | 您所填的資料有點問題，請修正後重新送出
             button.btn.btn-default(type="submit",ng-disabled="true",ng-click="submit()",ng-show="state==2") 訂購完成!
@@ -298,7 +324,9 @@ block bare-content
         img(src="/img/logo/icon-black.png")
         |  聯絡我們
       p
-        | 有任何訂購或商品上的問題，歡迎您寫信與我們聯絡，來信請寄至客服信箱 contact@fernwing.com ，我們會在 48 小時之內回覆您。
+        | 有任何訂購或商品上的問題，歡迎您寫信與我們聯絡，來信請寄至客服信箱 
+        a(href="mailto:contact@fernwing.com") contact@fernwing.com
+        |  ，我們會在 48 小時之內回覆您。
       br
       br
     //-#about: .ib

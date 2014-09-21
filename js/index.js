@@ -261,7 +261,6 @@ x$.controller('main', function($scope, $http, $timeout, allpay, context){
     }
     if (t > $scope.st['#order-info'] - h / 2 && !shown) {
       shown = true;
-      $('#order').addClass('shown');
       ga('send', 'event', 'form', 'reach');
     }
     for (i$ = 0, len$ = (ref$ = $scope.anchor).length; i$ < len$; ++i$) {

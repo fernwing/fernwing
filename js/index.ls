@@ -154,7 +154,7 @@ angular.module \main
         $('#feature .feature').add-class \zoom
       if t > $scope.st['#order-info'] - (h/2) and !shown =>
         shown := true
-        $('#order').add-class \shown
+        #$('#order').add-class \shown
         ga \send, \event, \form, \reach
       for item in $scope.anchor =>
         if t > $scope.st[item] and !$scope.reach[item] =>
