@@ -228,28 +228,24 @@ span.red {
 
   100% {
     opacity: 0; } }
-
 @-moz-keyframes blink {
   0% {
     opacity: 1; }
 
   100% {
     opacity: 0; } }
-
 @-ms-keyframes blink {
   0% {
     opacity: 1; }
 
   100% {
     opacity: 0; } }
-
 @keyframes blink {
   0% {
     opacity: 1; }
 
   100% {
     opacity: 0; } }
-
 #banner-golook {
   position: absolute;
   bottom: 10px;
@@ -839,6 +835,8 @@ span.red {
     width: 48%;
     margin: 2px 0;
     height: 160px; }
+    #order .choice .price {
+      bottom: 0; }
     #order .choice .ib {
       margin: 0;
       height: 160px; }
@@ -918,7 +916,6 @@ span.red {
 
   100% {
     opacity: 0; } }
-
 @-moz-keyframes fadeout {
   0% {
     opacity: 1; }
@@ -928,7 +925,6 @@ span.red {
 
   100% {
     opacity: 0; } }
-
 @-ms-keyframes fadeout {
   0% {
     opacity: 1; }
@@ -938,7 +934,6 @@ span.red {
 
   100% {
     opacity: 0; } }
-
 @keyframes fadeout {
   0% {
     opacity: 1; }
@@ -948,7 +943,6 @@ span.red {
 
   100% {
     opacity: 0; } }
-
 .state-indicator {
   display: inline;
   font-size: 16px;

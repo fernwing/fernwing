@@ -53,7 +53,7 @@ block bare-content
     #content
       #feature
         div.text-center
-          .btn.btn-danger.btn-lg 心動了嗎？點我訂購
+          a.btn.btn-danger.btn-lg(href="#order-info") 心動了嗎？點我訂購
         .wing.delay-bk#wing-feature(delay-bk="/img/wing.png")
         br
         h2 滿足您對背包的期待與渴望
@@ -271,7 +271,7 @@ block bare-content
             p * 商品訂購後將於 5 ~ 7 天內出貨
 
         //-form#allpayform(action="http://payment-stage.allpay.com.tw/AioHelper/GenCheckMacValue",method="POST")
-        form#allpayform(action="http://payment-stage.allpay.com.tw/Cashier/AioCheckOut",method="POST")
+        form#allpayform(action="https://payment.allpay.com.tw/Cashier/AioCheckOut",method="POST")
           input.form-control(type="hidden",name="MerchantID",ng-value="allPayData.MerchantID")
           input.form-control(type="hidden",name="MerchantTradeNo",ng-value="allPayData.MerchantTradeNo")
           input.form-control(type="hidden",name="MerchantTradeDate",ng-value="allPayData.MerchantTradeDate")
