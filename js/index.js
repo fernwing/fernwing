@@ -202,7 +202,7 @@ x$.controller('main', function($scope, $http, $timeout, allpay, context){
   $scope.postSubmitted = function(){
     return $scope.state = 2;
   };
-  $scope.submit = function(onarrive){
+  $scope.submit = function(paytype){
     var payload;
     if (!($scope.name && $scope.addr && $scope.email && $scope.phone && $scope.priceTotal())) {
       return $scope.needFix = true, $scope.state = 0, $scope;
@@ -214,12 +214,12 @@ x$.controller('main', function($scope, $http, $timeout, allpay, context){
       email: $scope.email,
       addr: $scope.addr,
       phone: $scope.phone,
-      count: $scope.count,
-      onarrive: $scope.onarrive
+      count: $scope.count
     };
-    return $scope.allpay(payload, onarrive);
+    payload.paytype = paytype;
+    return $scope.allpay(payload);
   };
-  $scope.allpay = function(payload, onarrive){
+  $scope.allpay = function(payload){
     return $http({
       url: '/d/order/init',
       method: 'POST',
@@ -228,7 +228,7 @@ x$.controller('main', function($scope, $http, $timeout, allpay, context){
       },
       data: payload
     }).success(function(d){
-      if (onarrive) {
+      if (payload.paytype !== 0) {
         return $timeout($scope.postSubmitted, 1000);
       }
       console.log("payload information (to allpay): " + d);

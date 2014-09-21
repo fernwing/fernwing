@@ -3,7 +3,7 @@ angular.module \main
     list: <[red green cyan purple magenta black]>
     hash: red: 0, green: 0, cyan: 0, purple: 0, magenta: 0, black: 0
     total: (v) -> v.total = @list.map(-> parseInt v[it]).reduce(((a,b) -> a + b), 0)
-  ..filter \orderState, -> (input) -> <[建立中 待付款 已付款 已出貨]>[input]
+  ..filter \orderState, -> (input) -> <[建立中 待付款 已付款 已出貨 貨到付]>[input]
 
   ..controller \notify, <[$scope $http]> ++ ($scope, $http) ->
     $scope.notify = []

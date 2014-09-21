@@ -23,7 +23,7 @@ x$.factory('color', function(){
 });
 x$.filter('orderState', function(){
   return function(input){
-    return ['建立中', '待付款', '已付款', '已出貨'][input];
+    return ['建立中', '待付款', '已付款', '已出貨', '貨到付'][input];
   };
 });
 x$.controller('notify', ['$scope', '$http'].concat(function($scope, $http){

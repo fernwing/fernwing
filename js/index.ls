@@ -103,7 +103,7 @@ angular.module \main
 
     $scope.post-submitted = ->
       $scope.state = 2
-    $scope.submit = (onarrive) ->
+    $scope.submit = (paytype) ->
       #if not ($scope.name and $scope.addr and $scope.email and ($scope.user or $scope.password) and $scope.phone and $scope.priceTotal()) =>
       if not ($scope.name and $scope.addr and $scope.email and $scope.phone and $scope.priceTotal()) =>
         return $scope <<< {need-fix: true, state: 0}
@@ -117,19 +117,20 @@ angular.module \main
       #  .success (d) -> $scope.user = d
       #  .error (d) ->
 
-      payload = $scope{name, email, addr, phone, count, onarrive}
+      payload = $scope{name, email, addr, phone, count}
+      payload.paytype = paytype
       #ga \send, \event, \form, \submit
-      $scope.allpay payload, onarrive
+      $scope.allpay payload
       #$timeout ( -> $scope.post-submitted! ), 2000
 
-    $scope.allpay = (payload, onarrive) ->
+    $scope.allpay = (payload) ->
       $http do
         url: \/d/order/init
         method: \POST
         headers: "Content-Type": "application/json"
         data: payload
       .success (d) ->
-        if onarrive => return $timeout $scope.post-submitted, 1000
+        if payload.paytype!=0 => return $timeout $scope.post-submitted, 1000
         console.log "payload information (to allpay): #d"
         $scope.allPayData = d
         $timeout (-> $(\#allpayform).submit!), 100
