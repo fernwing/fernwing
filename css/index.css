@@ -746,6 +746,9 @@ span.red {
 #orderlist td {
   padding: 2px 10px 2px 0; }
 
+#order-complete {
+  margin-top: 40px; }
+
 #order .choices {
   text-align: center;
   width: 100%;

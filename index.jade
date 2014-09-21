@@ -277,21 +277,27 @@ block bare-content
               |  最後，選擇付款方式完成訂購
             .row
               .col-sm-6
-                button.btn.btn-danger.btn-block.btn-lg(type="submit",ng-disabled="!priceTotal() || !want || state!=0",ng-click="submit(1)",ng-hide="state==2") 貨到付款
+                button.btn.btn-danger.btn-block.btn-lg(type="submit",ng-disabled="!priceTotal() || !want || state!=0",ng-click="submit(1)") 貨到付款
                 br
               .col-sm-6
-                button.btn.btn-danger.btn-block.btn-lg(type="submit",ng-disabled="!priceTotal() || !want || state!=0",ng-click="submit(2)",ng-hide="state==2") ATM、超商付款或信用卡
+                button.btn.btn-danger.btn-block.btn-lg(type="submit",ng-disabled="!priceTotal() || !want || state!=0",ng-click="submit(2)") ATM、超商付款或信用卡
                 | * 若選此項，將連至歐付寶繼續下一步
             br
-            img(src="img/SSL.png",style="width:64px")
-            div(style="display:inline-block;vertical-align:middle")
-              | 我們使用 SSL 連線，
-              br
-              | 保障您的資料安全
+            #ssl
+              img(src="img/SSL.png",style="width:64px")
+              div(style="display:inline-block;vertical-align:middle")
+                | 我們使用 SSL 連線，
+                br
+                | 保障您的資料安全
             .text-danger(ng-show="fix('name') || fix('addr') || fix('email') || fix('password') || fix('phone')")
               | 您所填的資料有點問題，請修正後重新送出
-            button.btn.btn-default(type="submit",ng-disabled="true",ng-click="submit()",ng-show="state==2") 訂購完成!
-            button.btn.btn-success(type="submit",ng-click="clearForm()",ng-show="state==2") 我要追加
+            #order-complete(ng-show="state==2")
+              h3
+                i.glyphicon.glyphicon-ok
+                |  訂購完成，感謝您的訂購！
+              p 我們同時寄送了一封訂購明細至您所提供的信箱，以便您確認訂購內容。
+              //-button.btn.btn-default(type="submit",ng-disabled="true",ng-click="submit()",ng-show="state==2") 訂購完成!
+              button.btn.btn-success(type="submit",ng-click="clearForm()") 想要再多買幾個嗎？按我追加
             br
             br
             p * 商品訂購後將於 5 ~ 7 天內出貨
