@@ -825,7 +825,9 @@ span.red {
 #order .choice.soldout .color {
   -webkit-filter: saturate(0);
   filter: saturate(0);
-  opacity: 0.5; }
+  opacity: 0.6; }
+  #order .choice.soldout .color:before {
+    display: none; }
   #order .choice.soldout .color:after {
     content: "已售完";
     display: block;
@@ -869,7 +871,9 @@ span.red {
           font-size: 0.8em;
           line-height: 1.6em;
           padding: 1px 0;
-          width: 30px; } }
+          width: 30px; }
+        #order .choice .ib .color:after {
+          width: 36px; } }
 .radio label {
   vertical-align: middle; }
 

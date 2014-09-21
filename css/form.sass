@@ -111,7 +111,9 @@
   .choice.soldout
     .color
       @include filter(saturate(0))
-      opacity: 0.5
+      opacity: 0.6
+      &:before
+        display: none
       &:after
         content: "已售完"
         display: block
@@ -157,6 +159,8 @@
             line-height: 1.6em
             padding: 1px 0
             width: 30px
+          &:after
+            width: 36px
 
 .radio label
   vertical-align: middle
