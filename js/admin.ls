@@ -38,6 +38,26 @@ angular.module \main
     $scope.show = (order) -> 
       $scope.corder = order
       setTimeout ( -> $ \#order-detail-modal .modal show: true), 100
+    $scope.hide = (order) ->
+      $scope.state.loading!
+      payload = {MerchantTradeNo: order.init.MerchantTradeNo, hide: !!!order.hide}
+      $http do
+        url: \/d/debug/genmac
+        method: \POST
+        data: JSON.stringify(payload)
+      .success (d) ->
+        payload.CheckMacValue = d
+        console.log payload
+        $http do
+          url: if order.hide => \/d/order/show else \/d/order/hide
+          method: \POST
+          data: JSON.stringify(payload)
+        .success (d) ->
+          order.hide = !!!order.hide
+          $scope.state.done!
+        .error (e) -> $scope.state.fail!
+      .error (e) -> $scope.state.fail!
+
     $scope.ship = (order) ->
       $scope.state.loading!
       payload = {MerchantTradeNo: order.init.MerchantTradeNo}

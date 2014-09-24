@@ -30,8 +30,8 @@ angular.module \main
       
     # TODO this should not be here.
     hash: do
-      key: "5294y06JbISpM5x9"
-      iv: "v77hoKGq4kWxNNIS"
+      key: ""
+      iv: ""
     _encode: (data) -> data
     encode: (data) ->
       list = []

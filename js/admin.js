@@ -84,6 +84,34 @@ x$.controller('order', ['$scope', '$http', 'stateIndicator', '$timeout'].concat(
       });
     }, 100);
   };
+  $scope.hide = function(order){
+    var payload;
+    $scope.state.loading();
+    payload = {
+      MerchantTradeNo: order.init.MerchantTradeNo,
+      hide: !order.hide
+    };
+    return $http({
+      url: '/d/debug/genmac',
+      method: 'POST',
+      data: JSON.stringify(payload)
+    }).success(function(d){
+      payload.CheckMacValue = d;
+      console.log(payload);
+      return $http({
+        url: order.hide ? '/d/order/show' : '/d/order/hide',
+        method: 'POST',
+        data: JSON.stringify(payload)
+      }).success(function(d){
+        order.hide = !order.hide;
+        return $scope.state.done();
+      }).error(function(e){
+        return $scope.state.fail();
+      });
+    }).error(function(e){
+      return $scope.state.fail();
+    });
+  };
   return $scope.ship = function(order){
     var payload;
     $scope.state.loading();

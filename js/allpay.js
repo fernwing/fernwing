@@ -34,8 +34,8 @@ x$.factory('allpay', function(){
       return y + "/" + M + "/" + d + " " + h + ":" + m + ":" + s;
     },
     hash: {
-      key: "5294y06JbISpM5x9",
-      iv: "v77hoKGq4kWxNNIS"
+      key: "",
+      iv: ""
     },
     _encode: function(data){
       return data;
