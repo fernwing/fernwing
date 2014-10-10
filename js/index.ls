@@ -13,15 +13,6 @@ angular.module \main
         , 1000)
         false
 
-  ..directive \delayBk, -> do
-    restrict: \A
-    link: (scope, e, attrs, ctrl) ->
-      url = attrs["delayBk"]
-      $ \<img/> .attr \src url .load ->
-        $(@)remove!
-        e.css "background-image": "url(#url)"
-        setTimeout (-> e.toggle-class \visible), 100
-
   ..controller \notify, <[$scope $timeout stateIndicator $http]> ++ ($scope, $timeout, stateIndicator, $http) ->
     $scope.need-fix = false
     $scope.state = 0

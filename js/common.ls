@@ -21,4 +21,4 @@ angular.module \ld.common, <[]>
       $ \<img/> .attr \src url .load ->
         $(@)remove!
         e.css "background-image": "url(#url)"
-        setTimeout (->e.addClass \visible), 500
+        e.addClass \visible

@@ -21,24 +21,6 @@ x$.config(function(){
     }
   });
 });
-x$.directive('delayBk', function(){
-  return {
-    restrict: 'A',
-    link: function(scope, e, attrs, ctrl){
-      var url;
-      url = attrs["delayBk"];
-      return $('<img/>').attr('src', url).load(function(){
-        $(this).remove();
-        e.css({
-          "background-image": "url(" + url + ")"
-        });
-        return setTimeout(function(){
-          return e.toggleClass('visible');
-        }, 100);
-      });
-    }
-  };
-});
 x$.controller('notify', ['$scope', '$timeout', 'stateIndicator', '$http'].concat(function($scope, $timeout, stateIndicator, $http){
   $scope.needFix = false;
   $scope.state = 0;

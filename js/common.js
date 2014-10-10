@@ -44,9 +44,7 @@ x$.directive('delayBk', function(){
         e.css({
           "background-image": "url(" + url + ")"
         });
-        return setTimeout(function(){
-          return e.addClass('visible');
-        }, 500);
+        return e.addClass('visible');
       });
     }
   };
