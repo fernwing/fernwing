@@ -148,9 +148,19 @@ angular.module \main
     zoomed = false
     shown = false
     $scope.st = {}
-    $scope.anchor = <[wing-feature order order-info about gallery]>
+    $scope.anchor = <[ship-info feature-trilogy detail spec wing-feature order order-info about gallery]>
     $scope.anchor.map -> $scope.st["\##it"] = ($("\##it").offset! or {})top
     $scope.reach = {}
+    $scope.$watch 'count', (->
+      c = [it[k] for k of it]reduce(((a,b)->a+b),0)
+      if !c or $scope.reach["-form-count"] => return
+      $scope.reach["-form-count"] = true
+      ga \send, \event, \form, \choose-count
+    ), true
+    $scope.$watch 'name', ->
+      if !it or $scope.reach["-form-name"] => return
+      $scope.reach["-form-name"] = true
+      ga \send, \event, \form, \fill-name
     $(window)scroll (e) ->
       h = $(window)height!
       t = $(window)scroll-top!
@@ -163,7 +173,8 @@ angular.module \main
         #$('#order').add-class \shown
         ga \send, \event, \form, \reach
       for item in $scope.anchor =>
-        if t > $scope.st[item] and !$scope.reach[item] =>
+        if t > $scope.st["\##item"] - (h/2) and !$scope.reach[item] =>
+          $scope.reach[item] = true
           ga \send, \event, \scroll, item
     count = 100
     x = new Array count

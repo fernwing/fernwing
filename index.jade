@@ -55,7 +55,7 @@ block bare-content
       #feature
         div.text-center
           a.btn.btn-danger.btn-lg(href="#order-info") 心動了嗎？點我訂購
-        .wing.delay-bk#wing-feature(delay-bk="/img/wing.png")
+        .wing.delay-bk#wing-feature.hidden-xs(delay-bk="/img/wing.png")
         br
         h2 滿足您對背包的期待與渴望
         br
@@ -65,7 +65,7 @@ block bare-content
             .feature
               .feature-icon.delay-bk(delay-bk="/img/feature/a.png")
               .feature-icon.delay-bk(delay-bk="/img/feature/a-2.png")
-            h3 極舒適
+            h3#feature-trilogy 極舒適
             p.visible-xs
               | 一般輕量背包常在背負系統妥協而影響舒適性，但是
               b 蕨之翼
@@ -130,7 +130,7 @@ block bare-content
         .item
           .img.delay-bk(delay-bk="/img/detail/02.jpg")
           .title 方便的側袋與前袋隔間
-        .item
+        .item.hidden-xs
           .img.delay-bk(delay-bk="/img/detail/06.jpg")
           .title 背帶可以迅速調整長度
         .item.hidden-xs
@@ -187,6 +187,7 @@ block bare-content
           h2 
             i.glyphicon.glyphicon-phone-alt
             |  現在就訂購！
+          .text-center 蕨之翼採貨到付款，安全有保障
           br
 
           form(name="orderform",novalidate)
@@ -204,7 +205,7 @@ block bare-content
 
             br.clear
             br
-            h4
+            h4#ship-info
               i.glyphicon.glyphicon-list-alt
               |  第二步、運送資訊
             br
@@ -274,14 +275,19 @@ block bare-content
             br
             h4
               i.glyphicon.glyphicon-credit-card
-              |  最後，選擇付款方式完成訂購
+              |  最後，選擇貨物送達時間
             .row
               .col-sm-6
-                button.btn.btn-danger.btn-block.btn-lg(type="submit",ng-disabled="!priceTotal() || !want || state!=0",ng-click="submit(1)") 貨到付款
+                button.btn.btn-danger.btn-block.btn-lg(type="submit",ng-disabled="!priceTotal() || !want || state!=0",ng-click="submit(1)")
+                  | 貨到付款
+                  | - 白天 09:00 ~ 18:00
                 br
               .col-sm-6
-                button.btn.btn-danger.btn-block.btn-lg(type="submit",ng-disabled="!priceTotal() || !want || state!=0",ng-click="submit(0)") ATM、超商付款或信用卡
-                | * 若選此項，將連至歐付寶繼續下一步
+                button.btn.btn-danger.btn-block.btn-lg(type="submit",ng-disabled="!priceTotal() || !want || state!=0",ng-click="submit(2)")
+                  | 貨到付款
+                  | - 晚上 18:00 ~ 21:00
+                //- button.btn.btn-danger.btn-block.btn-lg(type="submit",ng-disabled="!priceTotal() || !want || state!=0",ng-click="submit(0)") ATM、超商付款或信用卡
+                //- | * 若選此項，將連至歐付寶繼續下一步
             br
             #order-complete-anchor
             #ssl

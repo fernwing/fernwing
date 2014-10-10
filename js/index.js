@@ -256,11 +256,35 @@ x$.controller('main', function($scope, $http, $timeout, allpay, context){
   zoomed = false;
   shown = false;
   $scope.st = {};
-  $scope.anchor = ['wing-feature', 'order', 'order-info', 'about', 'gallery'];
+  $scope.anchor = ['ship-info', 'feature-trilogy', 'detail', 'spec', 'wing-feature', 'order', 'order-info', 'about', 'gallery'];
   $scope.anchor.map(function(it){
     return $scope.st["#" + it] = ($("#" + it).offset() || {}).top;
   });
   $scope.reach = {};
+  $scope.$watch('count', function(it){
+    var c, k;
+    c = (function(){
+      var results$ = [];
+      for (k in it) {
+        results$.push(it[k]);
+      }
+      return results$;
+    }()).reduce(function(a, b){
+      return a + b;
+    }, 0);
+    if (!c || $scope.reach["-form-count"]) {
+      return;
+    }
+    $scope.reach["-form-count"] = true;
+    return ga('send', 'event', 'form', 'choose-count');
+  }, true);
+  $scope.$watch('name', function(it){
+    if (!it || $scope.reach["-form-name"]) {
+      return;
+    }
+    $scope.reach["-form-name"] = true;
+    return ga('send', 'event', 'form', 'fill-name');
+  });
   $(window).scroll(function(e){
     var h, t, i$, ref$, len$, item, results$ = [];
     h = $(window).height();
@@ -276,7 +300,8 @@ x$.controller('main', function($scope, $http, $timeout, allpay, context){
     }
     for (i$ = 0, len$ = (ref$ = $scope.anchor).length; i$ < len$; ++i$) {
       item = ref$[i$];
-      if (t > $scope.st[item] && !$scope.reach[item]) {
+      if (t > $scope.st["#" + item] - h / 2 && !$scope.reach[item]) {
+        $scope.reach[item] = true;
         results$.push(ga('send', 'event', 'scroll', item));
       }
     }

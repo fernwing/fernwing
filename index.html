@@ -86,7 +86,7 @@
         <div id="content">
           <div id="feature">
             <div class="text-center"><a href="#order-info" class="btn btn-danger btn-lg">心動了嗎？點我訂購</a></div>
-            <div id="wing-feature" delay-bk="/img/wing.png" class="wing delay-bk"></div><br>
+            <div id="wing-feature" delay-bk="/img/wing.png" class="wing delay-bk hidden-xs"></div><br>
             <h2>滿足您對背包的期待與渴望</h2><br><br>
             <div class="row">
               <div class="col-sm-4 bl-red">
@@ -94,7 +94,7 @@
                   <div delay-bk="/img/feature/a.png" class="feature-icon delay-bk"></div>
                   <div delay-bk="/img/feature/a-2.png" class="feature-icon delay-bk"></div>
                 </div>
-                <h3>極舒適</h3>
+                <h3 id="feature-trilogy">極舒適</h3>
                 <p class="visible-xs">一般輕量背包常在背負系統妥協而影響舒適性，但是<b>蕨之翼</b>在輕量化時仍使用<b>透氣可調式肩帶</b>，讓你即使日常使用也不會有額外負擔。</p>
                 <p class="hidden-xs">
                    
@@ -137,7 +137,7 @@
               <div delay-bk="/img/detail/02.jpg" class="img delay-bk"></div>
               <div class="title">方便的側袋與前袋隔間</div>
             </div>
-            <div class="item">
+            <div class="item hidden-xs">
               <div delay-bk="/img/detail/06.jpg" class="img delay-bk"></div>
               <div class="title">背帶可以迅速調整長度</div>
             </div>
@@ -204,7 +204,8 @@
           </div>
           <div id="order" ng-show="status.status==1" class="shown">
             <div class="ib">
-              <h2> <i class="glyphicon glyphicon-phone-alt"></i> 現在就訂購！</h2><br>
+              <h2> <i class="glyphicon glyphicon-phone-alt"></i> 現在就訂購！</h2>
+              <div class="text-center">蕨之翼採貨到付款，安全有保障</div><br>
               <form name="orderform" novalidate>
                 <h4><i class="glyphicon glyphicon-shopping-cart"></i> 第一步、選擇數量</h4>
                 <div class="choices">
@@ -263,7 +264,7 @@
                     </div>
                   </div>
                 </div><br class="clear"><br>
-                <h4><i class="glyphicon glyphicon-list-alt"></i> 第二步、運送資訊</h4><br>
+                <h4 id="ship-info"><i class="glyphicon glyphicon-list-alt"></i> 第二步、運送資訊</h4><br>
                 <div ng-class="fix('name')" class="form-group">
                   <label>收件人<span ng-show="needFix &amp;&amp; orderform.name.$invalid"><i class="glyphicon glyphicon-exclamation-sign text-danger"></i>
                       <div ng-show="orderform.name.$error.required" class="text-danger">此欄位爲必填</div>
@@ -321,13 +322,19 @@
                   </div>
                   <div ng-show="priceTotal()" class="total"><i class="glyphicon glyphicon-tag"></i> 此筆訂單的總金額為：<span class="red">{{priceTotal()}} </span> 元</div>
                 </div><br>
-                <h4><i class="glyphicon glyphicon-credit-card"></i> 最後，選擇付款方式完成訂購</h4>
+                <h4><i class="glyphicon glyphicon-credit-card"></i> 最後，選擇貨物送達時間</h4>
                 <div class="row">
                   <div class="col-sm-6">
-                    <button type="submit" ng-disabled="!priceTotal() || !want || state!=0" ng-click="submit(1)" class="btn btn-danger btn-block btn-lg">貨到付款</button><br>
+                    <button type="submit" ng-disabled="!priceTotal() || !want || state!=0" ng-click="submit(1)" class="btn btn-danger btn-block btn-lg">
+                      貨到付款
+                      - 白天 09:00 ~ 18:00
+                    </button><br>
                   </div>
                   <div class="col-sm-6">
-                    <button type="submit" ng-disabled="!priceTotal() || !want || state!=0" ng-click="submit(0)" class="btn btn-danger btn-block btn-lg">ATM、超商付款或信用卡</button>* 若選此項，將連至歐付寶繼續下一步
+                    <button type="submit" ng-disabled="!priceTotal() || !want || state!=0" ng-click="submit(2)" class="btn btn-danger btn-block btn-lg">
+                      貨到付款
+                      - 晚上 18:00 ~ 21:00
+                    </button>
                   </div>
                 </div><br>
                 <div id="order-complete-anchor"></div>
