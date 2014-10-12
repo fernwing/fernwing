@@ -256,7 +256,7 @@ x$.controller('main', function($scope, $http, $timeout, allpay, context){
   zoomed = false;
   shown = false;
   $scope.st = {};
-  $scope.anchor = ['ship-info', 'feature-trilogy', 'detail', 'spec', 'wing-feature', 'order', 'order-info', 'about', 'gallery'];
+  $scope.anchor = ['ship-info', 'feature-trilogy', 'detail', 'spec', 'order-now', 'order', 'order-info', 'about', 'gallery'];
   $scope.anchor.map(function(it){
     return $scope.st["#" + it] = ($("#" + it).offset() || {}).top;
   });
@@ -289,7 +289,7 @@ x$.controller('main', function($scope, $http, $timeout, allpay, context){
     var h, t, i$, ref$, len$, item, results$ = [];
     h = $(window).height();
     t = $(window).scrollTop();
-    if (t > $scope.st['#wing-feature'] - h / 2 && !zoomed) {
+    if (t > $scope.st['#order-now'] - h / 2 && !zoomed) {
       zoomed = true;
       $('#feature img').addClass('zoom');
       $('#feature .feature').addClass('zoom');

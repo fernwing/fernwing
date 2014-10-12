@@ -148,7 +148,7 @@ angular.module \main
     zoomed = false
     shown = false
     $scope.st = {}
-    $scope.anchor = <[ship-info feature-trilogy detail spec wing-feature order order-info about gallery]>
+    $scope.anchor = <[ship-info feature-trilogy detail spec order-now order order-info about gallery]>
     $scope.anchor.map -> $scope.st["\##it"] = ($("\##it").offset! or {})top
     $scope.reach = {}
     $scope.$watch 'count', (->
@@ -164,7 +164,7 @@ angular.module \main
     $(window)scroll (e) ->
       h = $(window)height!
       t = $(window)scroll-top!
-      if t > $scope.st['#wing-feature'] - (h/2) and !zoomed =>
+      if t > $scope.st['#order-now'] - (h/2) and !zoomed =>
         zoomed := true
         $('#feature img').add-class \zoom
         $('#feature .feature').add-class \zoom

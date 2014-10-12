@@ -48,17 +48,17 @@ block bare-content
       img(src="/img/gallery/320/05.jpg")
     br.clear
     br.clear
-    br.clear
   a(name="brief")
   div
     #content
       #feature
         div.text-center
-          a.btn.btn-danger.btn-lg(href="#order-info") 心動了嗎？點我訂購
-        .wing.delay-bk#wing-feature.hidden-xs(delay-bk="/img/wing.png")
-        br
-        h2 滿足您對背包的期待與渴望
-        br
+          a.btn.btn-danger.btn-lg#order-now(href="#order-info") 心動了嗎？點我訂購
+        //.wing.delay-bk#wing-feature.hidden-xs(delay-bk="/img/wing-white.png")
+        h2 
+          span 三個特色，
+          br.visible-xs
+          span 滿足您對背包的期待與渴望
         br
         .row
           .col-sm-4.bl-red
@@ -120,6 +120,8 @@ block bare-content
               | ，妥善的分隔讓你瞬間就能找到東西。水壺雨具在側邊、錢包零錢在前袋，甚至
               b 不需卸下背包
               | 就能取得，現在就把其他機能不良的背包丟了吧。
+      .wing.delay-bk.hidden-xs(delay-bk="/img/wing-white.png")
+      br
       #detail
         .item
           .img.delay-bk(delay-bk="/img/detail/08.jpg")
