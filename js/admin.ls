@@ -36,6 +36,9 @@ angular.module \main
       $scope.order = d
       $scope.order.sort ((a,b) -> if a > b => -1 else if a==b => 0 else 1)
     $scope.show = (order) -> 
+      order.sort (a,b) ->
+        [c,d] = [a,b]map(-> new Date it.init.MerchantTradeDate)
+        return if c > d => -1 else 1
       $scope.corder = order
       setTimeout ( -> $ \#order-detail-modal .modal show: true), 100
     $scope.hide = (order) ->
