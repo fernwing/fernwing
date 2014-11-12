@@ -66,12 +66,24 @@ x$.controller('order', ['$scope', '$http', 'stateIndicator', '$timeout'].concat(
   $scope.state = stateIndicator.init();
   $http.get('/d/order').success(function(d){
     $scope.order = d;
-    return $scope.order.sort(function(a, b){
+    $scope.order.sort(function(a, b){
       var ref$, c, d;
       ref$ = [a, b].map(function(it){
         return new Date((it.init || (it.init = {})).MerchantTradeDate || 0);
       }), c = ref$[0], d = ref$[1];
       return c > d ? -1 : 1;
+    });
+    return $scope.order.map(function(it){
+      if (!it.info) {
+        return;
+      }
+      if (/google/.exec(it.info.referrer)) {
+        return it.info.ref = "G";
+      } else if (/facebook/.exec(it.info.referrer)) {
+        return it.info.ref = "F";
+      } else {
+        return it.info.ref = "-";
+      }
     });
   });
   $scope.show = function(order){

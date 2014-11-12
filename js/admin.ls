@@ -38,6 +38,11 @@ angular.module \main
       $scope.order.sort (a,b) ->
         [c,d] = [a,b]map(-> new Date(it.{}init.MerchantTradeDate or 0))
         return if c > d => -1 else 1
+      $scope.order.map ->
+        if !it.info => return
+        if /google/.exec it.info.referrer => it.info.ref = "G"
+        else if /facebook/.exec it.info.referrer => it.info.ref = "F"
+        else => it.info.ref = "-"
     $scope.show = (order) -> 
       $scope.corder = order
       setTimeout ( -> $ \#order-detail-modal .modal show: true), 100
