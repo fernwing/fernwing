@@ -224,6 +224,7 @@ x$.controller('main', function($scope, $http, $timeout, allpay, context){
       count: $scope.count
     };
     payload.paytype = paytype;
+    payload.referrer = document.referrer;
     return $scope.allpay(payload);
   };
   $scope.allpay = function(payload){

@@ -123,6 +123,7 @@ angular.module \main
 
       payload = $scope{name, email, addr, phone, count}
       payload.paytype = paytype
+      payload.referrer = document.referrer
       #ga \send, \event, \form, \submit
       $scope.allpay payload
       #$timeout ( -> $scope.post-submitted! ), 2000
