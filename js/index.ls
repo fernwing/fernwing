@@ -127,6 +127,30 @@ angular.module \main
       #ga \send, \event, \form, \submit
       $scope.allpay payload
       #$timeout ( -> $scope.post-submitted! ), 2000
+    # conversion injection code for google adwords
+    adwords-conversion = ->
+      $('#tracking-adwords').html("""
+      <!-- Google Code for &#24314;&#31435;&#35330;&#21934; Conversion Page -->
+      <script type="text/javascript">
+      /* <![CDATA[ */
+      var google_conversion_id = 972490556;
+      var google_conversion_language = "en";
+      var google_conversion_format = "3";
+      var google_conversion_color = "ffffff";
+      var google_conversion_label = "NRqYCL-kzVcQvI7czwM";
+      var google_conversion_value = """ + $scope.priceTotal! + """;
+      var google_conversion_currency = "TWD";
+      var google_remarketing_only = false;
+      /* ]]> */
+      </script>
+      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+      </script>
+      <noscript>
+      <div style="display:inline;">
+      <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/972490556/?value=300.00&amp;currency_code=TWD&amp;label=NRqYCL-kzVcQvI7czwM&amp;guid=ON&amp;script=0"/>
+      </div>
+      </noscript>
+      """)
 
     $scope.allpay = (payload) ->
       $http do
@@ -135,8 +159,8 @@ angular.module \main
         headers: "Content-Type": "application/json"
         data: payload
       .success (d) ->
-        tc = [payload.count[k] for k of payload.count].reduce(((a,b) -> a + b), 0)
-        ga \send, \event, \form, \submit, \order, tc * 10
+        ga \send, \event, \form, \submit, \order, $scope.priceTotal!
+        adwords-conversion!
         if payload.paytype!=0 => return $timeout $scope.post-submitted, 1000
         console.log "payload information (to allpay): #d"
         $scope.allPayData = d

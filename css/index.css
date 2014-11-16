@@ -1029,3 +1029,8 @@ span.red {
 
 .btn-danger .state-indicator .spinner {
   background-image: url(/img/spin-danger.gif); }
+
+#tracking-adwords {
+  opacity: 0.01;
+  height: 1px;
+  overflow: hidden; }

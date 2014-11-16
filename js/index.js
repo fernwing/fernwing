@@ -57,7 +57,7 @@ x$.controller('notify', ['$scope', '$timeout', 'stateIndicator', '$http'].concat
   };
 }));
 x$.controller('main', function($scope, $http, $timeout, allpay, context){
-  var zoomed, shown, count, x, y, v, r, s, m, idx, jdx, n, res$, i$, i, w, h;
+  var adwordsConversion, zoomed, shown, count, x, y, v, r, s, m, idx, jdx, n, res$, i$, i, w, h;
   $scope.db = {
     order: null,
     count: null
@@ -227,6 +227,9 @@ x$.controller('main', function($scope, $http, $timeout, allpay, context){
     payload.referrer = document.referrer;
     return $scope.allpay(payload);
   };
+  adwordsConversion = function(){
+    return $('#tracking-adwords').html("<!-- Google Code for &#24314;&#31435;&#35330;&#21934; Conversion Page -->\n<script type=\"text/javascript\">\n/* <![CDATA[ */\nvar google_conversion_id = 972490556;\nvar google_conversion_language = \"en\";\nvar google_conversion_format = \"3\";\nvar google_conversion_color = \"ffffff\";\nvar google_conversion_label = \"NRqYCL-kzVcQvI7czwM\";\nvar google_conversion_value = " + $scope.priceTotal() + ";\nvar google_conversion_currency = \"TWD\";\nvar google_remarketing_only = false;\n/* ]]> */\n</script>\n<script type=\"text/javascript\" src=\"//www.googleadservices.com/pagead/conversion.js\">\n</script>\n<noscript>\n<div style=\"display:inline;\">\n<img height=\"1\" width=\"1\" style=\"border-style:none;\" alt=\"\" src=\"//www.googleadservices.com/pagead/conversion/972490556/?value=300.00&amp;currency_code=TWD&amp;label=NRqYCL-kzVcQvI7czwM&amp;guid=ON&amp;script=0\"/>\n</div>\n</noscript>");
+  };
   $scope.allpay = function(payload){
     return $http({
       url: '/d/order/init',
@@ -236,17 +239,8 @@ x$.controller('main', function($scope, $http, $timeout, allpay, context){
       },
       data: payload
     }).success(function(d){
-      var tc, k;
-      tc = (function(){
-        var results$ = [];
-        for (k in payload.count) {
-          results$.push(payload.count[k]);
-        }
-        return results$;
-      }()).reduce(function(a, b){
-        return a + b;
-      }, 0);
-      ga('send', 'event', 'form', 'submit', 'order', tc * 10);
+      ga('send', 'event', 'form', 'submit', 'order', $scope.priceTotal());
+      adwordsConversion();
       if (payload.paytype !== 0) {
         return $timeout($scope.postSubmitted, 1000);
       }
