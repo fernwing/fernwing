@@ -159,7 +159,7 @@ x$.controller('sales', ['$scope', '$http', 'stateIndicator', '$timeout', 'color'
     return [['init', 0], ['confirm', 1], ['paid', 2], ['shipped', 3]].map(function(v){
       var col, count, i$, len$, o, j$, ref$, len1$, k;
       col = d.filter(function(it){
-        return it.state === v[1];
+        return it.state === v[1] && !it.hide;
       });
       $scope[v[0]] = count = import$({}, color.hash);
       for (i$ = 0, len$ = col.length; i$ < len$; ++i$) {

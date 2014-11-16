@@ -95,7 +95,7 @@ angular.module \main
     $http.get \/d/order
     .success (d) -> 
       [[\init 0] [\confirm 1] [\paid 2] [\shipped 3]]map (v) ->
-        col = d.filter(-> it.state == v.1)
+        col = d.filter(-> it.state == v.1 and !it.hide)
         $scope[v.0] = count = {} <<< color.hash
         for o in col =>
           for k in color.list => count[k] += o.info.count[k]
