@@ -236,6 +236,17 @@ x$.controller('main', function($scope, $http, $timeout, allpay, context){
       },
       data: payload
     }).success(function(d){
+      var tc, k;
+      tc = (function(){
+        var results$ = [];
+        for (k in payload.count) {
+          results$.push(payload.count[k]);
+        }
+        return results$;
+      }()).reduce(function(a, b){
+        return a + b;
+      }, 0);
+      ga('send', 'event', 'form', 'submit', 'order', tc * 10);
       if (payload.paytype !== 0) {
         return $timeout($scope.postSubmitted, 1000);
       }

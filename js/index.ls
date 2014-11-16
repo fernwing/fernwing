@@ -135,6 +135,8 @@ angular.module \main
         headers: "Content-Type": "application/json"
         data: payload
       .success (d) ->
+        tc = [payload.count[k] for k of payload.count].reduce(((a,b) -> a + b), 0)
+        ga \send, \event, \form, \submit, \order, tc * 10
         if payload.paytype!=0 => return $timeout $scope.post-submitted, 1000
         console.log "payload information (to allpay): #d"
         $scope.allPayData = d
