@@ -2,7 +2,7 @@ doctype html
 //- basic libraries: jquery(1.10.2), d3js(3.3.11), angularjs(1.2.3), bootstrap(3.0)/semantic-ui(0.9.3/0.9.5)
 - var usecdn = false
 - var useog = true
-- var lib = { jquery: true, d3js: true, angular: true, bootstrap: true, semantic: false }
+- var lib = { jquery: true, d3js: false, angular: true, bootstrap: true, semantic: false }
 - var assets = "/assets"
 - var thumbnail = "https://www.fernwing.com/thumbnail.png"
 - var online = false
@@ -27,7 +27,7 @@ html(lang="en")
     // libraries
     include library.jade
     // custom files
-    link(rel="stylesheet",type="text/css",href="/css/index.css")
+    link(rel="stylesheet",type="text/css",href="/css/index.min.css")
     script.
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

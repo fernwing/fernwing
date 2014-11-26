@@ -1,4 +1,4 @@
-require! <[chokidar http fs child_process path]>
+require! <[chokidar http fs child_process path minify]>
 
 RegExp.escape = -> it.replace /[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&"
 
@@ -167,6 +167,7 @@ ftype = ->
   | /\.ls$/.exec it => "ls"
   | /\.sass$/.exec it => "sass"
   | /\.jade$/.exec it => "jade"
+  | /\.css$/.exec it => "css"
   | otherwise => "other"
 
 # assign functions to route-table for server side script routing
@@ -214,6 +215,7 @@ log = (error, stdout, stderr) -> if "#{stdout}\n#{stderr}".trim! => console.log 
 update-file = ->
   [type,cmd] = [ftype(it), ""]
   if type == \other => return
+  if type == \css and !/\.min\./.exec it => return minify \css/index.css (e,d) -> fs.write-file-sync \css/index.min.css, d
   if type == \ls => cmd = "#{ls} -cb #{it}"
   if type == \sass => cmd = "#{sass} --sourcemap=none css/index.sass css/index.css"# #{it} #{it.replace /\.sass$/, \.css}"
   if type == \jade => cmd = "#{jade} -P #{it}"
