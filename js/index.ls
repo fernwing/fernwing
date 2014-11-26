@@ -1,4 +1,4 @@
-angular.module \main, <[ngAnimate ld.common]>
+angular.module \main, <[ngAnimate ld.common backend]>
 fast-debug = false
 
 angular.module \main
