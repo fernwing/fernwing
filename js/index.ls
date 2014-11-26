@@ -238,3 +238,4 @@ angular.module \main
         if m[i] => m[i].css "-webkit-transform": "rotate(#{r[i]}deg) scale(#{s[i]})"
         if x[i]>=w => x[i] = Math.random! * -100
     
+    $scope.inited = 1

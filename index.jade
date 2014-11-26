@@ -9,7 +9,7 @@ mixin order-choice(color)
     select.form-control(class=color,ng-disabled="!avail."+color,name="count_"+color,ng-model="count."+color,ng-options="v for v in choicelist['"+color+"']")
       option(value="0") 0
 block pre-content
-  #dim.dimmer(ng-show="state==1"): .ib 處理訂單中 .. 
+  #dim.dimmer(ng-show="state==1",ng-class="{'active':inited}"): .ib 處理訂單中 .. 
   #feathers
 block bare-content
   #banner

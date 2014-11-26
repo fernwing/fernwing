@@ -35,12 +35,14 @@ html(lang="en")
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       ga('create', 'UA-48765647-1', 'fernwing.com');
       ga('send', 'pageview');
-    script(type="text/javascript",src="/js/md5.min.js")
-    script(type="text/javascript",src="/js/common.js")
-    script(type="text/javascript",src="/js/index.js")
-    script(type="text/javascript",src="/js/allpay.js")
-    script(type="text/javascript",src="/js/dbref.js")
-    script(type="text/javascript",src="/d/user")
+    //-
+      script(type="text/javascript",async,src="/js/md5.min.js")
+      script(type="text/javascript",async,src="/js/common.js")
+      script(type="text/javascript",async,src="/js/index.js")
+      script(type="text/javascript",async,src="/js/allpay.js")
+      script(type="text/javascript",async,src="/js/dbref.js")
+    script(type="text/javascript",async,src="js/generated.js")
+    script(type="text/javascript",async,src="/d/user")
 
   body(ng-app="main",ng-controller="main")
     block pre-content

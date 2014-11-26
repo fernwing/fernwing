@@ -343,7 +343,7 @@ x$.controller('main', function($scope, $http, $timeout, allpay, context){
     m[i] = n[i].find('div');
   }
   if (false) {
-    return setInterval(function(){
+    setInterval(function(){
       var i$, i, cy, results$ = [];
       for (i$ = 0; i$ < 50; ++i$) {
         i = i$;
@@ -369,4 +369,5 @@ x$.controller('main', function($scope, $http, $timeout, allpay, context){
       return results$;
     }, 50);
   }
+  return $scope.inited = 1;
 });

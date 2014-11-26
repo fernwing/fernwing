@@ -1,4 +1,4 @@
-require! <[chokidar http fs child_process path minify]>
+require! <[chokidar http fs child_process path minify buildify]>
 
 RegExp.escape = -> it.replace /[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&"
 
@@ -165,6 +165,7 @@ ctype = (name=null) ->
 ftype = ->
   switch
   | /\.ls$/.exec it => "ls"
+  | /\.js$/.exec it => "js"
   | /\.sass$/.exec it => "sass"
   | /\.jade$/.exec it => "jade"
   | /\.css$/.exec it => "css"
@@ -216,6 +217,21 @@ update-file = ->
   [type,cmd] = [ftype(it), ""]
   if type == \other => return
   if type == \css and !/\.min\./.exec it => return minify \css/index.css (e,d) -> fs.write-file-sync \css/index.min.css, d
+  if type == \js and !/generated\./.exec it =>
+    buildify!
+      .load \assets/jquery/1.10.2/jquery.min.js
+      .concat <[
+          assets/angular/1.2.3/angular.min.js
+          assets/angular/1.2.3/angular-animate.min.js
+          assets/bootstrap/3.0.2/js/bootstrap.min.js
+          js/md5.min.js
+          js/common.js
+          js/index.js
+          js/allpay.js
+          js/dbref.js
+        ]>
+      .save \js/generated.js
+
   if type == \ls => cmd = "#{ls} -cb #{it}"
   if type == \sass => cmd = "#{sass} --sourcemap=none css/index.sass css/index.css"# #{it} #{it.replace /\.sass$/, \.css}"
   if type == \jade => cmd = "#{jade} -P #{it}"

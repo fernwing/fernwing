@@ -30,15 +30,11 @@
       ga('create', 'UA-48765647-1', 'fernwing.com');
       ga('send', 'pageview');
     </script>
-    <script type="text/javascript" src="/js/md5.min.js"></script>
-    <script type="text/javascript" src="/js/common.js"></script>
-    <script type="text/javascript" src="/js/index.js"></script>
-    <script type="text/javascript" src="/js/allpay.js"></script>
-    <script type="text/javascript" src="/js/dbref.js"></script>
-    <script type="text/javascript" src="/d/user"></script>
+    <script type="text/javascript" async src="js/generated.js"></script>
+    <script type="text/javascript" async src="/d/user"></script>
   </head>
   <body ng-app="main" ng-controller="main">
-    <div id="dim" ng-show="state==1" class="dimmer">
+    <div id="dim" ng-show="state==1" ng-class="{'active':inited}" class="dimmer">
       <div class="ib">處理訂單中 .. </div>
     </div>
     <div id="feathers"></div>
