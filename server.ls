@@ -216,8 +216,14 @@ log = (error, stdout, stderr) -> if "#{stdout}\n#{stderr}".trim! => console.log 
 update-file = ->
   [type,cmd] = [ftype(it), ""]
   if type == \other => return
-  if type == \css and !/\.min\./.exec it => return minify \css/index.css (e,d) -> fs.write-file-sync \css/index.min.css, d
-  if type == \js and !/generated\./.exec it =>
+  if type == \css and !/\.min\./.exec it => 
+    minify \css/index.css (e,d) -> fs.write-file-sync \css/index.min.css, d
+    buildify!
+      .load \assets/bootstrap/3.0.2/css/bootstrap.min.css
+      .concat <[css/index.min.css]>
+      .save \css/generated.min.css
+    return
+  if type == \js and !/\.min\./.exec it =>
     buildify!
       .load \assets/jquery/1.10.2/jquery.min.js
       .concat <[
@@ -230,7 +236,8 @@ update-file = ->
           js/allpay.js
           js/dbref.js
         ]>
-      .save \js/generated.js
+      .save \js/generated.min.js
+    return
 
   if type == \ls => cmd = "#{ls} -cb #{it}"
   if type == \sass => cmd = "#{sass} --sourcemap=none css/index.sass css/index.css"# #{it} #{it.replace /\.sass$/, \.css}"
