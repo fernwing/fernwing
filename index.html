@@ -79,7 +79,7 @@
           <div delay-bk="/img/gallery/07.jpg" class="brick one delay-bk"></div>
           <div delay-bk="/img/gallery/03.jpg" class="brick two delay-bk"></div><br class="clear">
         </div>
-        <div id="gallery-xs"><img src="/img/gallery/320/01.jpg"><img src="/img/gallery/320/07.jpg"><img src="/img/gallery/320/06.jpg"><img src="/img/gallery/320/05.jpg">
+        <div id="gallery-xs"><img src="/img/gallery/320/all.jpg">
         </div><br class="clear"><br class="clear">
       </div><a name="brief"></a>
       <div>
@@ -87,7 +87,7 @@
           <div id="feature">
             <div class="text-center"><a id="order-now" href="#order-info" class="btn btn-danger btn-lg">心動了嗎？點我訂購</a></div>
             <!--.wing.delay-bk#wing-feature.hidden-xs(delay-bk="/img/wing-white.png")-->
-            <h2> <span>三個特色，</span><br class="visible-xs"><span>滿足您對背包的期待與渴望</span></h2><br>
+            <h2><span>三個特色，</span><br class="visible-xs"><span>滿足您對背包的期待與渴望</span></h2><br>
             <div class="row">
               <div class="col-sm-4 bl-red">
                 <div class="feature">
@@ -96,10 +96,7 @@
                 </div>
                 <h3 id="feature-trilogy">極舒適</h3>
                 <p class="visible-xs">一般輕量背包常在背負系統妥協而影響舒適性，但是<b>蕨之翼</b>在輕量化時仍使用<b>透氣可調式肩帶</b>，讓你即使日常使用也不會有額外負擔。</p>
-                <p class="hidden-xs">
-                   
-                  一般輕量化背包為了減少重量會在背負系統妥協而影響舒適性，然而<b>蕨休閒背包</b>在輕量化的同時仍使用<b>透氣可調式肩帶</b>，良好的背負系統讓你即使在日常生活中使用它也不會有額外的負擔。
-                </p>
+                <p class="hidden-xs">一般輕量化背包為了減少重量會在背負系統妥協而影響舒適性，然而<b>蕨休閒背包</b>在輕量化的同時仍使用<b>透氣可調式肩帶</b>，良好的背負系統讓你即使在日常生活中使用它也不會有額外的負擔。</p>
               </div>
               <div class="col-sm-4 bl-green">
                 <div class="feature">
@@ -108,10 +105,7 @@
                 </div>
                 <h3>超輕量</h3>
                 <p class="visible-xs">僅<b> 300 公克</b>- 比一盒<b> 鋁箔包</b> 還輕，收納後就如手掌大，節省家中空間與行李箱容量，無論旅遊、通勤、甚至上賣場，沒有理由不將他帶上。</p>
-                <p class="hidden-xs">
-                   
-                  重量不到<b>300 克</b>，甚至比一盒<b>鋁箔包飲料</b>還輕。收納後大約<b>一個手掌大</b>，節省家中儲藏空間，也節省登山背包的珍貴容量，無論登山、旅遊、通勤、甚至上賣場，你沒有理由不隨身帶上一個。
-                </p>
+                <p class="hidden-xs">重量不到<b>300 克</b>，甚至比一盒<b>鋁箔包飲料</b>還輕。收納後大約<b>一個手掌大</b>，節省家中儲藏空間，也節省登山背包的珍貴容量，無論登山、旅遊、通勤、甚至上賣場，你沒有理由不隨身帶上一個。</p>
               </div>
               <div class="col-sm-4 bl-cyan">
                 <div class="feature">
@@ -165,10 +159,7 @@
                   <h3>產品規格<small> / 蕨之翼隨身背包</small></h3>
                   <ul>
                     <li>容量: 25升</li>
-                    <li>
-                       
-                      重量: <b>199公克</b>，三顆蛋的重量
-                    </li>
+                    <li>重量: <b>199公克</b>，三顆蛋的重量</li>
                   </ul>
                   <ul>
                     <li>尺寸: 高 36 / 寬 24 / 深 14 (公分)</li>
@@ -206,7 +197,7 @@
           </div>
           <div id="order" ng-show="status.status==1" class="shown">
             <div class="ib">
-              <h2> <i class="glyphicon glyphicon-phone-alt"></i> 現在就訂購！</h2>
+              <h2><i class="glyphicon glyphicon-phone-alt"></i> 現在就訂購！</h2>
               <div class="text-center">蕨之翼採貨到付款，安全有保障</div><br>
               <form name="orderform" novalidate>
                 <h4><i class="glyphicon glyphicon-shopping-cart"></i> 第一步、選擇數量</h4>
@@ -389,7 +380,7 @@
                     <th>電子郵件</th>
                     <th>電話</th>
                   </tr>
-                  <tr ng-repeat="(k,v) in orders.pending"> 
+                  <tr ng-repeat="(k,v) in orders.pending">
                     <td>{{v[0]}}</td>
                     <td>{{v[1]}}</td>
                     <td>{{v[2]}}</td>
@@ -416,10 +407,7 @@
                 <h4 class="modal-title">此網站使用的素材</h4>
               </div>
               <div class="modal-body">
-                <h4>
-                   
-                  圖示<small> / 來自 <a href="http://thenounproject.com/">noun projects</a></small>
-                </h4>
+                <h4>圖示<small> / 來自 <a href="http://thenounproject.com/">noun projects</a></small></h4>
                 <ul>
                   <li>"<a href="http://thenounproject.com/term/bird/27693/">Bird</a>", by Harvey Modhar</li>
                   <li>"<a href="http://thenounproject.com/term/backpack/2551/">Backpack</a>", by Rémy Médard</li>
