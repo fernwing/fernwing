@@ -28,6 +28,7 @@
   </head>
   <body ng-app="main" ng-controller="main">
     <div id="dim" ng-show="state==1" ng-class="{'active':inited}" class="dimmer">
+      <div ng-show="!inited" class="ib2">開啟網站中 ..</div>
       <div class="ib">處理訂單中 .. </div>
     </div>
     <div id="feathers"></div>

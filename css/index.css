@@ -704,14 +704,15 @@ span.red {
   height: 100%;
   background: center center no-repeat black;
   z-index: 100; }
-  #dim .ib {
+  #dim .ib, #dim .ib2 {
     position: fixed;
     top: 50%;
     left: 50%;
     margin: 50px 0 0 -50px;
     width: 100px;
     text-align: center;
-    color: #fff;
+    color: #fff; }
+  #dim .ib {
     display: none; }
   #dim.active {
     background-color: rgba(0, 0, 0, 0.5);
