@@ -336,7 +336,13 @@ block bare-content
               button.btn.btn-success(type="submit",ng-click="clearForm()") 想要再多買幾個嗎？按我追加
             br
             br
-            p * 商品訂購後將於 5 ~ 7 天內出貨
+            p 
+              | * 商品訂購後將於 5 ~ 7 天內出貨
+            p
+              | * 若需修改或取消訂單，請來信至 
+              a(href="mailto:contact@fernwing.com") 客服信箱
+              |  並告知您的姓名與修改內容，我們將竭誠為您服務。
+            
 
         //-form#allpayform(action="http://payment-stage.allpay.com.tw/AioHelper/GenCheckMacValue",method="POST")
         form#allpayform(action="https://payment.allpay.com.tw/Cashier/AioCheckOut",method="POST")
