@@ -891,6 +891,10 @@ span.red {
 .radio label {
   vertical-align: middle; }
 
+@media (max-width: 768px) {
+  #countychooser {
+    margin-bottom: 10px; } }
+
 #about {
   width: 80%;
   margin: auto; }

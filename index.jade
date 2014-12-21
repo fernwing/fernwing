@@ -244,8 +244,17 @@ block bare-content
                 ng-disabled="!want || state!=0",name="name",ng-model="name",required,ng-minlength="2")
             .form-group(ng-class="fix('addr')")
               +valid-label("orderform","addr", "寄送地址", "地址")
-              input.form-control(type="text",placeholder="例如：台北市士林區福港街 12 號",
-                ng-disabled="!want || state!=0",name="addr",ng-model="addr",required,ng-minlength="5")
+              br
+              .row
+                .col-sm-4
+                  #countychooser.row
+                    .col-xs-6
+                      select.form-control(ng-model="county",ng-options="c for c in countylist")
+                    .col-xs-6
+                      select.form-control(ng-model="town",ng-options="t for t in townlist[county]")
+                .col-sm-8
+                  input.form-control(type="text",placeholder="例如：福港街 12 號",
+                    ng-disabled="!want || state!=0",name="addr",ng-model="addr",required,ng-minlength="5")
             .row
               .col-sm-6: .form-group(ng-class="fix('phone')")
                 +valid-label("orderform","phone", "聯絡電話", "電話")

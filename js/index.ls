@@ -121,7 +121,8 @@ angular.module \main
       #  .success (d) -> $scope.user = d
       #  .error (d) ->
 
-      payload = $scope{name, email, addr, phone, count}
+      payload = $scope{name, email, phone, count}
+      payload.addr = "#{$scope.postcode[$scope.county][$scope.town].join("或")} #{$scope.county} #{$scope.town} #{$scope.addr}"
       payload.paytype = paytype
       payload.referrer = document.referrer
       #ga \send, \event, \form, \submit
@@ -238,4 +239,21 @@ angular.module \main
         if m[i] => m[i].css "-webkit-transform": "rotate(#{r[i]}deg) scale(#{s[i]})"
         if x[i]>=w => x[i] = Math.random! * -100
     
+    # POSTCODE / COUNTY / TOWN handling
+    $scope.postcode = null
+    $scope.countylist = null
+    $scope.townlist = null
+    $http do
+      url: \postcode.json
+      method: \GET
+    .success (d) ->
+      $scope.postcode = d
+      $scope.countylist = [c for c of $scope.postcode] ++ <[其它]>
+      $scope.townlist = {}
+      for c in $scope.countylist =>
+        $scope.townlist[c] = [t for t of ($scope.postcode[c] or {})] ++ <[其它]>
+      $scope.county = "臺北市"
+      $scope.town = "中正區"
+      $scope.$watch 'county' -> $scope.town = $scope.townlist[$scope.county][0]
+    .error (d) -> console.error "can't read postcode.json. "
     $scope.inited = 1

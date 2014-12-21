@@ -218,10 +218,10 @@ x$.controller('main', function($scope, $http, $timeout, allpay){
     payload = {
       name: $scope.name,
       email: $scope.email,
-      addr: $scope.addr,
       phone: $scope.phone,
       count: $scope.count
     };
+    payload.addr = $scope.postcode[$scope.county][$scope.town].join("或") + " " + $scope.county + " " + $scope.town + " " + $scope.addr;
     payload.paytype = paytype;
     payload.referrer = document.referrer;
     return $scope.allpay(payload);
@@ -368,5 +368,41 @@ x$.controller('main', function($scope, $http, $timeout, allpay){
       return results$;
     }, 50);
   }
+  $scope.postcode = null;
+  $scope.countylist = null;
+  $scope.townlist = null;
+  $http({
+    url: 'postcode.json',
+    method: 'GET'
+  }).success(function(d){
+    var c, i$, ref$, len$, t;
+    $scope.postcode = d;
+    $scope.countylist = (function(){
+      var results$ = [];
+      for (c in $scope.postcode) {
+        results$.push(c);
+      }
+      return results$;
+    }()).concat(['其它']);
+    $scope.townlist = {};
+    for (i$ = 0, len$ = (ref$ = $scope.countylist).length; i$ < len$; ++i$) {
+      c = ref$[i$];
+      $scope.townlist[c] = (fn$()).concat(['其它']);
+    }
+    $scope.county = "臺北市";
+    $scope.town = "中正區";
+    return $scope.$watch('county', function(){
+      return $scope.town = $scope.townlist[$scope.county][0];
+    });
+    function fn$(){
+      var results$ = [];
+      for (t in $scope.postcode[c] || {}) {
+        results$.push(t);
+      }
+      return results$;
+    }
+  }).error(function(d){
+    return console.error("can't read postcode.json. ");
+  });
   return $scope.inited = 1;
 });
