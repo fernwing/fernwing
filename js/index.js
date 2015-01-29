@@ -56,12 +56,13 @@ x$.controller('notify', ['$scope', '$timeout', 'stateIndicator', '$http'].concat
     }, 2000);
   };
 }));
-x$.controller('main', function($scope, $http, $timeout, allpay){
+x$.controller('main', function($scope, $http, $timeout, allpay, stateIndicator){
   var adwordsConversion, zoomed, shown, count, x, y, v, r, s, m, idx, jdx, n, res$, i$, i, w, h;
   $scope.db = {
     order: null,
     count: null
   };
+  $scope.notifyStatus = stateIndicator.init();
   $scope.price = {
     red: 0,
     green: 0,
@@ -368,6 +369,40 @@ x$.controller('main', function($scope, $http, $timeout, allpay){
       return results$;
     }, 50);
   }
+  $scope.notifyInOrder = {
+    state: 0,
+    show: function(){
+      return this.state = 1;
+    },
+    email: null,
+    emailng: true,
+    submit: function(){
+      var this$ = this;
+      if (!this.email) {
+        return;
+      }
+      this.state = 2;
+      $scope.notifyStatus.loading();
+      $http({
+        url: '/d/notify',
+        method: 'POST',
+        data: {
+          email: this.email
+        }
+      }).success(function(){}).error(function(){});
+      ga('send', 'event', 'notify-in-order', 'submit');
+      return $timeout(function(){
+        $scope.notifyStatus.done();
+        return this$.state = 3;
+      }, 2000);
+    },
+    done: function(){
+      return this.state = 4;
+    }
+  };
+  $scope.$watch('notifyInOrder.email', function(v){
+    return $scope.notifyInOrder.emailng = !/[a-zA-Z_0-9.-]@\w+\.\w+/.exec(v);
+  });
   $scope.postcode = null;
   $scope.countylist = null;
   $scope.townlist = null;

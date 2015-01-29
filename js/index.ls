@@ -22,6 +22,7 @@ angular.module \main
       $scope.state = 2
     $scope.fix = (it) ->
       if $scope.need-fix and !$scope[it] => "has-error" else ""
+
     $scope.submit = ->
       if not ($scope.email) => return $scope.need-fix = true
       $scope.need-fix = false
@@ -37,8 +38,9 @@ angular.module \main
       $timeout ( -> $scope.post-submitted! ), 2000
 
 
-  ..controller \main, ($scope, $http, $timeout, allpay) ->#, context) ->
+  ..controller \main, ($scope, $http, $timeout, allpay, stateIndicator) ->#, context) ->
     $scope.db = order: null, count: null
+    $scope.notify-status = stateIndicator.init!
     #$scope.user = context.user
     #$scope.$watch 'user', -> if $scope.user => $scope.email = $scope.user.email
 
@@ -238,6 +240,29 @@ angular.module \main
         n[i].css top: cy, left: x[i],  opacity: s[i] #, "box-shadow": "0px 30px 50px rgba(0,0,0,0.5)"
         if m[i] => m[i].css "-webkit-transform": "rotate(#{r[i]}deg) scale(#{s[i]})"
         if x[i]>=w => x[i] = Math.random! * -100
+    $scope.notify-in-order = do
+      state: 0
+      show: -> @state = 1
+      email: null
+      emailng: true
+      submit: ->
+        if not (@email) => return
+        @state = 2
+        $scope.notify-status.loading!
+        $http do
+          url: \/d/notify
+          method: \POST
+          data: {email: @email}
+        .success ->
+        .error ->
+        ga \send, \event, \notify-in-order, \submit
+        $timeout ( ~>
+          $scope.notify-status.done!
+          @state = 3
+        ), 2000
+      done: -> @state = 4
+    $scope.$watch 'notifyInOrder.email', (v) ->
+      $scope.notify-in-order.emailng = !!!/[a-zA-Z_0-9.-]@\w+\.\w+/.exec(v)
     
     # POSTCODE / COUNTY / TOWN handling
     $scope.postcode = null
