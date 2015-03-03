@@ -227,28 +227,28 @@ block bare-content
 
               +order-choice("red")
               +order-choice("black")
-              br
-              br
-              br
-              p#notifyInOrder(ng-show="notifyInOrder.state==0")
-                span(style="white-space:nowrap") * 目前僅剩紅色與黑色。想要其它顏色嗎？
+              //- if run out of some stock...
                 br
-                a(ng-click="notifyInOrder.show()",style="white-space:nowrap;cursor:pointer") 到貨時通知我
-              div(ng-show="notifyInOrder.state==1",style="max-width:400px;margin:auto")
-                span 請提供您的 email 以便我們通知您:
-                .input-group
-                  input.form-control(type="email",ng-model="notifyInOrder.email",placeholder="您的 email，如: abc5026@kenshen.med",required)
-                  span.input-group-btn
-                    button.btn.btn-success(type="button",ng-click="notifyInOrder.submit()",ng-disabled="notifyInOrder.emailng") 送出
-              ldstate(ng-model="notifyStatus.value",ng-show="notifyInOrder.state==2")
-              p(ng-show="notifyInOrder.state==3")
-                | 感謝您的支持，我們有更新時會發送電子郵件通知您。
-                a(ng-click="notifyInOrder.done()",style="cursor:pointer") 繼續選購
-              //-
-                +order-choice("green")
-                +order-choice("cyan")
-                +order-choice("purple")
-                +order-choice("magenta")
+                br
+                br
+                p#notifyInOrder(ng-show="notifyInOrder.state==0")
+                  span(style="white-space:nowrap") * 目前僅剩紅色與黑色。想要其它顏色嗎？
+                  br
+                  a(ng-click="notifyInOrder.show()",style="white-space:nowrap;cursor:pointer") 到貨時通知我
+                div(ng-show="notifyInOrder.state==1",style="max-width:400px;margin:auto")
+                  span 請提供您的 email 以便我們通知您:
+                  .input-group
+                    input.form-control(type="email",ng-model="notifyInOrder.email",placeholder="您的 email，如: abc5026@kenshen.med",required)
+                    span.input-group-btn
+                      button.btn.btn-success(type="button",ng-click="notifyInOrder.submit()",ng-disabled="notifyInOrder.emailng") 送出
+                ldstate(ng-model="notifyStatus.value",ng-show="notifyInOrder.state==2")
+                p(ng-show="notifyInOrder.state==3")
+                  | 感謝您的支持，我們有更新時會發送電子郵件通知您。
+                  a(ng-click="notifyInOrder.done()",style="cursor:pointer") 繼續選購
+              +order-choice("green")
+              +order-choice("cyan")
+              +order-choice("purple")
+              +order-choice("magenta")
 
             br.clear
             br

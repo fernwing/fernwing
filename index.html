@@ -241,16 +241,43 @@
                         <option value="0">0</option>
                       </select>
                     </div>
-                  </div><br><br><br>
-                  <p id="notifyInOrder" ng-show="notifyInOrder.state==0"><span style="white-space:nowrap">* 目前僅剩紅色與黑色。想要其它顏色嗎？</span><br><a ng-click="notifyInOrder.show()" style="white-space:nowrap;cursor:pointer">到貨時通知我</a></p>
-                  <div ng-show="notifyInOrder.state==1" style="max-width:400px;margin:auto"><span>請提供您的 email 以便我們通知您:</span>
-                    <div class="input-group">
-                      <input type="email" ng-model="notifyInOrder.email" placeholder="您的 email，如: abc5026@kenshen.med" required class="form-control"><span class="input-group-btn">
-                        <button type="button" ng-click="notifyInOrder.submit()" ng-disabled="notifyInOrder.emailng" class="btn btn-success">送出</button></span>
+                  </div>
+                  <div ng-class="{'soldout':!avail.green}" class="choice">
+                    <div class="ib">
+                      <div class="price"><span ng-show="!count.green">每個 </span><span>{{price.green}} 元</span><span ng-show="count.green"> x {{count.green}} = {{price.green * count.green}} 元</span></div>
+                      <div class="color green"></div>
+                      <select ng-disabled="!avail.green" name="count_green" ng-model="count.green" ng-options="v for v in choicelist['green']" class="form-control green">
+                        <option value="0">0</option>
+                      </select>
                     </div>
                   </div>
-                  <ldstate ng-model="notifyStatus.value" ng-show="notifyInOrder.state==2"></ldstate>
-                  <p ng-show="notifyInOrder.state==3">感謝您的支持，我們有更新時會發送電子郵件通知您。<a ng-click="notifyInOrder.done()" style="cursor:pointer">繼續選購</a></p>
+                  <div ng-class="{'soldout':!avail.cyan}" class="choice">
+                    <div class="ib">
+                      <div class="price"><span ng-show="!count.cyan">每個 </span><span>{{price.cyan}} 元</span><span ng-show="count.cyan"> x {{count.cyan}} = {{price.cyan * count.cyan}} 元</span></div>
+                      <div class="color cyan"></div>
+                      <select ng-disabled="!avail.cyan" name="count_cyan" ng-model="count.cyan" ng-options="v for v in choicelist['cyan']" class="form-control cyan">
+                        <option value="0">0</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div ng-class="{'soldout':!avail.purple}" class="choice">
+                    <div class="ib">
+                      <div class="price"><span ng-show="!count.purple">每個 </span><span>{{price.purple}} 元</span><span ng-show="count.purple"> x {{count.purple}} = {{price.purple * count.purple}} 元</span></div>
+                      <div class="color purple"></div>
+                      <select ng-disabled="!avail.purple" name="count_purple" ng-model="count.purple" ng-options="v for v in choicelist['purple']" class="form-control purple">
+                        <option value="0">0</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div ng-class="{'soldout':!avail.magenta}" class="choice">
+                    <div class="ib">
+                      <div class="price"><span ng-show="!count.magenta">每個 </span><span>{{price.magenta}} 元</span><span ng-show="count.magenta"> x {{count.magenta}} = {{price.magenta * count.magenta}} 元</span></div>
+                      <div class="color magenta"></div>
+                      <select ng-disabled="!avail.magenta" name="count_magenta" ng-model="count.magenta" ng-options="v for v in choicelist['magenta']" class="form-control magenta">
+                        <option value="0">0</option>
+                      </select>
+                    </div>
+                  </div>
                 </div><br class="clear"><br>
                 <h4 id="ship-info"><i class="glyphicon glyphicon-list-alt"></i> 第二步、運送資訊</h4><br>
                 <div ng-class="fix('name')" class="form-group">
